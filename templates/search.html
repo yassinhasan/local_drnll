@@ -1,0 +1,125 @@
+{% extends 'master.html' %}
+{% block css %}
+<link href="../static/css/lib/footer.css" rel="stylesheet" type="text/css" />
+<link href="../static/css/search.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block content %}
+<a class="arrow" href="" aria-label="arrow">
+  <i class="fa-solid fa-angles-up"></i>
+</a>
+<!-- after login -->
+<div class="home-wraper">
+  <h3 class="heading-2 head-title">
+    Search Items
+  </h3>
+  <p class="hint">Please note that search will take less than 2 sec to collect data from websites</p>
+  <form class="url-form">
+    <div class="form-wraper">
+      <div class="input-wraper">
+        <input class="form-control form-control-lg url-input autocomplete" type="search" placeholder="Enter Item you want to search" id="myInput"
+          aria-label=".form-control-lg example" name="item">
+          <div class="form-check restricted-search-div">
+            <input class="form-check-input restricted-search" type="checkbox" id="acurate-search">
+            <label class="form-check-label " for="acurate-search">
+              restricted search
+            </label>
+          </div>
+        <div class="time-div"></div>
+      </div>
+      <!-- <div class="copy-div">
+                  <i class="fa-solid fa-copy copy"></i>
+                 </div> -->
+    </div>
+    <button type="submit" class="btn  btn-lg download-btn heading-6">Get Results <i
+        class="fa-solid fa-magnifying-glass"></i></button>
+  </form>
+  <div class="loader"></div>
+  <div class="results">
+    <div class="result-content">
+      <div class="inner-wraper">
+        <form class="filter-form">
+          <div class="slider-wraper">
+            <label for="customRange1" class="price-range">price range<br>
+              (<span class="price-value-span">0</span> -<span class="max-value-span">0</span>
+              )<span>&#65020;</span>
+            </label>
+            <input type="range" class="form-range form-label custom-range" id="customRange1" value="0">
+          </div>
+          <div class="filter-wraper">
+            <input type="search" class="form-control filter-name" placeholder="Filter by name">
+          </div>
+        </form>
+        <div class="btn-results-wraper">
+          <div class="btn-csv-wraper"><button class="btn download-results">Download Resutls <i
+            class="fa-solid fa-download"></i></button>
+          </div>  
+          <div class="view-wraper">
+            <i class="fa-solid fa-table-cells show-grid view-icon" title="show grid view"></i>
+            <i class="fa-solid fa-list show-list view-icon active" title="show list view"></i>
+            <i class="fa-solid fa-bars show-bars view-icon" title="show bars view"></i>
+            <i class="fa-solid fa-arrow-up asc sort-icon " title="sort ascending"></i>
+            <i class="fa-solid fa-arrow-down desc sort-icon active" title="sort desc"></i>
+          </div>
+        </div>
+      </div>
+      <div class="web-results list">
+        <div class="dawaa-results inner-results">
+          <div class="heading-6 web-name dawaa" data-bs-toggle="collapse" href="#dawaa" role="button"
+            aria-expanded="true" aria-controls="dawaa">
+            <img src="https://www.al-dawaa.com/media/logo/stores/1/Logo.png" class="image-bg" alt="dawaa">
+            <span class="web-name-span">Al dawaa</span>
+            <i class="fa fa-solid fa-angle-down" style=" margin-left: 10px;"></i>
+        </div>
+          <div class='result-wraper show' id="dawaa"></div>
+      </div>
+        <div class="nahdi-results inner-results">
+          <div class="heading-6 web-name nahdi" data-bs-toggle="collapse" href="#nahdi" role="button"
+            aria-expanded="true" aria-controls="nahdi">
+            <img src="https://www.nahdionline.com/static/version1712167040/frontend/Nahdi/theme-nahdi-default/en_US/images/sprite.view.svg#nahdi-mobile" class="image-bg"  alt="nahdi">
+            <span class="web-name-span">Al nahdi</span>
+            <i class="fa fa-solid fa-angle-down" style=" margin-left: 10px;"></i>
+          </div>
+          <div class='result-wraper show' id="nahdi"></div>
+      </div>
+        <div class="united-results inner-results">
+        <div class="heading-6 web-name united" data-bs-toggle="collapse" href="#united" role="button"
+          aria-expanded="true" aria-controls="united">
+          <img referrerPolicy="no-referrer"  src="https://unitedpharmacy.sa/media/logo/stores/2/Logo.png" class="image-bg" alt="united">
+          <span class="web-name-span">united</span>
+          <i class="fa fa-solid fa-angle-down" style=" margin-left: 10px;"></i>
+        </div>
+        <div class='result-wraper show' id="united">
+         
+        </div>
+     </div>
+    </div>
+    </div>
+  </div> <!--end of resules-->
+</div>
+
+<!-- after login -->
+{% endblock %}
+
+
+{% block modal %}
+{% include 'modals/registermodal.html' %}
+{% include 'modals/loginmodal.html' %}
+{% endblock %}
+
+
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="../static/js/firbase.js" type="module"></script>
+<script src="../static/js/helper.js"></script>
+<script src="../static/js/validation.js"></script>
+{% if isLogged == True: %}
+<script src="../static/js/logout.js" type="module"></script>
+{% endif %}
+
+<script src="../static/js/user.js" type="module"></script>
+<script src="../static/js/lib/downloadFile.js"></script>
+<script src="../static/js/search.js" type="module"></script>
+<script src="../static/js/script.js"></script>
+{% endblock %}

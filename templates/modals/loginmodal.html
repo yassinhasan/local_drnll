@@ -1,0 +1,36 @@
+  <!-- login modal -->
+  <div class="modal fade signin-modal" data-bs-backdrop="static" data-bs-keyboard="false" id="loginModal" tabindex="-1"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Sign In</h5>
+
+          <i class="fa-solid fa-xmark btn-close close-login-modal" type="button" data-bs-dismiss="modal" aria-label="Close"></i>
+        </div>
+        <div class="modal-body">
+          <form action="/login" method="POST" class="loginform">
+            <div class="mb-3">
+              <label for="email" class="form-label">Email address</label>
+              <input type="email" class="form-control email" id="email"  required
+                autocomplete name="email">
+                
+                  <div class="invalid-feedback invalid-email-login">{{ error }}</div>
+                
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" class="form-control password" id="password" required
+                autocomplete name="password">
+                <i class="fa-regular fa-eye" id="togglePassword"></i>
+              <div class="invalid-feedback invalid-password-login">
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary login-btn-modal" name="submit">Sign in</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- modal -->

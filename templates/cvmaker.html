@@ -1,0 +1,1025 @@
+{% extends 'master.html' %}
+{% block css %}
+<link href="../static/css/lib/footer.css" rel="stylesheet" type="text/css" />
+
+
+<link href="../static/css/cvmaker.css" media="screen"  rel="stylesheet" type="text/css" />
+<link href="../static/css/cvmaker-print.css" rel="stylesheet" media="print"  type="text/css" />
+<link href="../static/css/lib/jquery-ui.css" rel="stylesheet">  
+<script src="../static/js/lib/jquery-ui.js"></script>  
+
+<!-- <link href="../static/css/lib/glide.core.min.css" rel="stylesheet"> -->
+
+<link rel="stylesheet" href="../static/css/lib/sliderm.css">
+
+
+{% endblock %}
+
+{% block content %}
+<div class="loader-wraper">
+    <div class="laoder-box">
+        <div class="loader show"></div>
+        <div class="loader-title">Download File ...</div>
+    </div>
+</div>
+
+<div class="home-wraper">
+    <h3 class="heading-3 head-title">
+        Cv Maker
+    </h3>
+    <div class="cv-container">
+        <div class="progress">
+            <div class="progress-bar
+                        progress-bar-striped bg-success" role="progressbar" style="width: 0%" aria-valuenow="0"
+                aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <form class="main-form">
+            <div class="step active">
+                <p class="text-center mb-4 form-title">About Section</p>
+                <div class="row">
+                    <div class="mb-2  col-sm-12 col-md-4">
+                        <label for="firstname_cv" class="form-label">First Name</label>
+                        <input type="text" class="form-control firstname_cv" autofocus aria-describedby="firstname_cv"
+                            required name="firstname_cv" list="datalist_firstname_cv"
+                            oninput="generateCV('firstname-container','firstname_cv','firstname_cv')"
+                            placeholder="Ex: Hasan">
+                        <datalist id="datalist_firstname_cv">
+                            <option value="Hasan">
+                        </datalist>
+                        <div class="invalid-feedback invalid_firstname_cv">
+                        </div>
+                    </div>
+                    <div class="mb-2  col-sm-12 col-md-4">
+                        <label for="middlename_cv" class="form-label">Middle Name (Optional)</label>
+                        <input type="text" class="form-control middlename_cv" aria-describedby="middlename_cv"
+                            name="middlename_cv" autocomplete="middlename_cv" list="datalist_middlename_cv"
+                            oninput="generateCV('middlename-container','middlename_cv','middlename_cv')"
+                            placeholder="Ex: Elhussiny">
+                        <datalist id="datalist_middlename_cv">
+                            <option value="Elhussiny">
+                        </datalist>
+                        <div class="invalid-feedback invalid_middlename_cv">
+                        </div>
+                    </div>
+                    <div class="mb-2  col-sm-12 col-md-4">
+                        <label for="lastname_cv" class="form-label">Last Name</label>
+                        <input type="text" class="form-control lastname_cv" aria-describedby="lastname_cv"
+                            name="lastname_cv" oninput="generateCV('lastname-container','lastname_cv','lastname_cv')"
+                            placeholder="Ex: Meady" list="datalist_lastname_cv">
+                        <datalist id="datalist_lastname_cv">
+                            <option value="Meady">
+                        </datalist>
+                        <div class="invalid-feedback invalid_lastname_cv">
+                        </div>
+                    </div>
+                    <div class="mb-2  col-sm-12 col-md-12">
+                        <label for="job_cv" class="form-label">Jop</label>
+                        <input type="text" class="form-control job_cv" aria-describedby="job_cv" name="job_cv"
+                            list="datalist_job_cv" oninput="generateCV('jop-container','job_cv','job_cv')"
+                            placeholder="Ex: Pharmacist">
+                        <datalist id="datalist_job_cv">
+                            <option value="Pharamacist">
+                        </datalist>
+                        <div class="invalid-feedback invalid_job_cv">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row image-row">
+                    <div class="mb-2 mt-8">
+                        <label for="image-cv-input" class="form-label">Your Photo</label>
+                        <input type="file" class="form-control form-control-sm image_cv_input"
+                            aria-describedby="image-cv-input" name="image-cv-input" autocomplete="image-cv-input"
+                            onchange="previewImage()">
+
+                        <div class="invalid-feedback invalid_image-cv-input">
+                        </div>
+                    </div>
+                    <div class="image-preview-wraper">
+                        <img src="" class="image-preview" alt="image-prview">
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="step">
+                <p class="text-center mb-4 form-title">Contact Section</p>
+                <div class="contact-form repeater ">
+                    <div class="row repeater" data-repeater-list="group-a">
+                        <div class="row" data-repeater-item>
+                            <div class="mb-2  col-sm-12 col-md-12">
+                                <label for="phone_cv" class="form-label">Phone</label>
+                                <input type="text" class="form-control phone_cv" aria-describedby="phone_cv"
+                                    name="phone_cv" list="datalist_phone_cv"
+                                    oninput="generateCV('phone-container','phone_cv','contact')"
+                                    placeholder="EX: +966546035917">
+                                <datalist id="datalist_phone_cv">
+                                    <option value="+966546035917">
+                                    <option value="+966575653417">
+                                </datalist>
+                                <div class="invalid-feedback invalid_phone_cv">
+                                </div>
+                            </div>
+                            <div class="mb-2  col-sm-12 col-md-12">
+                                <label for="email_cv" class="form-label">Email</label>
+                                <input type="email" class="form-control email_cv" aria-describedby="email_cv"
+                                    name="email_cv" list="datalist_email_cv"
+                                    oninput="generateCV('email-container','email_cv','contact')"
+                                    placeholder="EX: dr_hasan781@yahoo.com">
+                                <datalist id="datalist_email_cv">
+                                    <option value="dr_hasan781@yahoo.com">
+                                    <option value="figo781@gmail.com">
+                                </datalist>
+                                <div class="invalid-feedback invalid_email_cv">
+                                </div>
+                            </div>
+                            <div class="mb-2  col-sm-12 col-md-12">
+                                <label for="address_cv" class="form-label">Address</label>
+                                <input type="text" class="form-control address_cv" aria-describedby="address_cv"
+                                    name="address_cv" list="datalist_address_cv"
+                                    oninput="generateCV('address-container','address_cv','contact')"
+                                    placeholder="EX: Al Mubarraz, Al Ahsa,Saudi Arabia">
+                                <datalist id="datalist_address_cv">
+                                    <option value="Al Mubarraz, Al Ahsa,Saudi Arabia">
+                                </datalist>
+                                <div class="invalid-feedback invalid_address_cv">
+                                </div>
+                            </div>
+                            <div class="mb-2  col-sm-12 col-md-12">
+                                <label for="portfolio_cv" class="form-label">Portfolio Website</label>
+                                <input type="url" class="form-control portfolio_cv" aria-describedby="portfolio_cv"
+                                    name="portfolio_cv" list="datalist_portfolio_cv"
+                                    oninput="generateCV('portfolio-container','portfolio_cv','contact')"
+                                    placeholder="EX: https://hasanmeady.web.app">
+                                <datalist id="datalist_portfolio_cv">
+                                    <option value="https://hasanmeady.web.app">
+                                </datalist>
+                                <div class="invalid-feedback invalid_portfolio_cv">
+                                </div>
+                            </div>
+
+                            <!-- <div class="mb-2  col-sm-12 col-md-6">
+                            <label for="summary_cv" class="form-label">Extra Info</label>
+                            <input type="text" class="form-control summary_cv" aria-describedby="summary_cv"
+                                name="summary_cv" autocomplete="summary_cv" oninput="generateCV()">
+                            <div class="invalid-feedback invalid_summary_cv">
+                            </div>
+                        </div> -->
+                            <div class="delete-btn-parent">
+                                <button data-repeater-delete type="button"
+                                    class="btn-repeater-delete repeater-remove-btn">-</button>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <button type="button" data-repeater-create value="Add"
+                        class="btn-repeater-add repeater-add-btn  repeat-contact-form">+</button>
+                </div>
+            </div>
+            <div class="step">
+                <p class="text-center mb-4 form-title">education</p>
+                <div class="education-form repeater">
+                    <div class="row repeater" data-repeater-list="group-b">
+                        <div class="row" data-repeater-item>
+                            <div class="mb-2  col-sm-12 col-md-12">
+                                <label for="edu_descrption" class="form-label">Description</label>
+                                <input type="text" class="form-control edu_descrption" aria-describedby="edu_descrption"
+                                    name="edu_descrption" list="datalistedu_descrption"
+                                    oninput="generateCV('education-container','edu_descrption','education')"
+                                    placeholder="EX: Bachelor’s degree in pharmacy (Very Good), Tanta University">
+                                <datalist id="datalistedu_descrption">
+                                    <option value="Bachelor’s degree in pharmacy (Very Good), Tanta University">
+                                </datalist>
+                                <div class="invalid-feedback invalid_edu_descrption">
+                                </div>
+                            </div>
+                            <!-- <div class="mb-2  col-sm-12 col-md-6">
+                            <label for="edu_startdate" class="form-label">Start Date</label>
+                            <input type="date" class="form-control edu_startdate" aria-describedby="edu_startdate"
+                                name="edu_startdate" autocomplete="edu_startdate" oninput="generateCV()">
+                            <div class="invalid-feedback invalid_edu_startdate">
+                            </div>
+                        </div>
+                        <div class="mb-2  col-sm-12 col-md-6">
+                            <label for="edu_enddate" class="form-label">End Date</label>
+                            <input type="date" class="form-control edu_enddate" aria-describedby="edu_enddate"
+                                name="edu_enddate" autocomplete="edu_enddate" oninput="generateCV()">
+                            <div class="invalid-feedback invalid_edu_enddate">
+                            </div>
+                        </div> -->
+
+                            <div class="delete-btn-parent">
+                                <button data-repeater-delete type="button"
+                                    class="btn-repeater-delete repeater-remove-btn">-</button>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <button type="button" data-repeater-create value="Add"
+                        class="btn-repeater-add repeater-add-btn  repeat-education-form">+</button>
+                </div>
+            </div>
+            <div class="step">
+                <p class="text-center mb-4 form-title">Work Experience</p>
+                <div class="work-form repeater">
+                    <div class="row repeater" data-repeater-list="group-c">
+                        <div class="row" data-repeater-item>
+                            <div class="mb-2  col-sm-12 col-md-12">
+                                <label for="exp_description" class="form-label">Description</label>
+                                <input type="text" class="form-control exp_description"
+                                    aria-describedby="exp_description" name="exp_description"
+                                    list="datalisteduexp_description"
+                                    oninput="generateCV('work-container','exp_description','workExperience')"
+                                    placeholder="EX:Pharmacist at Aldwaa, Alahsaa">
+                                <datalist id="datalisteduexp_description">
+                                    <option value="Pharmacist at Aldwaa, Alahsaa, KSA (2011 - Present)">
+                                    <option
+                                        value="Pharmacist, Ibn Alnafess Pharmacy (part-time), Tanta, Egypt, (2010 - 2011)">
+                                    <option
+                                        value="Pharmacist, Ministry of Health hospitals (Public Duty), Tanta, Egypt (2011)">
+                                </datalist>
+                                <div class="invalid-feedback invalid_exp_description">
+                                </div>
+                            </div>
+                            <!-- <div class="mb-2  col-sm-12 col-md-6">
+                            <label for="exp_organization" class="form-label">Company / Organization</label>
+                            <input type="text" class="form-control exp_organization" aria-describedby="exp_organization"
+                                name="exp_organization" autocomplete="exp_organization" oninput="generateCV()">
+                            <div class="invalid-feedback invalid_exp_organization">
+                            </div>
+                        </div>
+                        <div class="mb-2  col-sm-12 col-md-6">
+                            <label for="exp_startdate" class="form-label">Start Date</label>
+                            <input type="date" class="form-control exp_startdate" aria-describedby="exp_startdate"
+                                name="exp_startdate" autocomplete="exp_startdate" oninput="generateCV()">
+                            <div class="invalid-feedback invalid_exp_startdate">
+                            </div>
+                        </div>
+                        <div class="mb-2  col-sm-12 col-md-6">
+                            <label for="exp_enddate" class="form-label">End Date</label>
+                            <input type="date" class="form-control exp_enddate" aria-describedby="exp_enddate"
+                                name="exp_enddate" autocomplete="exp_enddate" oninput="generateCV()">
+                            <div class="invalid-feedback invalid_exp_enddate">
+                            </div>
+                        </div> -->
+
+                            <div class="delete-btn-parent">
+                                <button data-repeater-delete type="button"
+                                    class="btn-repeater-delete repeater-remove-btn">-</button>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <button type="button" data-repeater-create value="Add"
+                        class="btn-repeater-add repeater-add-btn  repeat-workExperience-form">+</button>
+                </div>
+            </div>
+            <div class="step">
+                <p class="text-center mb-4 form-title">skills</p>
+                <div class="skills-form repeater">
+                    <div class="row repeater" data-repeater-list="group-d">
+                        <div class="row" data-repeater-item>
+                            <div class="mb-2  col-sm-12">
+                                <label for="skill_cv" class="form-label">Skill</label>
+                                <input type="text" class="form-control skill_cv" aria-describedby="skill_cv"
+                                    name="skill_cv" list="datalist_skill_cv"
+                                    oninput="generateCV('skills-container','skill_cv','siklls')"
+                                    placeholder="EX:Communication Skills">
+                                <datalist id="datalist_skill_cv">
+                                    <option
+                                        value="Communication Skills: Proficient in liaising and communication with stakeholders, including experience with internal and external parties. Fluent in Arabic and English.">
+                                    <option
+                                        value="Leadership & Training Skills: Experienced in onboarding and training new staff and pharmacists, ensuring smooth transition and implementation of systems.">
+                                    <option
+                                        value="Problem-Solving Skills: Able to identify, report and propose solutions for any bug fixing or development.">
+                                </datalist>
+                                <div class="invalid-feedback invalid_skill_cv">
+                                </div>
+                            </div>
+                            <div class="delete-btn-parent">
+                                <button data-repeater-delete type="button"
+                                    class="btn-repeater-delete repeater-remove-btn">-</button>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <button type="button" data-repeater-create value="Add"
+                        class="btn-repeater-add repeater-add-btn  repeat-siklls-form">+</button>
+                </div>
+            </div>
+
+            <div class="step">
+                <p class="text-center mb-4 form-title">Courses And Trainning</p>
+                <div class="courses-form repeater">
+                    <div class="row repeater" data-repeater-list="group-e">
+                        <div class="row" data-repeater-item>
+                            <div class="mb-2  col-sm-12 col-md-12">
+                                <label for="courses_desc" class="form-label">Description</label>
+                                <input type="text" class="form-control courses_desc" aria-describedby="courses_desc"
+                                    name="courses_desc" list="datalistcourses_desc"
+                                    oninput="generateCV('courses-container','courses_desc','courses')"
+                                    placeholder="EX: Web and Programming Fundamentals">
+                                <datalist id="datalistcourses_desc">
+                                    <option
+                                        value="Web and Programming Fundamentals (PHP, JAVASCRIPT, TYPESCRIPT, PYTHON, HTML, CSS)">
+                                    <option
+                                        value="Advanced Database Management using MySQL Shell Scripting, Virtualization, Active Directory (MCSA)">
+                                    <option value="Docker containerization">
+                                    <option value="Manage Linux operating systems">
+                                    <option value="Networking (CCNA)">
+                                    <option value="Networking (CCNA)">
+                                </datalist>
+                                <div class="invalid-feedback invalid_courses_desc">
+                                </div>
+                            </div>
+                            <div class="delete-btn-parent">
+                                <button data-repeater-delete type="button"
+                                    class="btn-repeater-delete repeater-remove-btn">-</button>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <button type="button" data-repeater-create value="Add"
+                        class="btn-repeater-add repeater-add-btn  repeat-courses-form">+</button>
+                </div>
+            </div>
+            <div class="step">
+                <p class="text-center mb-4 form-title">Language Skills</p>
+                <div class="lang-form repeater">
+                    <div class="row repeater" data-repeater-list="group-g">
+                        <div data-repeater-item>
+                            <div class="row-grid">
+                                <select class="form-select lang_desc" aria-label="Select Your Lang"
+                                    onchange="generateCV('lang-container','lang_desc','lang')" ocomplete="lang_desc"
+                                    name="lang_desc">
+                                    <option selected value="">Select Language</option>
+                                    <option value="Arabic">Arabic</option>
+                                    <option value="English">English</option>
+                                </select>
+
+                                <select class="form-select lang_skills" aria-label="Select Your Lang_skills"
+                                    onchange="generateCV('lang-container','lang_skills','lang')" ocomplete="lang_skills"
+                                    name="Lang_skills">
+                                    <option selected value="">Select Skills</option>
+                                    <option value="Native">Native</option>
+                                    <option value="Fluent">Fluent</option>
+                                    <option value="Excellent">Excellent</option>
+                                    <option value="Very Good">Very Good</option>
+                                    <option value="Good">Good</option>
+                                </select>
+                            </div>
+                            <div class="delete-btn-parent">
+                                <button data-repeater-delete type="button"
+                                    class="btn-repeater-delete repeater-remove-btn">-</button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <button type="button" data-repeater-create value="Add"
+                        class="btn-repeater-add repeater-add-btn repeat-lang-form">+</button>
+                </div>
+            </div>
+            <div class="step">
+                <p class="text-center mb-4 form-title">Refrecness</p>
+                <div class="ref-form repeater">
+                    <div class="row repeater" data-repeater-list="group-f">
+                        <div class="row" data-repeater-item>
+                            <div class="mb-2  col-sm-12 col-md-12">
+                                <label for="ref_desc" class="form-label">Description</label>
+                                <input class="form-control ref_desc" list="datalistOptions" id="ref_desc"
+                                    placeholder="Ex: Available upon request"
+                                    oninput="generateCV('ref-container','ref_desc','References')">
+                                <datalist id="datalistOptions">
+                                    <option value="Available upon request">
+                                </datalist>
+                            </div>
+                            <div class="delete-btn-parent">
+                                <button data-repeater-delete type="button"
+                                    class="btn-repeater-delete repeater-remove-btn">-</button>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <button type="button" data-repeater-create value="Add"
+                        class="btn-repeater-add repeater-add-btn  repeat-References-form">+</button>
+                </div>
+            </div>
+        </form>
+
+
+
+        <div class="form-footer d-flex">
+            <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+            <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+        </div>
+    </div>
+    <section id="preview-cv" class="print_area">
+        <div class="btn-create ">
+            <div class="cv-btn-select">
+                <select class="form-select download-img-cv btn-select" id="download-img-cv" aria-label="Select Template"
+                    name="download-img-cv" onchange="selectTemplate(this)">
+                    <option selected value="all">Select Template</option>
+                    <option value="1">Template 1</option>
+                    <option value="2">Template 2</option>
+                    <option value="3">Template 3</option>
+                    <option value="4">Template 4</option>
+                </select>
+            </div>
+            <div class="cv-btn">
+                <button for="print-pdf" onclick="printCv(this)" class="label-print label" data-target="all"><i
+                        class="fa-solid fa-print"></i> Print</button>
+                <button onclick="downloadCvAsImage(this)" for="download-img-cv" class="label-download label"
+                        data-target="all"><i class="fa-solid fa-download"></i> Download Img</button>        
+                <button onclick="downloadCvAsPdf(this)" for="download-pdf-cv" class="label-download-pdf label"
+                        data-target="all"><i class="fa-solid fa-download"></i> Download Pdf</button>        
+            </div>
+            <!-- <div class="cv-btn">
+                <label for="edit-cv-label" class="label-edit label" data-target="all"><i
+                        class="fa-solid fa-pen-to-square"></i> Edit CV</label>
+                <select class="form-select edit-cv-label btn-select" id="edit-cv-label" aria-label="Select Template"
+                    name="edit-cv-label" onchange="selectTemplate(this,true)">
+                    <option selected value="all">Select Template</option>
+                    <option value="1">Template 1</option>
+                    <option value="2">Template 2</option>
+                    <option value="3">Template 3</option>
+                    <option value="4">Template 4</option>
+                </select>
+            </div> -->
+            <!-- <button class="btn document-btn">Download Document</button> -->
+        </div>
+        <div class="show-option hide">
+            <p class="edit-hint" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Click Here Edit Your Selected Template <i class="fa-solid fa-angle-down"></i></p>
+            <div class="row collapse"  id="collapseExample">
+                <div class="font-row col-sm-12 col-md-6">
+                    <div class="font-size-row">
+                        <label for="fontsize1" class="form-label">Heading Size<span
+                                class="fsize-span1">(10px)</span></label>
+                        <input type="range" id="fontsize1" class="form-range fontsize1" required name="fontsize1" value="12"
+                            min="8" max="46" onchange="changeFontsize1(this)">
+                    </div>
+                    <div class="font-size-row">
+                        <label for="fontsize2" class="form-label">Title Size<span class="fsize-span2">(10px)</span></label>
+                        <input type="range" id="fontsize2" class="form-range fontsize2" required name="fontsize2" value="12"
+                            min="8" max="36" onchange="changeFontsize2(this)">
+                    </div>
+                    <div class="font-size-row">
+                        <label for="fontsize3" class="form-label">Text Size<span class="fsize-span3">(10px)</span></label>
+                        <input type="range" id="fontsize3" class="form-range fontsize3" required name="fontsize3" value="12"
+                            min="8" max="26" onchange="changeFontsize3(this)">
+                    </div>
+                    <div class="font-family-row">
+                        <select class="form-select fontfamily" id="fontfamily" aria-label="Select Fontsize"
+                            name="fontfamily" onchange="changeFontfamily(this)">
+                            <option selected value="">Select Fontfamily</option>
+                            <option selected value='"Poppins", sans-serif'>Poppins</option>
+                            <option selected value='"Caveat", cursive'>Caveat</option>
+                            <option value='"Roboto", sans-seri'>Roboto</option>
+                            <option value='"Gideon Roman", serif'>Gideon Roman</option>
+                            <option value='"Open Sans", sans-serif'>Open Sans</option>
+                            <option value='"Montserrat", sans-serif'>Montserrat</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="color-row col-sm-12 col-md-6">
+                    <div class="bgcolor1-row bg-row">
+                        <label for="bg-1" class="form-label">Change Bacground Color 1</label>
+                        <input type="color" class="form-control form-control-color bg-1" aria-describedby="bg-1" required
+                            name="bg-1" value="#084C41" oninput="changeBg1(this)">
+                    </div>
+                    <div class="bgcolor2-row bg-row">
+                        <label for="bg-2" class="form-label">Change Bacground Color 2</label>
+                        <input type="color" class="form-control form-control-color bg-2" aria-describedby="bg-2" required
+                            name="bg-2" value="#e9e9e9" oninput="changeBg2(this)">
+                    </div>
+                    <div class="bgcolor3-row bg-row">
+                        <label for="fc1" class="form-label">Change Text Color</label>
+                        <input type="color" class="form-control form-control-color fc1" aria-describedby="fc1" name="fc1"
+                            value="#e9e9e9" oninput="changeFc1(this)">
+                    </div>
+                    <div class="bgcolor4-row bg-row">
+                        <label for="fc2" class="form-label">Change Text Color</label>
+                        <input type="color" class="form-control form-control-color fc2" aria-describedby="fc2" name="fc2"
+                            value="#e9e9e9" oninput="changeFc2(this)">
+                    </div>
+                </div>
+                <div class="col-sm-12 arrow-key-container">
+                    <div>
+                        <label for="" class="form-label">Change Image Position</label>
+                    </div>
+                    <div>
+                        <div class="arrow-key up" data-key="38" data-target="up" onclick="changeImagePosition(this)"></div><br>
+                        <div class="arrow-key left" data-key="37" data-target="left" onclick="changeImagePosition(this)"></div>
+                        <div class="arrow-key down" data-key="40" data-target="down" onclick="changeImagePosition(this)"></div>
+                        <div class="arrow-key right" data-key="39" data-target="right" onclick="changeImagePosition(this)"></div>
+                    </div>
+                </div>
+                <button class="default-btn">Default</button>
+            </div>
+        </div>
+        <!-- Slider main container -->
+        <div class="cv-wraper">
+            <div class="cv-box cv1 cv flex" id="cv1" data-target="1">
+                <div class="inner-cv grid">
+                    <div class="left">
+                        <div class="top-box column">
+                            <div class="image-cv-box">
+                                <img src="../static/images/hasan.png" class="image-cv item dragable" alt="image">
+                            </div>
+                            <div class="name-parent parent-list dragable">
+                                <p class="fullname_cv item">Hasan Meady</p>
+                            </div>
+                            <div class="jop-parent parent-list dragable">
+                                <p class="jop-cv item">Pharmacist</p>
+                            </div>
+                        </div>
+                        <div class="bottom-box">
+                            <div class="phone-parent parent-list dragable">
+                                <h4 class="heading-title">Phone</h4>
+                                <ul class="phone-container list-container item">
+                                    <li class="phone">+966546035917</li>
+                                    <li class="phone">+966575653417</li>
+                                </ul>
+                            </div>
+                            <div class="email-parent parent-list dragable">
+                                <h4 class="heading-title">Email</h4>
+                                <ul class="email-container list-container item">
+                                    <li class="email">dr_hasan781@yahoo.com</li>
+                                    <li class="email">hasanmmeady781@gmail.com</li>
+                                </ul>
+                            </div>
+                            <div class="address-parent parent-list dragable">
+                                <h4 class="heading-title">Address</h4>
+                                <ul class=" address-container list-container item">
+                                    <li class="address">Al Mubarraz, Al Ahsa, Saudi Arabia</li>
+                                </ul>
+                            </div>
+                            <div class="portfolio-parent parent-list dragable">
+                                <h4 class="heading-3 heading-title">Portfolio</h4>
+                                <ul class="portfolio-container list-container item">
+                                    <li><a class="portfolio" href="https://hasanmeady.web.app"
+                                            style="color: #fbfbfb !important;">https://hasanmeady.web.app</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="right-secion">
+                        <div class="education-parent parent-list dragable">
+                            <h4 class="heading-3 heading-title">Education</h4>
+                            <ul class="ul education-container list-container item">
+                                <li>Bachelor’s degree in pharmacy (Very Good), Tanta University, Egypt (2010)</li>
+                            </ul>
+                        </div>
+                        <div class="work-parent parent-list dragable">
+                            <h4 class="heading-3 heading-title">Work Experience</h4>
+                            <ul class="ul work-container list-container item">
+                                <li>Pharmacist at Aldwaa, Alahsaa, KSA (2011 - Present)</li>
+                                <li>Pharmacist, Ibn Alnafess Pharmacy (part-time), Tanta, Egypt, (2010 - 2011)></li>
+                                <li>Pharmacist, Ministry of Health hospitals (Public Duty), Tanta, Egypt (2011)</li>
+                            </ul>
+                        </div>
+                        <div class="skills-parent parent-list dragable">
+                            <h4 class="heading-3 heading-title">Skills</h4>
+                            <ul class="ul list-container item skills-container">
+                                <li>Communication Skills: Proficient in liaising and communication with
+                                    stakeholders,including experience with internal and external parties. Fluent in
+                                    Arabic and English.</li>
+                                <li>Leadership & Training Skills: Experienced in onboarding and training new staff
+                                    andpharmacists, ensuring smooth transition and implementation of systems.</li>
+                                <li>Problem-Solving Skills: Able to identify, report and propose solutions for any bug
+                                    fixing or development.</li>
+                            </ul>
+                        </div>
+                        <div class="courses-parent parent-list dragable">
+                            <h4 class="heading-3 heading-title">Courses And Trainning</h4>
+                            <ul class="ul list-container item courses-container">
+                                <li>Web and Programming Fundamentals (PHP, JAVASCRIPT, TYPESCRIPT, PYTHON,HTML, CSS)
+                                </li>
+                                <li>Advanced Database Management using MySQL</li>
+                                <li>Shell Scripting, Virtualization, Active Directory (MCSA)</li>
+                                <li> Docker containerization</li>
+                                <li>Manage Linux operating systems.</li>
+                                <li>Networking (CCNA) </li>
+                                <li>Git-Version Control</li>
+                            </ul>
+                        </div>
+                        <div class="lang-parent parent-list dragable">
+                            <h4 class="heading-3 heading-title">Language Skills</h4>
+                            <ul class="ul list-container item lang-container">
+                                <li><span class="lang-item">Arabic:</span><span class="lang-skills">Native</span> </li>
+                                <li><span class="lang-item">English:</span><span class="lang-skills">Fluent</span> </li>
+                            </ul>
+                        </div>
+                        <div class="ref-parent parent-list dragable">
+                            <h4 class="heading-3 heading-title">Refrecness</h4>
+                            <ul class="ul list-container item ref-container">
+                                <li>Available upon request</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cv-box cv2 cv flex" id="cv2" data-target="2" >
+                <div class="inner-cv grid">
+                    <div class="left">
+                        <div class="bottom-box">
+                            <h4 class="heading-3 heading-title">Contact</h4>
+                            <div class="contact-section">
+                                <ul class="phone-container list-container dragable item">
+                                    <li>
+                                        <div class="text-size-bold">Mobile: </div>
+                                        <span class="phone text-size">+966546035917</span>
+                                    </li>
+                                    <li>
+                                        <div class="text-size-bold">Mobile: </div>
+                                        <span class="phone text-size">+966575653417</span>
+                                    </li>
+                                </ul>
+                                <ul class="email-container list-container dragable item">
+                                    <li>
+                                        <div class="text-size-bold">Email: </div><a class="email text-size">dr_hasan781@yahoo.com</a>
+                                    </li>
+                                    <li>
+                                        <div class="text-size-bold">Email: </div><a class="email text-size">hasanmmeady781@gmail.com</a>
+                                    </li>
+                                </ul>
+                                <ul class="address-container list-container dragable item">
+                                    <li>
+                                        <div class="text-size-bold text-size">Adress: </div>
+                                        <span class="text-size-bold address text-size">Al Mubarraz, Al Ahsa,Saudi Arabia </span>
+                                    </li>
+                                </ul>
+                                <ul class="portfolio-container list-container dragable item">
+                                    <li>
+                                        <div class="text-size-bold text-size">Portfolio: </div>
+                                        <a class="text-size-bold portfolio text-size" href="https://hasanmeady.web.app" target="_blank">https://hasanmeady.web.app</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="right-secion">
+                        <div class="top-box column">
+                            <div class="image-cv-box">
+                                <img src="../static/images/hasan.png" class="image-cv item dragable" alt="image">
+                            </div>
+                            <div class="name-parent parent-list dragable">
+                                <p class="fullname_cv item">Hasan Meady</p>
+                            </div>
+                            <div class="jop-parent parent-list dragable">
+                                <p class="jop-cv item">Pharmacist</p>
+                            </div>
+
+                        </div>
+                        <div class="education-parent parent-list dragable">
+                            <h4 class="heading-3 heading-title">Education</h4>
+                            <ul class="ul education-container list-container  item">
+                                <li>Bachelor’s degree in pharmacy (Very Good), Tanta University, Egypt (2010)</li>
+                            </ul>
+                        </div>
+                        <div class="work-parent parent-list dragable">
+                            <h4 class="heading-title">Work Experience</h4>
+                            <ul class="ul work-container list-container  item">
+                                <li>Pharmacist at Aldwaa, Alahsaa, KSA (2011 - Present)</li>
+                                <li>Pharmacist, Ibn Alnafess Pharmacy (part-time), Tanta, Egypt, (2010 - 2011)</li>
+                                <li>Pharmacist, Ministry of Health hospitals (Public Duty), Tanta, Egypt (2011)</li>
+                            </ul>
+                        </div>
+                        <div class="skills-parent parent-list dragable">
+                            <h4 class="heading-title">Skills</h4>
+                            <ul class="ul skills-container list-container  item">
+                                <li>Communication Skills: Proficient in liaising and communication with
+                                    stakeholders,including experience with internal and external parties. Fluent in
+                                    Arabic and English.</li>
+                                <li>Leadership & Training Skills: Experienced in onboarding and training new staff and
+                                    pharmacists, ensuring smooth transition and implementation of systems.</li>
+                                <li>Problem-Solving Skills: Able to identify, report and propose solutions for any bug
+                                    fixing or development.</li>
+                            </ul>
+                        </div>
+                        <div class="courses-parent parent-list dragable">
+                            <h4 class="heading-title">Courses And Trainning</h4>
+                            <ul class="ul courses-container list-container  item">
+                                <li>Web and Programming Fundamentals (PHP, JAVASCRIPT, TYPESCRIPT, PYTHON,HTML, CSS)
+                                </li>
+                                <li>Advanced Database Management using MySQL</li>
+                                <li>Shell Scripting, Virtualization, Active Directory (MCSA)</li>
+                                <li> Docker containerization</li>
+                                <li>Manage Linux operating systems.</li>
+                                <li>Networking (CCNA) </li>
+                                <li>Git-Version Control</li>
+                            </ul>
+                        </div>
+                        <div class="lang-parent parent-list dragable">
+                            <h4 class="heading-title">Language Skills</h4>
+                            <ul class="ul lang-container list-container  item">
+                                <li><span class="lang-item">Arabic:</span><span class="lang-skills"> Native</span> </li>
+                                <li><span class="lang-item">English:</span><span class="lang-skills"> Fluent</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="ref-parent parent-list dragable">
+                            <h4 class="heading-title">Refrecness</h4>
+                            <ul class="ul  ref-container list-container  item">
+                                <li class="li">Available upon request</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="cv-box cv3 cv" id="cv3" data-target="3">
+                <div class="inner-cv">
+                    <div class="top-box  info-div">
+                        <div class="left">
+                            <div class="name-parent parent-list dragable">
+                                <p class="fullname_cv item">Hasan <span class="last-name">Meady</span></p>
+                            </div>
+                            <div class="jop-parent parent-list dragable">
+                                <p class="jop-cv item">Pharmacist</p>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <div class="image-cv-box">
+                                <img src="../static/images/hasan.png" class="image-cv item dragable" alt="image">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="center-box center-box-1">
+                        <div class="left">
+                            <div class="phone-parent parent-list dragable">
+                                <div class="phone-container list-container item">
+                                    <ul class="grid-div">
+                                        <i class="fa-solid fa-phone-flip contact-icon"></i>
+                                        <span class="phone">+966546035917</span>
+                                    </ul>
+                                    <ul class="grid-div">
+                                        <i class="fa-solid fa-phone-flip contact-icon"></i>
+                                        <span class="phone">+966546035917</span>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="email-parent parent-list dragable">
+                                <div class="email-container list-container item">
+                                    <ul class="grid-div">
+                                        <i class="fa-regular fa-envelope contact-icon"></i>
+                                        <a class="email link-color">dr_hasan781@yahoo.com</a>
+                                    </ul>
+                                    <ul class="grid-div">
+                                        <i class="fa-regular fa-envelope contact-icon"></i>
+                                        <a class="email link-color">dr_hasan781@yahoo.com</a>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="address-parent parent-list dragable">
+                                <div class=" address-container list-container item">
+                                    <ul class="grid-div">
+                                        <i class="fa-solid fa-location-dot contact-icon"></i>
+                                        <span class="address">Al Mubarraz, Al Ahsa, Saudi Arabia</span>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="portfolio-parent parent-list dragable">
+                                <div class="portfolio-container list-container item">
+                                    <ul class="grid-div">
+                                        <i class="fa-solid fa-globe contact-icon"></i>
+                                        <span><a class="portfolio link-color"
+                                                href="https://hasanmeady.web.app">https://hasanmeady.web.app</a></span>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <div class="education-parent parent-list dragable">
+                                <h4 class="heading-title">Education</h4>
+                                <ul class="ul education-container list-container item">
+                                    <li>Bachelor’s degree in pharmacy (Very Good), Tanta University, Egypt (2010)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="center-box center-box-2">
+                        <div class="left">
+                            <div class="work-parent parent-list dragable">
+                                <h4 class="heading-title">Work Experience</h4>
+                                <ul class="ul work-container list-container item">
+                                    <li>Pharmacist at Aldwaa, Alahsaa, KSA (2011 - Present)</li>
+                                    <li>Pharmacist, Ibn Alnafess Pharmacy (part-time), Tanta, Egypt, (2010 - 2011)</li>
+                                    <li>Pharmacist, Ministry of Health hospitals (Public Duty), Tanta, Egypt (2011)</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <div class="skills-parent parent-list dragable">
+                                <h4 class="heading-title">Skills</h4>
+                                <ul class="ul skills-container list-container item">
+                                    <li>Communication Skills: Proficient in liaising and communication with
+                                        stakeholders,including experience with internal and external parties. Fluent in
+                                        Arabic and English.</li>
+                                    <li>Leadership & Training Skills: Experienced in onboarding and training new staff
+                                        and
+                                        pharmacists, ensuring smooth transition and implementation of systems.</li>
+                                    <li>Problem-Solving Skills: Able to identify, report and propose solutions for any
+                                        bug
+                                        fixing or development.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="center-box center-box-3">
+                        <div class="left">
+                            <div class="courses-parent parent-list dragable">
+                                <h4 class="heading-title">Courses And Trainning</h4>
+                                <ul class="ul courses-container list-container item">
+                                    <li>Web and Programming Fundamentals (PHP, JAVASCRIPT, TYPESCRIPT, PYTHON,HTML, CSS)
+                                    </li>
+                                    <li>Advanced Database Management using MySQL</li>
+                                    <li>Shell Scripting, Virtualization, Active Directory (MCSA)</li>
+                                    <li> Docker containerization</li>
+                                    <li>Manage Linux operating systems.</li>
+                                    <li>Networking (CCNA) </li>
+                                    <li>Git-Version Control</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <div class="lang-parent parent-list dragable">
+                                <h4 class="heading-title">Language Skills</h4>
+                                <ul class="ul lang-container list-container item">
+                                    <li><span class="lang-item">Arabic:</span><span class="lang-skills"> Native</span>
+                                    </li>
+                                    <li><span class="lang-item">English:</span><span class="lang-skills"> Fluent</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="end-box">
+                        <div class="end">
+                            <div class="ref-parent parent-list dragable">
+                                <h4 class="heading-title">Refrecness</h4>
+                                <ul class="ul  ref-container list-container item">
+                                    <li class="li">Available upon request</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cv-box cv4 cv" id="cv4" data-target="4">
+                <div class="inner-cv">
+                    <div class="top-box  info-div">
+                        <div class="center">
+                            <div class="name-parent parent-list dragable">
+                                <p class="fullname_cv item">Hasan <span class="last-name">Meady</span></p>
+                            </div>
+                            <div class="jop-parent parent-list dragable">
+                                <p class="jop-cv item">Pharmacist</p>
+                            </div>
+                            <div class="contact-div">
+                                <div class="phone-parent parent-list dragable contact-list">
+                                    <div class="phone-container list-container item">
+                                        <ul class="grid-div">
+                                            <i class="fa-solid fa-phone-flip contact-icon"></i>
+                                            <span class="phone">+966546035917</span>
+                                        </ul>
+                                        <ul class="grid-div">
+                                            <i class="fa-solid fa-phone-flip contact-icon"></i>
+                                            <span class="phone">+966546035917</span>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="email-parent parent-list dragable contact-list">
+                                    <div class="email-container list-container item">
+                                        <ul class="grid-div">
+                                            <i class="fa-regular fa-envelope contact-icon"></i>
+                                            <a class="email link-color">dr_hasan781@yahoo.com</a>
+                                        </ul>
+                                        <ul class="grid-div">
+                                            <i class="fa-regular fa-envelope contact-icon"></i>
+                                            <a class="email link-color">dr_hasan781@yahoo.com</a>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="address-parent parent-list dragable contact-list">
+                                    <div class=" address-container list-container item">
+                                        <ul class="grid-div">
+                                            <i class="fa-solid fa-location-dot contact-icon"></i>
+                                            <span class="address">Al Mubarraz, Al Ahsa, Saudi Arabia</span>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="portfolio-parent parent-list dragable contact-list">
+                                    <div class="portfolio-container list-container item">
+                                        <ul class="grid-div">
+                                            <i class="fa-solid fa-globe contact-icon"></i>
+                                            <span><a class="portfolio link-color"
+                                                    href="https://hasanmeady.web.app">https://hasanmeady.web.app</a></span>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="details-box">
+                        <div class="education-parent parent-list dragable">
+                            <h4 class="heading-title">Education</h4>
+                            <ul class="ul education-container list-container item">
+                                <li>Bachelor’s degree in pharmacy (Very Good), Tanta University, Egypt (2010)</li>
+                            </ul>
+                        </div>
+                        <div class="work-parent parent-list dragable">
+                            <h4 class="heading-title">Work Experience</h4>
+                            <ul class="ul work-container list-container item">
+                                <li>Pharmacist at Aldwaa, Alahsaa, KSA (2011 - Present)</li>
+                                <li>Pharmacist, Ibn Alnafess Pharmacy (part-time), Tanta, Egypt, (2010 - 2011)</li>
+                                <li>Pharmacist, Ministry of Health hospitals (Public Duty), Tanta, Egypt (2011)</li>
+                            </ul>
+                        </div>
+                        <div class="skills-parent parent-list dragable">
+                            <h4 class="heading-title">Skills</h4>
+                            <ul class="ul skills-container list-container item">
+                                <li>Communication Skills: Proficient in liaising and communication with
+                                    stakeholders,including experience with internal and external parties. Fluent in
+                                    Arabic and English.</li>
+                                <li>Leadership & Training Skills: Experienced in onboarding and training new staff and
+                                    pharmacists, ensuring smooth transition and implementation of systems.</li>
+                                <li>Problem-Solving Skills: Able to identify, report and propose solutions for any bug
+                                    fixing or development.</li>
+                            </ul>
+                        </div>
+                        <div class="courses-parent parent-list dragable">
+                            <h4 class="heading-title">Courses And Trainning</h4>
+                            <ul class="ul courses-container list-container item">
+                                <li>Web and Programming Fundamentals (PHP, JAVASCRIPT, TYPESCRIPT, PYTHON,HTML, CSS)
+                                </li>
+                                <li>Advanced Database Management using MySQL</li>
+                                <li>Shell Scripting, Virtualization, Active Directory (MCSA)</li>
+                                <li> Docker containerization</li>
+                                <li>Manage Linux operating systems.</li>
+                                <li>Networking (CCNA) </li>
+                                <li>Git-Version Control</li>
+                            </ul>
+                        </div>
+                        <div class="lang-parent parent-list dragable">
+                            <h4 class="heading-title">Language Skills</h4>
+                            <ul class="ul lang-container list-container item">
+                                <li><span class="lang-item">Arabic:</span><span class="lang-skills"> Native</span> </li>
+                                <li><span class="lang-item">English:</span><span class="lang-skills"> Fluent</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="ref-parent parent-list dragable">
+                            <h4 class="heading-title">Refrecness</h4>
+                            <ul class="ul  ref-container list-container item">
+                                <li class="li">Available upon request</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div> <!-- end of wraper-->
+
+</div>
+</section>
+
+</div>
+
+<!-- after login -->
+{% endblock %}
+
+
+{% block modal %}
+{% include 'modals/registermodal.html' %}
+{% include 'modals/loginmodal.html' %}
+{% endblock %}
+
+
+
+{% block scripts %}
+<script src="../static/js/firbase.js" type="module"></script>
+<script src="../static/js/helper.js"></script>
+<script src="../static/js/validation.js"></script>
+{% if isLogged == True: %}
+<script src="../static/js/logout.js" type="module"></script>
+{% endif %}
+
+<script src="../static/js/user.js" type="module"></script>
+<script src="../static/js/lib/repeater.js"></script>
+<script src="../static/js/lib/html2canvas.js"></script>
+
+<script src="../static/js/lib/printjs.js"></script>
+<script src="../static/js/lib/sliderm.js"></script>
+<script src="../static/js/lib/html-rtf.js"></script>
+<script src="../static/js/lib/jspdf.js"></script>
+<script src="../static/js/lib/default_vfs.js"></script>
+<script src="../static/js/cvmaker.js"></script>
+<script src="../static/js/script.js"></script>
+{% endblock %}
