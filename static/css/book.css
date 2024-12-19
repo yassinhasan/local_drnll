@@ -99,7 +99,10 @@ div#canvas {
 	animation: gelatine 0.5s 1;
 }
 
-
+/* Acoordion */
+.heading-cgp{
+	font-size: var(--heading-four) !important;
+}
 .accordion-waper {
 	margin-top: 24px;
 	padding-bottom: 80px;
@@ -137,6 +140,7 @@ div#canvas {
 	/* background: var(--accent-color) !important; */
 	background: var(--background-color) !important;
 	color: #f1f1f1 !important;
+	font-size: var(--heading-six) !important;
 }
 /*  */
 
@@ -157,6 +161,8 @@ body.light .accordion-button.collapsed {
 	/* background: var(--accent-color) !important; */
 	background: var(--accent-color) !important;
 	color: #f1f1f1 !important;
+	font-size: var(--heading-six) !important;
+
 }
 
  .accordion-body {

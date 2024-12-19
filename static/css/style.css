@@ -177,6 +177,7 @@ body.light{
     --caption-one: 24px;
     --caption-two: 16x;
     --caption-three: 12px;
+    --heading-six:14px;
   }
   .menu-btn{
     display: block;
@@ -252,6 +253,10 @@ body.light{
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) and (max-width: 767px) {
 
+  :root
+  {
+    --heading-six:14px;
+  }
   .about ,.projects{
     margin-top: 24px
   }
@@ -571,4 +576,10 @@ body.light{
 }
 .bi-eye::before{
   content: "\f070"
+}
+
+/* alert for cgp */
+.alert.alert-info.alert-dismissible.fade.show
+{
+  font-size: var(--heading-five) !important;
 }

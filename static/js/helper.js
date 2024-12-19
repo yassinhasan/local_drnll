@@ -48,8 +48,9 @@ function hideSignInmodal()
     // here we will do every thing
 }
 
-function fireAlert(type,msg,customClass='swal-login',position="top-start"){
+function fireAlert(type,msg,fire_time=null,customClass='swal-login',position="top-start"){
     var style = getComputedStyle(document.body)
+    var custome_time = fire_time == null ? 3000 : fire_time
     let primaryColor = ""
     if(type == "error")
     {
@@ -63,7 +64,7 @@ function fireAlert(type,msg,customClass='swal-login',position="top-start"){
         toast: true,
         position: position,
         showConfirmButton: false,
-        timer: 3000,
+        timer: custome_time,
         color: primaryColor,
         timerProgressBar: true,
         didOpen: (toast) => {
