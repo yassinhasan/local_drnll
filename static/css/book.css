@@ -108,7 +108,7 @@ div#canvas {
 .accordion-body .button-wraper {
 	display: grid;
 	grid-template-columns: auto auto;
-	gap: 6%;
+	gap: 3%;
 	justify-content: start;
 }
 

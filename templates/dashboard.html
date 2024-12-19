@@ -9,7 +9,13 @@
 {% endblock %}
 
 {% block content %}
-
+<!-- alert -->
+<div class="alert alert-info alert-dismissible fade show" role="alert">
+    <strong>   CGP files have been added to this path</strong>  Click Menu => Books or <a href="/book" target="_blank" style="color: var(--primary-color);">Click here</a>
+      <br>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+<!-- end alert -->
     <h1 class="heading-2 heading-dashboard">Dashboard</h1>
     <div class="action-wraper">
         <div class="icon">
@@ -19,10 +25,10 @@
             <a href="#" class="editusers-link" aria-label="users" title="edit users" data-bs-toggle="modal"data-bs-target="#editusersModal">  <i class="fa-regular fa-pen-to-square"></i></a>
           
         </div>
-        <div class="icon">
+        <!-- <div class="icon">
                    
             <a> <i class="fa-solid fa-chart-line"></i></a>
-        </div>
+        </div> -->
     </div>
     <div class="loader"></div>
     <div class="dashboard-wraper">
