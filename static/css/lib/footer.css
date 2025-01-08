@@ -1,0 +1,29 @@
+/* body{
+    min-height: 1200px;
+} */
+/* .container{
+    height: 100%;
+    position: relative;
+}
+.contact{
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--theme-color);
+}
+.contact-wraper{
+    height: auto;
+    width: 100%;
+}
+.upper, .footer{
+    height: auto;
+}
+.footer{
+    margin-top: 10px;
+}
+
+.home{
+  
+    min-height: 900px;
+} */

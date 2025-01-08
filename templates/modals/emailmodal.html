@@ -1,0 +1,40 @@
+  <!-- email modal -->
+  <div class="modal fade email-modal" data-bs-backdrop="static" data-bs-keyboard="false" id="emailModal" data-bs-focus="false"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-scrollable modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Send Email</h5>
+
+          <i class="fa-solid fa-xmark btn-close close-email-modal" type="button" data-bs-dismiss="modal" aria-label="Close"></i>
+        </div>
+        <div class="modal-body">
+          <form action="/sendemailevents" method="POST" class="emailform" enctype="multipart/form-data">
+            <div class="mb-3">
+              <label for="email-user" class="form-label email-user-label">Select Email(s)</label>
+              <select class="form-select email-user"  name="email-user" id="email-user" multiple aria-label="multiple select emails">
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="email-subject" class="form-label">Subject</label>
+              <input type="text" class="form-control email-subject" id="email-subject" aria-describedby="email-subjectHelp" required
+                autocomplete="email-subject" name="email-subject">
+                  <div class="invalid-feedback invalid-subject"></div>
+                
+            </div>
+            <div class="mb-3">
+              <div class="ckeditor" style="margin: 15px 0;">
+                <textarea id="content" name="content" class="content"></textarea>
+            </div>
+              <div class="invalid-feedback">
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary sendemail-btn-modal" name="submit">Send</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- modal -->
+   

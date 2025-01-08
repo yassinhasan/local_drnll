@@ -1,0 +1,56 @@
+{% extends 'master.html' %}
+{% block css %}
+<link href="../static/css/lib/footer.css" rel="stylesheet" type="text/css" />
+<link href="../../static/css/upload.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block content %}
+<div class="alert alert-info alert-dismissible fade show" role="alert">
+  <strong>   CGP files have been added to this path</strong>   Menu => Books or <a href="/book" target="_blank" style="color: var(--primary-color);">Click here</a>
+    <br>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+<!-- after login -->
+<div class="home-wraper">
+  <div class="profile-wraper">
+  <h2 class="hello heading-2">Hello!</h2>
+  <h2 class="username">
+    {{ username }}
+  </h2>
+  <h3 class="message heading-6">You can upload and download any files</h3>
+  <span class="down">&darr;</span>
+
+  <div class="wrapper">
+    <button class="heading-nav files-btn" aria-label="files" data-bs-toggle="modal" data-bs-target="#filesModal">Show
+      Files</button>
+    <form action="#" class="upload-form" enctype="multipart/form-data">
+      <input class="file-input" type="file" name="file" hidden multiple>
+      <i class="fas fa-cloud-upload-alt"></i>
+      <p class="drop-text">Click or Drag & Drop to Upload File</p>
+    </form>
+    <section class="progress-area"></section>
+    <section class="uploaded-area hide"></section>
+  </div>
+</div>
+</div>
+
+{% endblock %}
+
+
+{% block modal %}
+{% include 'modals/filesmodal.html' %}
+{% endblock %}
+
+
+
+{% block scripts %}
+<script src="../static/js/firbase.js" type="module"></script>
+<script src="../static/js/helper.js"></script>
+<script src="../static/js/validation.js"></script>
+<script src="../static/js/upload.js" type="module"></script>
+<script src="../static/js/files.js" type="module"></script>
+<script src="../static/js/logout.js" type="module"></script>
+<script src="../static/js/script.js"></script>
+
+{% endblock %}

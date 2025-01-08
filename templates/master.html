@@ -1,0 +1,54 @@
+<!-- header -->
+{% include "layouts/header.html" %}
+<!-- css -->
+{% block css %}
+{% endblock %}
+</head>
+
+<!-- body -->
+<body class="light">
+    <div class="container">
+      <!-- nav -->
+        {% include "layouts/nav.html" %}
+    <div class="home">
+        <!-- content -->
+        {% block content %}
+        {% endblock %}
+        <!-- here home or upload page -->
+    </div>
+
+    <!-- footer -->
+    {% block footer %}
+    {% endblock %}
+  </div> <!--  end of conatiner-->
+  {% block books %}
+  {% endblock %}
+    <!-- model -->
+    {% block modal %}
+    {% endblock %}
+    {% include  'modals/calcmodal.html' %}
+    <!-- loader -->
+    {% include "layouts/spinner.html" %}
+    {% include "layouts/footer.html" %}
+
+    {% block chatboot %}
+      {% if admin != True %}
+      {% include "layouts/chatbot.html" %}  
+      {% endif %}
+    {% endblock %}
+
+    
+    <!-- js scripts -->
+    {% block scripts %}
+    
+    {%  endblock %}
+    {% if admin != True %}
+    <script src="../../static/js/lib/chatbot.js"></script>
+    {% endif %}
+    <script src="../../static/js/lib/calc.js"></script>
+    <script src="../../static/js/lib/record.js"></script>
+
+</body>
+
+</html>
+

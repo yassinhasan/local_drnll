@@ -1,0 +1,123 @@
+{% extends 'master.html' %}
+{% block css %}
+
+
+<link href="../static/css/dashboard.css" rel="stylesheet" type="text/css" />
+<script src="../static/js/lib/google-charts.js"></script>
+<script src="../static/ckeditor/ckeditor.js"></script>
+
+{% endblock %}
+
+{% block content %}
+<!-- alert -->
+<div class="alert alert-info alert-dismissible fade show" role="alert">
+    <strong>   CGP files have been added to this path</strong>   Menu => Books or <a href="/book" target="_blank" style="color: var(--primary-color);">Click here</a>
+      <br>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+<!-- end alert -->
+    <h1 class="heading-2 heading-dashboard">Dashboard</h1>
+    <div class="action-wraper">
+        <div class="icon">
+            <a href="#" class="send-email" aria-label="email" title="send email to users" data-bs-toggle="modal"data-bs-target="#emailModal">  <i class="fa-solid fa-paper-plane"></i></a>
+        </div>
+        <div class="icon" >
+            <a href="#" class="editusers-link" aria-label="users" title="edit users" data-bs-toggle="modal"data-bs-target="#editusersModal">  <i class="fa-regular fa-pen-to-square"></i></a>
+          
+        </div>
+        <!-- <div class="icon">
+                   
+            <a> <i class="fa-solid fa-chart-line"></i></a>
+        </div> -->
+    </div>
+    <div class="loader"></div>
+    <div class="dashboard-wraper">
+        <div class="main-dashboard">
+            <div class="users">
+                    <div class="icon">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <div class="info">
+                        <p class="num"></p>
+                        <p class="title">Total Users</p>
+                    </div>
+            </div>
+            <div class="active-users">
+                    <div class="icon">
+                        <i class="fa-solid fa-user-check"></i>
+                    </div>
+                    <div class="info">
+                        <p class="num"></p>
+                        <p class="title">Active Users</p>
+                    </div>
+            </div>
+            <div class="inactive-users">
+                    <div class="icon">
+                        <i class="fa-solid fa-user-large-slash"></i>
+                    </div>
+                    <div class="info">
+                        <p class="num"></p>
+                        <p class="title">Inactive Users</p>
+                    </div>
+            </div>
+    
+    
+        </div>
+        <div class="charts row">
+            <div id="chart_div" class="col"></div>
+            <div id="timeline" class="col"></div>
+        </div>
+        <div class="email-card">
+            <div class="card">
+                <div class="card-header">
+                  Emails
+                </div>
+                <ul class="list-group list-group-flush email-items">
+                </ul>
+              </div>
+        </div>
+        <div class="logs-wraper">
+            <h2 class="heading-2">Logs</h2>
+            <table id="myTableLogs" class="display table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Info</th>
+                        <th>Message</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody class="table-body">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block modal %}
+{% include 'modals/registermodal.html' %}
+{% include 'modals/loginmodal.html' %}
+{% include 'modals/emailmodal.html' %}
+{% include 'modals/editusersmodal.html' %}
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}
+
+
+
+{% block scripts %}
+<script src="../static/js/firbase.js" type="module"></script>
+<script src="../static/js/helper.js" ></script>
+<script src="../static/js/validation.js"></script>
+<script src="../static/js/user.js" type="module"></script>
+<script src="../static/js/dashboard.js" type="module"></script>
+{% if isLogged == True: %}
+<script src="../static/js/logout.js" type="module"></script>
+{%  endif %}
+<script src="https://cdn.datatables.net/2.1.3/js/dataTables.js"></script>
+<script src="../static/js/script.js"></script>
+
+{% endblock %}

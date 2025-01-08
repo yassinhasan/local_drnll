@@ -1,0 +1,51 @@
+/* modal */
+.modal-content {
+    border-radius: 8px;
+  }
+  .modal-content , .form-control{
+    background-color: var(--background-color) !important;
+    color: var(--primary-color);
+    box-shadow: 2px 2px var(--accent-color);
+    
+  }
+  .form-control{
+    border: var(--border) !important;
+  }
+  .form-control:focus,.form-control:active ,.form-control:focus-visible,.form-control:target,.form-control::target-text,.form-control:focus-within{
+    background-color: var(--background-color) !important;
+    color: var(--primary-color);
+    box-shadow: 2px 2px var(--accent-color);
+    border: var(--border) !important;
+  }
+  .modal-header .btn-close {
+    background: var(--theme-color) !important;
+    color: var(--accent-color) !important;
+    font-size: var(--heading-two);
+  }
+  .login-btn,.register-btn,.login-btn-modal,.register-btn-modal{
+    background-color: var(--accent-color);
+    color: var(--forecolor) !important;
+  }
+  
+  .btn-primary , .btn-primary:hover , .btn-primary:focus{
+    background-color: var(--accent-color);
+    border: none;
+    outline: none;
+  }
+  body.modal-open .container{
+    filter: blur(8px);
+  }
+  
+  
+  .login-btn-modal:hover,.register-btn-modal:hover {
+    
+    transition-timing-function: cubic-bezier(0.6, 4, 0.3, 0.8);
+    animation: gelatine 0.5s 1;
+    }
+
+   
+    /* alert for verify */
+.verify-alert{
+  background-color: var(--background-color);
+}
+

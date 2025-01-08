@@ -1,0 +1,81 @@
+  <!-- calc modal -->
+  <div class="modal fade calc-modal" data-bs-backdrop="static" data-bs-keyboard="false" id="calcModal"
+    tabindex="-1" aria-labelledby="calcModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-scrollable modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="calcModalLabel">Calc</h5>
+          <i class="fa-solid fa-xmark btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></i>
+        </div>
+        <div class="modal-body">
+          <form>
+          <div class="row">
+            <div class="mb-2 col-6">
+              <label for="total" class="form-label">Total Cash And Span</label>
+              <input type="number"  class="form-control" autofocus id="total" aria-describedby="total" required
+                name="total" autocomplete="total">
+              <div class="invalid-feedback invalid-total">
+              </div>
+            </div>
+            <div class="mb-2 col-6">
+              <label for="credit" class="form-label">Post to account</label>
+              <input type="number" class="form-control" id="credit" aria-describedby="credit" 
+                autocomplete="credit" name="credit">
+            </div>
+            <div class="mb-2 col-6">
+              <label for="arbahi" class="form-label">Arbhahi</label>
+              <input type="number" class="form-control" id="arbahi" aria-describedby="arbahi" 
+                autocomplete="arbahi" name="arbahi">
+            </div>
+            <div class="mb-2 col-6">
+              <label for="qitaf" class="form-label">qitaf</label>
+              <input type="number" class="form-control" id="qitaf" aria-describedby="qitaf" 
+                autocomplete="qitaf" name="qitaf">
+            </div>
+            <div class="mb-2 col-6">
+              <label for="rajhi" class="form-label">rajhi</label>
+              <input type="number" class="form-control" id="rajhi" aria-describedby="rajhi" 
+                autocomplete="rajhi" name="rajhi">
+            </div>
+            <div class="mb-2 col-6">
+              <label for="online" class="form-label">online</label>
+              <input type="number" class="form-control" id="online" aria-describedby="online" 
+                autocomplete="online" name="online">
+            </div>
+            <div class="mb-2 col-12">
+              <label for="mwzna1" class="form-label">موازنه 1</label>
+              <input type="text" class="form-control mwzna1" id="mwzna1" aria-describedby="mwzna1" 
+                autocomplete="mwzna1" name="mwzna1" placeholder="You can enter multiple numbers with + seperator">
+            </div>
+            <div class="mb-3 col-12">
+              <label for="mwzna2" class="form-label">موازنه 2</label>
+              <input type="text" class="form-control mwzna2" id="mwzna2" aria-describedby="mwzna2" 
+                autocomplete="mwzna2" name="mwzna2" placeholder="You can enter multiple numbers with + seperator">
+            </div>
+          </div>
+            <!-- <button  class="btn btn-primary  rcalc-btn-modal">Calc</button> -->
+            <div class="calc-results">
+              <div><label for="total" class="form-label total-net">Total :</label>
+                <span class="total-text"></span>
+              </div>
+              <div><label for="cash" class="form-label cash-net">Cash :</label>
+                <span class="cash-text"></span>
+              </div>
+              <div><label for="span-t" class="form-label span-net">Span :</label>
+                <span class="span-text"></span>
+              </div>
+              
+            </div>
+            <button type="reset" class="btn btn-primary clear-btn">Clear</button>
+            <button type="button" class="btn btn-secondary download-calc">Download</button>
+            <button type="button" class="btn btn-info view-calc">View <i class="fa-solid fa-eye"></i></button>
+            <button type="button" class="btn btn-danger print-calc">Print</button>
+            <div class="img-box">
+              <canvas id="canvas2" width="340" height="340"></canvas>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- modal -->
