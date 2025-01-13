@@ -1,0 +1,96 @@
+
+
+<!-- calc modal -->
+<div class="modal fade target-modal" data-bs-backdrop="static" data-bs-keyboard="false" id="targetModal" tabindex="-1"
+  aria-labelledby="targetModalLabel" aria-hidden="true">
+  <div class="modal-dialog  modal-dialog-scrollable modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div style="width: 100%;text-align: center;">
+          <h3 class="modal-title center" id="targetModalLabel">Daily Target Calculator </h3>
+          <h3 id="remaining-days" style="margin-top: 8px;" class="remaining-days heading-5">Remaining Days: 20</h3>
+        </div>
+        <i class="fa-solid fa-xmark btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></i>
+      </div>
+      <div class="modal-body">
+          <div class="target-container">
+            <h3 class="heading-5 target-label">Monthly Targets</h3>
+            <div class="row">
+              <div class="mb-2 col-6">
+                <label class="form-label" for="total-target">Total</label>
+                <input onblur="calculateDailyTargets()" class="form-control" type="number" id="total-target" placeholder="Enter total target">
+              </div>
+              <div class="mb-2 col-6">
+                <label class="form-label" for="diamond-target">Diamond</label>
+                <input onblur="calculateDailyTargets()" class="form-control" type="number" id="diamond-target" placeholder="Enter diamond target">
+              </div>
+              <div class="mb-2 col-6">
+                <label class="form-label" for="gold-target">Gold</label>
+                <input onblur="calculateDailyTargets()" class="form-control" type="number" id="gold-target" placeholder="Enter gold target">
+              </div>
+              <div class="mb-2 col-6">
+                <label class="form-label" for="silver-target">Silver</label>
+                <input onblur="calculateDailyTargets()" class="form-control" type="number" id="silver-target" placeholder="Enter silver target">
+              </div>
+            </div>
+          </div>
+            <div class="target-container">
+              <h3 class="heading-5 target-label">Actual Sales Until Today</h3>
+              <div class="row">
+                <div class="mb-2 col-6">
+                  <label class="form-label" for="total-sales">Total</label>
+                  <input onblur="calculateDailyTargets()" class="form-control" type="number" id="total-sales" placeholder="Enter total sales so far">
+                </div>
+                <div class="mb-2 col-6">
+                  <label class="form-label" for="diamond-sales">Diamond</label>
+                  <input onblur="calculateDailyTargets()" class="form-control" type="number" id="diamond-sales" placeholder="Enter diamond sales so far">
+                </div>
+                <div class="mb-2 col-6">
+                  <label class="form-label" for="gold-sales">Gold</label>
+                  <input onblur="calculateDailyTargets()" class="form-control" type="number" id="gold-sales" placeholder="Enter gold sales so far">
+                </div>
+                <div class="mb-2 col-6">
+                  <label class="form-label" for="silver-sales">Silver</label>
+                  <input onblur="calculateDailyTargets()" class="form-control" type="number" id="silver-sales" placeholder="Enter silver sales so far">
+                </div>
+              </div>
+
+            </div>
+            <div class="target-container">
+              <h3 class="heading-5 target-label">Target Percentage</h3>
+              <div class="row">
+              <div class="mb-2 col-6">
+                <label class="form-label" for="total-percentage">Total %</label>
+                <input onblur="calculateDailyTargets()" class="form-control"  type="number" id="total-percentage" placeholder="Enter percentage (e.g., 95 for 95%)"
+                  value="100">
+              </div>
+              <div class="mb-2 col-6">
+                <label class="form-label" for="diamond-percentage">Diamond %</label>
+                <input onblur="calculateDailyTargets()" class="form-control" type="number" id="diamond-percentage" placeholder="Enter percentage (e.g., 95 for 95%)"
+                  value="100">
+              </div>
+              <div class="mb-2 col-6">
+                <label class="form-label" for="gold-percentage">Gold %</label>
+                <input onblur="calculateDailyTargets()"  class="form-control"  type="number" id="gold-percentage" placeholder="Enter percentage (e.g., 95 for 95%)" value="100">
+              </div>
+              <div class="mb-2 col-6">
+                <label class="form-label"  for="silver-percentage">Silver %</label>
+                <input onblur="calculateDailyTargets()"  class="form-control" type="number" id="silver-percentage" placeholder="Enter percentage (e.g., 95 for 95%)"
+                  value="100">
+              </div>
+            </div>
+            </div>
+            <!-- result -->
+
+    <button class="btn btn-primary" style="width: 100%;" onclick="calculateDailyTargets()">Calculate Daily Targets</button>
+
+    <div class="target-results target-container" id="target-results" style="display: none;"></div>
+            <!-- result -->
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<!-- modal -->
+ 
+  <i class="fa-solid fa-chart-simple" id="target-icon"></i>

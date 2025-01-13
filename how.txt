@@ -3,4 +3,26 @@ source .env/bin/activate && \
 pip install -r requirements.txt && \
 
 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+to add new modal replace <<file>> with your file name
+create file name filemodal.html in template=>modals 
+create file.css in static=>css
+create js.css in static=>js
+
+in nav add this line
+          <a href="#" class="heading-nav file" aria-label="file" data-bs-toggle="modal" data-bs-target="#fileModal">file</a>
+
+in master file 
+    #in modal sections
+        {% include  'modals/filemodal.html' %}
+    #in js sections 
+        <script src="../../static/js/lib/file.js"></script>
+in header file
+    #add this line
+            <link href="../static/css/lib/file.css" rel="stylesheet" type="text/css" />
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+
 

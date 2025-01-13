@@ -18,12 +18,12 @@
         <a href="{{ url_for('notespage') }}" class="heading-nav  {%  if url_for(request.endpoint) == '/notes' : %} {{ 'active' }} {%  endif %}">Notes</a>
         <a href="{{ url_for('cvmakerpage') }}" class="heading-nav  {%  if url_for(request.endpoint) == '/cvmaker' : %} {{ 'active' }} {%  endif %}">Cv Maker</a>
         <a href="#" class="heading-nav calc" aria-label="calc" data-bs-toggle="modal"data-bs-target="#calcModal">Calc</a>
+        <a href="#" class="heading-nav target" aria-label="target" data-bs-toggle="modal"data-bs-target="#targetModal">Target</a>
         <a href="#" class="heading-nav record recording-toggle" title="record screen">Record</a>
         <a href="{{ url_for('dashboardpage') }}" class="heading-nav dashboard {%  if url_for(request.endpoint)  == '/dashboard': %} {{ 'active' }}{%  endif %}">Dashboard</a>
         <a href="#" class="heading-nav logout">logout</a>
         <a href="{{ url_for('dashboardpage') }}" class="heading-nav dashboard {%  if url_for(request.endpoint)  == '/dashboard': %} {{ 'active' }}{%  endif %}">Dashboard</a>
         {%  else %}
-        <a href="{{ url_for('bookpage') }}" class="heading-nav  {%  if url_for(request.endpoint)  == '/book': %} {{ 'active' }}{%  endif %}">Books</a>
         <a href="{{ url_for('downloadpage') }}" class="heading-nav  {%  if url_for(request.endpoint)  == '/download': %} {{ 'active' }}{%  endif %}">Download</a>
         <a href="{{ url_for('searchpage') }}" class="heading-nav  {%  if url_for(request.endpoint) == '/search' : %} {{ 'active' }} {%  endif %}">Search</a>
         <a href="{{ url_for('cvmakerpage') }}" class="heading-nav  {%  if url_for(request.endpoint) == '/cvmaker' : %} {{ 'active' }} {%  endif %}">Cv Maker</a>
@@ -51,11 +51,11 @@
           <a href="{{ url_for('notespage') }}" class="heading-nav  {%  if url_for(request.endpoint) == '/notes' : %} {{ 'active' }} {%  endif %}">Notes</a>
           <a href="{{ url_for('cvmakerpage') }}" class="heading-nav  {%  if url_for(request.endpoint) == '/cvmaker' : %} {{ 'active' }} {%  endif %}">Cv Maker</a>
           <a href="#" class="heading-nav calc" aria-label="calc" data-bs-toggle="modal" data-bs-target="#calcModal">Calc</a>
+          <a href="#" class="heading-nav target" aria-label="target" data-bs-toggle="modal"data-bs-target="#targetModal">Target</a>         
           <a href="#" class="heading-nav record recording-toggle" title="record screen">Record</a>
           <a href="#" class="heading-nav logout">logout</a> 
           <a href="{{ url_for('dashboardpage') }}" class="heading-nav dashboard {%  if url_for(request.endpoint)  == '/dashboard': %} {{ 'active' }}{%  endif %}">Dashboard</a>
    {%  else %}
-          <a href="{{ url_for('bookpage') }}" class="heading-nav  {%  if url_for(request.endpoint)  == '/book': %} {{ 'active' }}{%  endif %}">Books</a>
           <a href="{{ url_for('downloadpage') }}" class="heading-nav  {%  if url_for(request.endpoint)  == '/download': %} {{ 'active' }}{%  endif %}">Download</a>
           <a href="{{ url_for('searchpage') }}" class="heading-nav  {%  if url_for(request.endpoint) == '/search' : %} {{ 'active' }} {%  endif %}">Search</a>
           <a href="{{ url_for('cvmakerpage') }}" class="heading-nav  {%  if url_for(request.endpoint) == '/cvmaker' : %} {{ 'active' }} {%  endif %}">Cv Maker</a>

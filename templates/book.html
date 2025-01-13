@@ -50,7 +50,7 @@
 	</div>
 </div>
 <!--  -->
-<div class="accordion-waper">
+<!-- <div class="accordion-waper">
 	<p class="lead heading-cgp"  style="color: var(--primary-color);">
 		 CGP files
 	</p>
@@ -65,9 +65,9 @@
 			<div id="panelsStayOpen-collapseOne" class="accordion-collapse  show">
 				<div class="accordion-body">
 					<div class="button-wraper">
-						<a href="../static/files/cgp/Eastern2_Committee.pdf" target="_blank" ><i class="fa-solid fa-arrow-up-right-from-square yassin-book-showBtn book-show-btn "
-								title="open"></i></a>
-						<a href="../static/files/cgp/Eastern2_Committee.pdf" target="_blank" download="" title="dwonload"><i
+						<div  onclick="(async () => { await getFileUrl(this,'Eastern2_Committee.pdf'); })()"><i class="fa-solid fa-arrow-up-right-from-square yassin-book-showBtn book-show-btn "
+								title="open"></i></div>
+						<a href="#" target="_blank" download="" title="dwonload"><i
 								class="fa-solid fa-download book-download-btn"></i></a>
 					</div>
 				</div>
@@ -108,9 +108,63 @@
 					</div>
 				</div>
 			</div>
+		</div>		<div class="accordion-item">
+			<h2 class="accordion-header">
+				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+					data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
+					aria-controls="panelsStayOpen-collapseThree">
+					Eastern2_Committee_R3_Hypertension.pdf
+ </button>
+			</h2>
+			<div id="panelsStayOpen-collapseThree" class="accordion-collapse ">
+				<div class="accordion-body">
+					<div class="button-wraper">
+						<a href="../static/files/cgp/Eastern2_Committee_R2_New Items.pdf" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square yassin-book-showBtn book-show-btn "
+								title="open"></i><span class="text-icon"></span></a>
+								<a href="../static/files/cgp/Eastern2_Committee_R2_New Items.pdf" target="_blank"download="" title="dwonload"><i
+								class="fa-solid fa-download book-download-btn"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>		<div class="accordion-item">
+			<h2 class="accordion-header">
+				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+					data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
+					aria-controls="panelsStayOpen-collapseThree">
+					Eastern2_Committee_R4_Dyslipidemia - Blood Thinners - Thyroid Disorders.pdf
+ </button>
+			</h2>
+			<div id="panelsStayOpen-collapseThree" class="accordion-collapse ">
+				<div class="accordion-body">
+					<div class="button-wraper">
+						<a href="../static/files/cgp/Eastern2_Committee_R2_New Items.pdf" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square yassin-book-showBtn book-show-btn "
+								title="open"></i><span class="text-icon"></span></a>
+								<a href="../static/files/cgp/Eastern2_Committee_R2_New Items.pdf" target="_blank"download="" title="dwonload"><i
+								class="fa-solid fa-download book-download-btn"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>		<div class="accordion-item">
+			<h2 class="accordion-header">
+				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+					data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
+					aria-controls="panelsStayOpen-collapseThree">
+					Release_2_Customer_Service.pdf
+</button>
+			</h2>
+			<div id="panelsStayOpen-collapseThree" class="accordion-collapse ">
+				<div class="accordion-body">
+					<div class="button-wraper">
+						<a href="../static/files/cgp/Eastern2_Committee_R2_New Items.pdf" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square yassin-book-showBtn book-show-btn "
+								title="open"></i><span class="text-icon"></span></a>
+								<a href="../static/files/cgp/Eastern2_Committee_R2_New Items.pdf" target="_blank"download="" title="dwonload"><i
+								class="fa-solid fa-download book-download-btn"></i></a>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
-</div>
+</div> -->
 <!--  -->
 
 <!-- after login -->
@@ -158,6 +212,6 @@
 
 	<script src="../static/js/user.js" type="module"></script>
 	<script src="../static/js/lib/turn.js"></script>
-	<script src="../static/js/book.js"></script>
+	<script src="../static/js/book.js" type="module"></script>
 	<script src="../static/js/script.js"></script>
 	{% endblock %}

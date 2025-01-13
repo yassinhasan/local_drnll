@@ -1,0 +1,123 @@
+.target-container {
+    max-width: var(--max-width);
+    background-color: var(--theme-color);
+    margin: 16px auto;
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid #000;
+    background-color: var(--background-color);
+    
+
+}
+body.light .target-container {
+    box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.1);
+    border: none;
+}
+/* heading */
+.target-modal .modal-title {
+    text-align: center;
+    width: 100%;
+    font-size: var(--heading-three);
+}
+/* .target-container:nth-child(1)
+{
+    background-color: #5d7c8e;
+    background-image: linear-gradient(160deg, #7399af 0%, #aed4d0 100%);
+    
+
+}
+.target-container:nth-child(2)
+{
+    background-color: #70aacc;
+    background-image: linear-gradient(160deg, #70aacc 0%, #aed4d0 100%);
+    
+
+}
+.target-container:nth-child(3)
+{
+    background-color: #5d7c8e;
+    background-image: linear-gradient(160deg, #7ca8c1 0%, #58eddd 100%);
+    
+
+} */
+
+div#remaining-days
+{
+    font-weight: bold;
+    text-align: center;
+}
+.target-container .form-label 
+{
+    font-size: var(--heading-five);
+}
+/* sweetalert */
+.custom-html{
+    text-align: start !important;
+    padding: 0 !important;
+    font-size: var(--heading-five);
+
+    
+}
+.my-custom-popup{
+    background-color:var(--background-color)
+
+}
+
+.my-custom-popup {
+    padding: 4 !important; 
+    text-align: start;
+    width: fit-content !important;
+  }
+
+  .my-custom-title {
+    font-size: var(--heading-four);
+    background-color: var(--theme-color);
+    color: var(--accent-color);
+    padding: 4px 8px;
+  }
+
+  .my-custom-content {
+    padding: 4px 8px; 
+    text-align: start !important;
+    font-size: var(--heading-five);
+  }
+/*  */
+
+/* title for each form */
+.target-label
+{
+    /* font-weight: bold !important; */
+    /* text-align: center; */
+}
+
+.target-results p{
+    font-size: var(--heading-five);
+}
+
+
+
+
+/*daily  result span  */
+.daily-target-span{
+    display: inline-block;
+    padding: 4px;
+    font-weight: 500;
+}
+
+#target-icon
+{
+    font-size: 25px;
+    position: fixed;
+    right: 7px;
+    bottom: 100px;
+    cursor: pointer;
+    color: var(--accent-color);
+    transition-timing-function: cubic-bezier(0.6, 4, 0.3, 0.8);
+	animation: 3s gelatine 0.3s  10 ;
+  
+}
+#target-icon:hover
+{
+    transition-timing-function: cubic-bezier(0.6, 4, 0.3, 0.8);
+	animation: gelatine 0.5s 1;
+}

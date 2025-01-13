@@ -1,3 +1,5 @@
+import * as firbase from "./firbase.js";
+
 function loadApp() {
 
  	$('#canvas').fadeIn(1000);
@@ -407,3 +409,21 @@ document.querySelector(".book-copy-btn").addEventListener("click",e=>
 // 	both: ['../static/css/lib/docs.css', '../static/js/lib/docs.js'],
 // 	complete: loadApp
 // });
+
+async function getFileUrl(el,file_name){
+
+	const storageRef = firbase.storage.ref("/files/cgp/"+file_name);
+	try {
+	  const downloadURL = await firbase.storageRef.getDownloadURL();
+	  console.log("Download URL:", downloadURL);
+
+	  // Display the URL or use it
+	  const a_element = document.createElement("a");
+	  a_element.setAttribute("href", downloadURL);
+	  a_element.setAttribute("target", "_blank");
+	  a_element.click();
+
+	} catch (error) {
+	  console.error("Error fetching download URL:", error);
+	  alert("Failed to get download URL. Check the file path.");
+	}}

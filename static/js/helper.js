@@ -193,3 +193,45 @@ function createLogs(message)
      
 } 
 
+
+// function run at every 12 am to update the daily target
+
+
+// Calculate the time remaining until the next 12 AM
+function scheduleMidnightUpdate( methodToRun) {
+  const now = new Date();
+  const nextMidnight = new Date();
+
+  // Set the nextMidnight to 12 AM of the next day
+  nextMidnight.setDate(now.getDate() + 1);
+  nextMidnight.setHours(0, 0, 0, 0);
+
+  const timeUntilMidnight = nextMidnight - now;
+
+  // Use setTimeout to schedule the first execution
+  setTimeout(() => {
+    methodToRun();
+
+      // Use setInterval to run the function every 24 hours after the first execution
+      setInterval(methodToRun, 24 * 60 * 60 * 1000);
+  }, timeUntilMidnight);
+}
+
+// Start the scheduling process
+
+
+
+const monthNamesShort = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
