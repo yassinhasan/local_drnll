@@ -5,6 +5,10 @@ let currentMonth ; // Get month index (0-based)
 let daysInMonth ;
 let remainingDays ;
 
+function SelectContent(element)
+{
+  element.select();
+}
 function calculateDailyTargets() {
   // global
 
