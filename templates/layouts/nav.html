@@ -11,10 +11,10 @@
       {% block nav %}
       {% endblock %}
       {% if isLogged == True: %}
-      <a href="{{ url_for('bookpage') }}" class="heading-nav  {%  if url_for(request.endpoint)  == '/book': %} {{ 'active' }}{%  endif %}">Books</a>
-      <a href="{{ url_for('downloadpage') }}" class="heading-nav  {%  if url_for(request.endpoint)  == '/download': %} {{ 'active' }}{%  endif %}">Download</a>
-        <a href="{{ url_for('uploadpage') }}" class="heading-nav  {%  if url_for(request.endpoint) == '/upload' : %} {{ 'active' }} {%  endif %}">Files</a>
-        <a href="{{ url_for('searchpage') }}" class="heading-nav  {%  if url_for(request.endpoint) == '/search' : %} {{ 'active' }} {%  endif %}">Search</a>
+      <a href="{{ url_for('bookpage') }}" class="heading-nav  {%  if url_for(request.endpoint)  == '/data': %} {{ 'active' }}{%  endif %}">Data</a>
+      <a href="{{ url_for('downloadpage') }}" class="heading-nav  {%  if url_for(request.endpoint)  == '/download': %} {{ 'active' }}{%  endif %}">YDownload</a>
+        <a href="{{ url_for('uploadpage') }}" class="heading-nav  {%  if url_for(request.endpoint) == '/upload' : %} {{ 'active' }} {%  endif %}"> Files</a>
+        <a href="{{ url_for('searchpage') }}" class="heading-nav  {%  if url_for(request.endpoint) == '/search' : %} {{ 'active' }} {%  endif %}">Magic Search</a>
         <a href="{{ url_for('notespage') }}" class="heading-nav  {%  if url_for(request.endpoint) == '/notes' : %} {{ 'active' }} {%  endif %}">Notes</a>
         <a href="{{ url_for('cvmakerpage') }}" class="heading-nav  {%  if url_for(request.endpoint) == '/cvmaker' : %} {{ 'active' }} {%  endif %}">Cv Maker</a>
         <a href="#" class="heading-nav calc" aria-label="calc" data-bs-toggle="modal"data-bs-target="#calcModal">Calc</a>
@@ -24,8 +24,8 @@
         <a href="#" class="heading-nav logout">logout</a>
         <a href="{{ url_for('dashboardpage') }}" class="heading-nav dashboard {%  if url_for(request.endpoint)  == '/dashboard': %} {{ 'active' }}{%  endif %}">Dashboard</a>
         {%  else %}
-        <a href="{{ url_for('downloadpage') }}" class="heading-nav  {%  if url_for(request.endpoint)  == '/download': %} {{ 'active' }}{%  endif %}">Download</a>
-        <a href="{{ url_for('searchpage') }}" class="heading-nav  {%  if url_for(request.endpoint) == '/search' : %} {{ 'active' }} {%  endif %}">Search</a>
+        <a href="{{ url_for('downloadpage') }}" class="heading-nav  {%  if url_for(request.endpoint)  == '/download': %} {{ 'active' }}{%  endif %}">YDownload</a>
+        <a href="{{ url_for('searchpage') }}" class="heading-nav  {%  if url_for(request.endpoint) == '/search' : %} {{ 'active' }} {%  endif %}">Magic Search</a>
         <a href="{{ url_for('cvmakerpage') }}" class="heading-nav  {%  if url_for(request.endpoint) == '/cvmaker' : %} {{ 'active' }} {%  endif %}">Cv Maker</a>
         <a href="#" class="heading-nav calc" aria-label="calc" data-bs-toggle="modal" data-bs-target="#calcModal">Calc</a>
         <a href="#" class="heading-nav record recording-toggle" title="record screen">Record</a>
@@ -37,16 +37,35 @@
         {% endif %} 
 
     </div>
+      <!-- enable permssion icon -->
+    <div class="dropdown" data-bs-auto-close="outside">
+      <i class="fa-regular fa-bell notify-perm  dropdown-toggle" title="allow permssions" id="notificationDropdown" data-bs-toggle="dropdown" aria-expanded="false"></i>
+      <ul class="dropdown-menu permssion-dropdown" aria-labelledby="notificationDropdown">
+        <!--  -->
+        <li>
+          
+          <label class="dropdown-item" for="notificationToggle">
+            Enable Notification
+            <input type="checkbox" class="form-check-input cutsom-check" id="notificationToggle">
+          </label>
+        </li>
+        <li>
+          <label class="dropdown-item" for="locationToggle">
+            Enable Location
+            <input type="checkbox" class="form-check-input cutsom-check" id="locationToggle">
+          </label>
+        </li>
+      </ul>
+    </div>
     <div class="menu-btn">
-      
       <i class="fa-solid fa-bars burger"></i>
       <div class="links inner-links">
         {% block innerlinks %}
         {% endblock %}
           {%  if isLogged == True: %}
-          <a href="{{ url_for('bookpage') }}" class="heading-nav  {%  if url_for(request.endpoint)  == '/book': %} {{ 'active' }}{%  endif %}">Books</a>
-          <a href="{{ url_for('downloadpage') }}" class="heading-nav  {%  if url_for(request.endpoint)  == '/download': %} {{ 'active' }}{%  endif %}">Download</a>
-          <a href="{{ url_for('searchpage') }}" class="heading-nav  {%  if url_for(request.endpoint) == '/search' : %} {{ 'active' }} {%  endif %}">Search</a>
+          <a href="{{ url_for('bookpage') }}" class="heading-nav  {%  if url_for(request.endpoint)  == '/data': %} {{ 'active' }}{%  endif %}">Data</a>
+          <a href="{{ url_for('downloadpage') }}" class="heading-nav  {%  if url_for(request.endpoint)  == '/download': %} {{ 'active' }}{%  endif %}">YDownload</a>
+          <a href="{{ url_for('searchpage') }}" class="heading-nav  {%  if url_for(request.endpoint) == '/search' : %} {{ 'active' }} {%  endif %}">Magic Search</a>
           <a href="{{ url_for('uploadpage') }}" class="heading-nav  {%  if url_for(request.endpoint)  == '/upload': %} {{ 'active' }}{%  endif %}">Files</a>
           <a href="{{ url_for('notespage') }}" class="heading-nav  {%  if url_for(request.endpoint) == '/notes' : %} {{ 'active' }} {%  endif %}">Notes</a>
           <a href="{{ url_for('cvmakerpage') }}" class="heading-nav  {%  if url_for(request.endpoint) == '/cvmaker' : %} {{ 'active' }} {%  endif %}">Cv Maker</a>
@@ -56,8 +75,8 @@
           <a href="#" class="heading-nav logout">logout</a> 
           <a href="{{ url_for('dashboardpage') }}" class="heading-nav dashboard {%  if url_for(request.endpoint)  == '/dashboard': %} {{ 'active' }}{%  endif %}">Dashboard</a>
    {%  else %}
-          <a href="{{ url_for('downloadpage') }}" class="heading-nav  {%  if url_for(request.endpoint)  == '/download': %} {{ 'active' }}{%  endif %}">Download</a>
-          <a href="{{ url_for('searchpage') }}" class="heading-nav  {%  if url_for(request.endpoint) == '/search' : %} {{ 'active' }} {%  endif %}">Search</a>
+          <a href="{{ url_for('downloadpage') }}" class="heading-nav  {%  if url_for(request.endpoint)  == '/download': %} {{ 'active' }}{%  endif %}">YDownload</a>
+          <a href="{{ url_for('searchpage') }}" class="heading-nav  {%  if url_for(request.endpoint) == '/search' : %} {{ 'active' }} {%  endif %}">Magic Search</a>
           <a href="{{ url_for('cvmakerpage') }}" class="heading-nav  {%  if url_for(request.endpoint) == '/cvmaker' : %} {{ 'active' }} {%  endif %}">Cv Maker</a>
           <a href="#" class="heading-nav calc" aria-label="calc" data-bs-toggle="modal" data-bs-target="#calcModal">Calc</a>
           <a href="#" class="heading-nav record recording-toggle" title="record screen">Record</a>
@@ -73,3 +92,5 @@
   </div>
 
 </nav>
+
+<!-- notificaion trigger button -->

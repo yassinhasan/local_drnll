@@ -37,6 +37,7 @@ html,body {
   --dot-color: white;
   --dot-size: 1px;
   --dot-space: 22px;
+  
 }
 
 body{
@@ -147,6 +148,9 @@ body.light{
   font-weight: normal;
 }
 
+.bg-accent{
+  background-color: var(--accent-color);
+}
 
   
 @keyframes gelatine {
@@ -582,4 +586,9 @@ body.light{
 .alert.alert-info.alert-dismissible.fade.show
 {
   font-size: var(--heading-five) !important;
+}
+
+/* custome notification */
+.custom-notfi{
+  font-size: 12px !important; 
 }

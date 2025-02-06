@@ -44,3 +44,10 @@ menu_btn.addEventListener("click",()=>{
 })
 
 
+
+// permesssion notification prevent ater click on dropdown- item to be dissapear
+document.querySelectorAll('.permssion-dropdown .dropdown-item').forEach(el => {
+    el.addEventListener('click',(e)=>{
+        e.stopPropagation();
+    })
+})

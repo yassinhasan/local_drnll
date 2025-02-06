@@ -72,12 +72,12 @@ def downloadpage():
     template =   render_template("download.html",pagetitle="(download))✌Dr.Null",isLogged=isLogged) 
     return getResponse(template)
 
-@app.route("/book")
+@app.route("/data")
 def bookpage():
     if isUserLogged() == True:
         global isLogged 
         isLogged = True
-    template =   render_template("book.html",pagetitle="(yassin))Him",isLogged=isLogged) 
+    template =   render_template("data.html",pagetitle="Mixed Data",isLogged=isLogged) 
     return getResponse(template)
 
 @app.route("/cvmaker")

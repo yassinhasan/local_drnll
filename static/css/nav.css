@@ -136,18 +136,28 @@ nav{
   
   
   
-  .right-links .fa-moon
+  .right-links .fa-moon , .right-links .notify-perm
   {
     cursor: pointer;
     font-size: 14px;
     margin-right: 16px;
     color: var(--primary-color);
   }
+  .right-links .notify-perm{
+    font-size: 18px;
+  }
+    .right-links .notify-perm::before{
+      content: "\f0f3";
+    }
+   .right-links .notify-perm.dis::before{
+      content: "\f1f6";
+    }
+  
   .right-links .fa-moon::before{
   
       content: "\f186";
   }
-  .right-links .fa-moon:hover{
+  .right-links .fa-moon:hover , .right-links .notify-perm:hover{
     transition-timing-function: cubic-bezier(0.6, 4, 0.3, 0.8);
     animation: gelatine 0.5s 1;
   }
@@ -205,3 +215,30 @@ nav .burger:hover{
   .file-icon{
     display: none;
   }
+
+
+  /* notification dropdown */
+    /* Custom checkmark color */
+    .form-check-input.cutsom-check{
+      border-color: var(--accent-color) !important;
+
+    }
+    .form-check-input.cutsom-check:checked {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23FFFFFF' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 8.5 7 10.5 11 6.5'/%3e%3c/svg%3e");
+      background-color: var(--accent-color) !important; /* Your accent color */
+      border-color: #4F46E5 !important;
+    }
+    .permssion-dropdown{
+      background-color: var(--theme-color) !important; 
+      box-shadow: 10px 10px var(--accent-color);
+
+    }
+    .permssion-dropdown li{
+      margin-bottom: 8px;
+    }
+    .permssion-dropdown li label{
+      color: var(--primary-color) !important;
+    }
+    .dropdown-menu.show{
+      padding: 8px;
+    }

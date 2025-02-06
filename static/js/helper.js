@@ -55,7 +55,12 @@ function fireAlert(type,msg,fire_time=null,customClass='swal-login',position="to
     if(type == "error")
     {
         primaryColor = "#b52626";
-    }else{
+    }
+    else if (type == 'info')
+    {
+      primaryColor = "#1e90ff"
+    }
+    else{
         primaryColor = "#121212"
     }
     
@@ -235,3 +240,16 @@ const monthNamesShort = [
   "Nov",
   "Dec",
 ];
+
+
+
+
+// function convertTimeToMilliseconds(timeString) {
+//   // Split the time string into hours and minutes
+//   const [hours, minutes] = timeString.split(':');
+  
+//   // Calculate milliseconds
+//   const milliseconds = (parseInt(hours) * 3600000) + (parseInt(minutes) * 60000);
+  
+//   return milliseconds;
+// }
