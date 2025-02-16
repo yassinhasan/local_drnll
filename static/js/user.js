@@ -1,4 +1,4 @@
-import * as firbase from "./firbase.js";
+import {createLogs,db, sendEmailVerification ,auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, goOffline ,ref, set, onValue  } from "./firebase.js"
 const togglePassword = document
   .querySelector('#togglePassword');
 const togglePassword1 = document
@@ -7,6 +7,8 @@ const togglePassword1 = document
   const passwordR = document.querySelector('#password-r');
 function showHidePass(element,pass)
 {
+  if(!element) return
+  
 element.addEventListener('click', () => {
   // Toggle the type attribute using
   // getAttribure() method
@@ -24,11 +26,14 @@ showHidePass(togglePassword,password)
 showHidePass(togglePassword1,passwordR)
 // sign in
 let sign_in_btn = document.querySelector(".login-btn-modal");
+if(sign_in_btn)
+{
 
-sign_in_btn.addEventListener("click", (e) => {
-  e.preventDefault();
-  login()
-})
+  sign_in_btn.addEventListener("click", (e) => {
+    e.preventDefault();
+    login()
+  })
+}
 
 function login() {
     showSpinner();
@@ -41,14 +46,14 @@ function login() {
 
   let emailLoggedValue = email_input.value.trim();
   let passwordLoggedValue = password_input.value.trim();
-  firbase.signInWithEmailAndPassword(firbase.auth, emailLoggedValue, passwordLoggedValue)
+  signInWithEmailAndPassword(auth, emailLoggedValue, passwordLoggedValue)
     .then((userCredential) => {
       // Signed in 
       const user = userCredential.user;
       // read from database check if user approved or pending  if pending fire message not allowed if approved go login page
       // make button to copy data
-      const data = firbase.ref(firbase.db, 'users/' + user.uid );
-      firbase.onValue(data, (snapshot) => {
+      const data = ref(db, 'users/' + user.uid );
+      onValue(data, (snapshot) => {
         const loggedUser = snapshot.val();
         if(user.emailVerified)         
             {
@@ -66,7 +71,7 @@ function login() {
                   localStorage.setItem("uid",user.uid)
                   localStorage.setItem("userEmail",user.email)
                   var message = `${user.email} has been logged`;
-                  firbase.createLogs("info",message)
+                  createLogs("info",message)
                     if(loggedUser.role === "admin")
                       {
                         window.location.href= "/dashboard?token="+idToken
@@ -94,7 +99,7 @@ function login() {
               }).then(result => {
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
-                  firbase.sendEmailVerification(user)
+                  sendEmailVerification(user)
                   .then(()=>{
                     Swal.fire({
                       title: "Success!",
@@ -135,10 +140,14 @@ function login() {
 
 // register
 let register_btn = document.querySelector(".register-btn-modal");
-register_btn.addEventListener("click", (e) => {
-  e.preventDefault();
-  register()
-})
+if(register_btn)
+{
+
+  register_btn.addEventListener("click", (e) => {
+    e.preventDefault();
+    register()
+  })
+}
 
 function register() {
       showSpinner();
@@ -153,15 +162,15 @@ function register() {
       }
       let emailValue = email_r.value.trim();
       let passwordValue = passwordR.value.trim();
-      firbase.createUserWithEmailAndPassword(firbase.auth, emailValue,passwordValue)
+      createUserWithEmailAndPassword(auth, emailValue,passwordValue)
         .then((userCredential) => {
           const user = userCredential.user;
-          firbase.sendEmailVerification(user)
+          sendEmailVerification(user)
           .then(() => {
             // Email verification sent!
             saveUserinDatabase(user)
             var message = `${emailValue} regsiter new account`;
-            firbase.createLogs("info",message)
+            createLogs("info",message)
           }).catch(error=>fireAlert("error","error in creating account try again later"));
          
         })
@@ -175,7 +184,7 @@ function register() {
 
   }
 function saveUserinDatabase(user) {
-    firbase.set(firbase.ref(firbase.db, 'users/' + user.uid), {
+    set(ref(db, 'users/' + user.uid), {
       username: username_r.value,
       email: user.email,
       password: password_r.value ,
@@ -195,7 +204,7 @@ function saveUserinDatabase(user) {
           focusConfirm: false,
         });
         document.querySelector(".close-register-modal").click()
-        firbase.goOffline()
+        goOffline()
       })
 
   }

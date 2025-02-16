@@ -30,26 +30,14 @@
     {% include  'modals/targetmodal.html' %}
     <!-- loader -->
     {% include "layouts/spinner.html" %}
+    {% include "layouts/chatbot.html" %}  
     {% include "layouts/footer.html" %}
 
-    {% block chatboot %}
-      {% if admin != True %}
-      {% include "layouts/chatbot.html" %}  
-      {% endif %}
-    {% endblock %}
-
-    
     <!-- js scripts -->
     {% block scripts %}
     {%  endblock %}
-    {% if admin != True %}
-    <script src="../../static/js/lib/chatbot.js"></script>
-    {% endif %}
-    <script src="../../static/js/lib/calc.js"></script>
-    <script src="../../static/js/lib/target.js"></script>
-    <script src="../../static/js/lib/record.js"></script>
-    <script src="../../static/js/lib/notification.js"></script>
 
+ 
 </body>
 
 </html>

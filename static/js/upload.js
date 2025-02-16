@@ -1,8 +1,4 @@
-
-import * as firbase from "./firbase.js";
-
-
-
+import { auth, ref,onAuthStateChanged,storage,uploadBytesResumable,getDownloadURL, createLogs ,storageRef} from './firebase.js';
 const dropArea = document.querySelector(".upload-form"),
     dropText = dropArea.querySelector(".drop-text") ,
     fileInput = document.querySelector(".file-input"),
@@ -44,15 +40,15 @@ fileInput.onchange = ({ target }) => {
 
 function uploadFile() {
     
-  firbase.onAuthStateChanged(firbase.auth, (user) => {
+  onAuthStateChanged(auth, (user) => {
         if (user) {
             const uid = user.uid;
             if(localStorage.getItem("userEmail") == null)
             {
               localStorage.setItem("userEmail",user.email)
             }
-            const usersRef = firbase.storageRef(firbase.storage, `users/${uid}/${fullFileName}`);
-            const uploadTask = firbase.uploadBytesResumable(usersRef, file);
+            const usersRef = storageRef(storage, `users/${uid}/${fullFileName}`);
+            const uploadTask = uploadBytesResumable(usersRef, file);
             uploadTask.on('state_changed',
                 (snapshot) => {
                     // Observe state change events such as progress, pause, and resume
@@ -74,7 +70,7 @@ function uploadFile() {
                 () => {
                     // Handle successful uploads on complete
                     // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-                    firbase.getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                    getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
                         completeDownload(downloadURL)
                        
                     })
@@ -146,7 +142,7 @@ function completeDownload(link)
         title: "File Uploaded in successfully"
       }); // end of alert
       var message = ` ${localStorage.getItem("userEmail")} add new file  ${shortFileName}  Size: ${fileSize}`;
-      firbase.createLogs("low",message)
+      createLogs("low",message)
 
 }
 

@@ -146,12 +146,12 @@ nav{
   .right-links .notify-perm{
     font-size: 18px;
   }
-    .right-links .notify-perm::before{
+    /* .right-links .notify-perm::before{
       content: "\f0f3";
     }
    .right-links .notify-perm.dis::before{
       content: "\f1f6";
-    }
+    } */
   
   .right-links .fa-moon::before{
   
@@ -241,4 +241,11 @@ nav .burger:hover{
     }
     .dropdown-menu.show{
       padding: 8px;
+    }
+
+    /* only at big sizes dropdown will show on left of arrow  */
+    @media screen and (min-width: 768px){
+      .dropdown-menu.show{
+        transform: translate(-192px, 22px) !important; 
+      }
     }

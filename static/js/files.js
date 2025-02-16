@@ -1,4 +1,4 @@
-import * as firbase from "./firbase.js";
+import { auth, ref,onAuthStateChanged,storage,uploadBytesResumable,getDownloadURL, createLogs ,storageRef, uploadString, uploadBytes, listAll, getMetadata , deleteObject} from './firebase.js';
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Octr", "Nov", "Dec"];
 const fileTypes = {
 
@@ -29,7 +29,7 @@ filesBtn.addEventListener("click", () => {
 
 function listFiles() {
 
-    firbase.onAuthStateChanged(firbase.auth, (user) => {
+    onAuthStateChanged(auth, (user) => {
         if (user) {
             const uid = user.uid;
             if(localStorage.getItem("emailUser") == null)
@@ -37,10 +37,10 @@ function listFiles() {
                   localStorage.setItem("emailUser",user.email)
                 }
             // Create a reference under which you want to list
-            const listRef = firbase.storageRef(firbase.storage, `users/${uid}/`);
+            const listRef = storageRef(storage, `users/${uid}/`);
             // Find all the prefixes and items.
 
-            firbase.listAll(listRef)
+            listAll(listRef)
                 .then((res) => {
                     prepraListFilesHtml(uid, res)
                 }).catch((error) => {
@@ -75,10 +75,10 @@ function prepraListFilesHtml(uid, res) {
 
         let fileName = files[index].name;
 
-        firbase.getMetadata(firbase.storageRef(firbase.storage, `users/${uid}/${fileName}`))
+        getMetadata(storageRef(storage, `users/${uid}/${fileName}`))
             .then((metadata) => {
                 // unsorted.push(metadata)
-                firbase.getDownloadURL(firbase.storageRef(firbase.storage, `users/${uid}/${metadata.name}`))
+                getDownloadURL(storageRef(storage, `users/${uid}/${metadata.name}`))
                     .then((url) => {  
                         metadata['url'] = url
                         unsorted.push(metadata)
@@ -137,9 +137,9 @@ function prepraListFilesHtml(uid, res) {
                                                 confirmButtonText: "Yes, delete it!"
                                             }).then((result) => {
                                                 if (result.isConfirmed) {
-                                                    const desertRef = firbase.storageRef(firbase.storage, `users/${uid}/${fileToDeleted}`);
+                                                    const desertRef = storageRef(storage, `users/${uid}/${fileToDeleted}`);
                                                     // Delete the file
-                                                    firbase.deleteObject(desertRef).then(() => {
+                                                    deleteObject(desertRef).then(() => {
                                                         Swal.fire({
                                                             customClass: 'swal-height',
                                                             title: "Deleted!",
@@ -150,7 +150,7 @@ function prepraListFilesHtml(uid, res) {
                                                         cardWraper.innerHTML = "";
                                                         listFiles()
                                                         var message = ` ${localStorage.getItem("userEmail")} delete  file  ${fileToDeleted} `;
-                                                        firbase.createLogs("low",message)
+                                                        createLogs("low",message)
                                                     }).catch((error) => {
                                                         console.log(error);
                                                     });
@@ -246,7 +246,7 @@ function getFilePrivew(fileExtension) {
 }
 
 function logoutUser() {
-    firbase.signOut(firbase.auth)
+    signOut(auth)
     .then(() => {
         let formdata = new FormData()
         const options = {

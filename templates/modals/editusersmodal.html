@@ -1,25 +1,34 @@
-  <!-- email modal -->
-  <div class="modal fade editusers-modal" data-bs-backdrop="static" data-bs-keyboard="false" id="editusersModal" data-bs-focus="false"
-    aria-labelledby="editusersModalLabel" aria-hidden="true">
-    <div class="modal-dialog  modal-dialog-scrollable modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="editusersModalLabel">Edit Users</h5>
-
-          <i class="fa-solid fa-xmark btn-close close-email-modal" type="button" data-bs-dismiss="modal" aria-label="Close"></i>
-        </div>
-        <div class="modal-body">
-          <form action="" method="POST" class="emailform" enctype="multipart/form-data">
-            <div class="card edit-users-card">
-              <ul class="list-group list-group-flush edit-users-ul">
-              </ul>
-            </div>
-
-            <!-- <button type="submit" class="btn btn-primary editusers-btn-modal" name="submit">Save</button> -->
-          </form>
-        </div>
+<div class="modal fade editusers-modal" id="editusersModal" tabindex="-1" aria-labelledby="editusersModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editusersModalLabel">Edit User</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="POST" class="edit-user-form">
+          <input type="hidden" class="modal-user-id" name="userId">
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="text" class="form-control modal-email" readonly>
+          </div>
+          <div class="mb-3">
+            <label for="role" class="form-label">Role</label>
+            <select class="form-select modal-role" name="role">
+              <option value="user">User</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="status" class="form-label">Status</label>
+            <select class="form-select modal-status" name="status">
+              <option value="approved">Approved</option>
+              <option value="pending">Pending</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+        </form>
       </div>
     </div>
   </div>
-  <!-- modal -->
-   
+</div>

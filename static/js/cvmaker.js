@@ -1313,4 +1313,3 @@ allImages.forEach(element=>
 $(".dragable").draggable(
   {axis: "x,y"}
 )
-

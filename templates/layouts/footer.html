@@ -1,6 +1,8 @@
-
+<script src="../../static/js/main.js"></script>
     <!-- firebase -->
      <!-- toastify -->
+     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.12.0/toastify.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.12.0/toastify.min.js"></script>
     <!-- end toastify -->
@@ -8,15 +10,15 @@
     <script src="../../static/js/lib/pooper.js"></script>
     <script src="../../static/js/lib/bootstrap.min.js"></script>
     <script src="../../static/js/config.js"></script>
+  
+
+    <script src="../static/js/firebase.js" type="module"></script>
+    <script src="../static/js/helper.js"></script>
+    <script src="../static/js/validation.js"></script>
     <!-- <script src="../../static/js/worker.js"></script> -->
     <!-- main js -->
-    <script src="../../static/js/main.js"></script>
-
-    {%  if isLogged == False: %}
     <script src="../../static/js/user.js" type="module"></script>
-    {% endif %} 
-
-  
+    <script src="../static/js/logout.js" type="module"></script>
 
 
     {% if messages %}
@@ -48,3 +50,10 @@
     
     </script>
     {% endif %}
+
+    <script src="../../static/js/tools/calc.js"></script>
+    <script src="../../static/js/tools/chatbot.js"></script>
+    <script src="../../static/js/tools/target.js"></script>
+    <script src="../../static/js/tools/record.js"></script>
+    <script src="../../static/js/notification.js"></script>
+    <script src="../static/js/script.js"></script>

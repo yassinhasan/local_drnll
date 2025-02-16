@@ -1,4 +1,3 @@
-import * as firbase from "./firbase.js";
 
 function loadApp() {
 
@@ -412,9 +411,9 @@ document.querySelector(".book-copy-btn").addEventListener("click",e=>
 
 async function getFileUrl(el,file_name){
 
-	const storageRef = firbase.storage.ref("/files/cgp/"+file_name);
+	const storageRef = storage.ref("/files/cgp/"+file_name);
 	try {
-	  const downloadURL = await firbase.storageRef.getDownloadURL();
+	  const downloadURL = await storageRef.getDownloadURL();
 	  console.log("Download URL:", downloadURL);
 
 	  // Display the URL or use it

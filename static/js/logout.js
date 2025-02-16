@@ -1,8 +1,4 @@
-import * as firbase from "./firbase.js";
-
-
-
-
+import {signOut,auth} from "./firebase.js"
 let logoutBtns = document.querySelectorAll(".logout");
 logoutBtns.forEach(logoutBtn=>{
   logoutBtn.addEventListener("click", (e) => {
@@ -14,7 +10,7 @@ logoutBtns.forEach(logoutBtn=>{
 
 
 function logoutUser() {
-    firbase.signOut(firbase.auth)
+    signOut(auth)
     .then(() => {
         let formdata = new FormData()
         const options = {

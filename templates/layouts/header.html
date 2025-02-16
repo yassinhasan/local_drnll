@@ -25,7 +25,7 @@
     <meta name="keywords" content="HTML, CSS, JavaScript ,TANTA , egypt,al-dawaa,dawa,pharmacist,pharmacy,design">
     <meta name="author" content="Dr.Null(Hasan Meady)">
     <link rel="icon" type="image/x-icon" href="../../static/images/favicon.ico">
-    <link rel="manifest" href="../../static/manifest.json" />
+    <link rel="manifest" href="../../static/js/manifest.json" />
     <!-- ios support -->
     <link rel="apple-touch-icon" href="../../static/images/icon-192x192.png">
     <link rel="apple-touch-icon" href="../../static/images/icon-256x256.png">
@@ -39,13 +39,14 @@
 
     <link href="../../static/css/components.css" rel="stylesheet" type="text/css" />
     <link href="../../static/css/files.css" rel="stylesheet" type="text/css" />
-    <link href="../static/css/lib/chatbot.css" rel="stylesheet" type="text/css" />
-    <link href="../static/css/lib/calc.css" rel="stylesheet" type="text/css" />
-    <link href="../static/css/lib/target.css" rel="stylesheet" type="text/css" />
-    <link href="../static/css/lib/record.css" rel="stylesheet" type="text/css" />
+    <link href="../static/css/tools/chatbot.css" rel="stylesheet" type="text/css" />
+    <link href="../static/css/tools/calc.css" rel="stylesheet" type="text/css" />
+    <link href="../static/css/tools/target.css" rel="stylesheet" type="text/css" />
+    <link href="../static/css/tools/record.css" rel="stylesheet" type="text/css" />
     <link href="../static/css/nav.css" rel="stylesheet" type="text/css" /> 
     <link href="../static/css/modal.css" rel="stylesheet" type="text/css" /> 
     <link href="../../static/css/style.css" rel="stylesheet" type="text/css" />
+    
     <meta name="csrf_token" content="{{ csrf_token() }}">
 
     <style>
@@ -65,3 +66,4 @@
     {% else %}
     <script src="../../static/js/lib/jquery-3.7.1.min.js"></script>
     {% endif %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.7.0/math.min.js"></script>

@@ -1,0 +1,53 @@
+{% extends 'master.html' %}
+{% block css %}
+<link href="../static/css/lib/footer.css" rel="stylesheet" type="text/css" />
+<link href="../../static/css/expire.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block content %}
+
+<!-- alert -->
+<!-- alert -->
+<!-- <div class="alert alert-info alert-dismissible fade show" role="alert">
+  <strong> Required Daily Target Calculator Added In THis Path</strong>   Menu => Target or <a href="#" class="heading-nav target" aria-label="target" data-bs-toggle="modal"data-bs-target="#targetModal">Click Here</a>         
+    <br>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div> -->
+<!-- end alert -->
+<!-- alert -->
+<!-- after login -->
+<div class="home-wraper">
+    <h1>Expiry Report</h1>
+    <form id="expiryForm">
+        <label for="pharmacyNo">Pharmacy Number:</label>
+        <input type="text" id="pharmacyNo" value="175" required>
+
+        <label for="userId">User ID:</label>
+        <input type="text" id="userId" value="3611" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" value="hasan123" required>
+
+        <label for="fromDate">From Date:</label>
+        <input type="date" id="fromDate" required>
+
+        <label for="toDate">To Date:</label>
+        <input type="date" id="toDate" required>
+
+        <button type="submit">Login</button>
+    </form>
+</div>
+
+{% endblock %}
+
+
+{% block modal %}
+{% include 'modals/filesmodal.html' %}
+{% endblock %}
+
+
+
+{% block scripts %}
+<script src="../static/js/expire.js" type="module"></script>
+
+{% endblock %}
