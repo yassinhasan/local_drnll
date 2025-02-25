@@ -1,0 +1,250 @@
+
+  
+.results .spinners , .results .overlay{
+    position: absolute !important;
+    display: none;
+}
+
+
+
+.home-wraper{
+    text-align: center;
+    display: block;
+    /* margin-top: 80px; */
+}
+.head-title{
+       /* color: var(--style-color); */
+   color: var(--gray-color);
+    font-weight: bold;
+}
+.file-form{
+    width: 80%;
+    margin: 16px  auto;
+    text-align: center;
+}
+.form-wraper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.input-wraper {
+    margin: 16px 0;
+    position: relative;
+    width: 92%;
+}
+
+
+@keyframes copy {
+    from {
+        transform: scale(1);
+    }to {
+        transform: scale(1.3);
+    }
+}
+.input-wraper .clear{
+
+    background: var(--caption-color);
+    display: none;
+    color: #fbfbfb;
+    z-index: 100000;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    border-radius: 50%;
+    position: absolute;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 8px;
+    font-size: 12px;
+}
+
+ 
+.input-wraper .clear:hover{
+    color: var(--style-color);
+}
+
+.file-input{
+    height: 32px;
+}
+.file-input{
+    font-size: 12px;
+}
+.file-input::placeholder
+{
+    font-size: 16px;
+    color: var(--caption-color);
+}
+
+
+
+.upload-btn {
+    transition: all 0.3s ease-in-out;
+    margin: 16px;
+    border-color: var(--accent-color) !important;
+    color: var(--forecolor) !important;
+    border-color: var(--accent-color) !important;
+    background-color: var(--accent-color) !important;
+}
+
+.upload-btn.disabled{
+    user-select: none !important;
+    cursor:no-drop !important;
+    opacity: 0.6;
+    color: var(--theme-color) !important;
+    border-color: var(--accent-color) !important;
+    background-color: var(--accent-color) !important;
+}
+.upload-btn:focus-visible,.upload-btn:active{
+    border-color: var(--accent-color) !important;
+    color: var(--theme-color) !important;
+    border-color: var(--accent-color) !important;
+    background-color: var(--accent-color) !important;
+}
+
+.upload-btn:hover{
+    transition-timing-function: cubic-bezier(0.6, 4, 0.3, 0.8);
+    animation: gelatine 0.5s 1;
+    border-color: var(--accent-color);
+}
+@keyframes gelatine {
+    0%, 100% {
+        transform: scale(1, 1);
+    }
+    25% {
+        transform: scale(0.9, 1.1);
+    }
+    50% {
+        transform: scale(1.1, 0.9);
+    }
+    75% {
+        transform: scale(0.95, 1.05);
+    }
+    
+}
+
+@media only screen and (max-width: 600px) {
+
+    .contact{
+        margin-top: 80px;
+    }
+    .file-form{
+        width: 100%;
+        margin: 16px auto 0 auto;
+    }
+    
+    .input-wraper {
+        margin: 16px 0;
+    }
+    .input-wraper .copy, .input-wraper .clear
+    {
+
+        cursor: pointer;
+        display: none;
+    }
+ 
+    .file-input::placeholder
+    {
+        font-size: 12px;
+    }
+
+
+
+
+}
+  
+  
+  /* Small devices (portrait tablets and large phones, 600px and up) */
+  @media only screen and (min-width: 600px) and (max-width: 767px){
+    .file-form{
+        margin: 24px  auto;
+    }
+    
+    .input-wraper {
+        margin: 16px 0;
+        position: relative;
+        width: 100%;
+    }
+
+ 
+    .file-input{
+        height: 32px;
+    }
+    .file-input::placeholder
+    {
+        font-size: 12px;
+    }
+
+    
+
+  }
+  
+  /* Medium devices (landscape tablets, 768px and up) */
+  @media only screen and (min-width: 768px)  and (max-width: 991px){
+    .file-form{
+        width: 80%;
+        margin: 32px auto;
+    }
+  
+  }
+  
+  /* Large devices (laptops/desktops, 992px and up) */
+  @media only screen and (min-width: 992px)  and (max-width: 1199px){
+
+ 
+    .file-input{
+        height: 32px;
+    }
+    .file-input::placeholder
+    {
+        font-size: 14px;
+    }
+
+    .upload-btn{
+        transition: all 0.3s ease-in-out;
+    }
+    .file-form{
+        width: 75%;
+        margin: 32px  auto;
+    }
+
+  }
+  
+  /* Extra large devices (large laptops and desktops, 1200px and up) */
+  @media only screen and (min-width: 1200px) {
+    .file-form{
+       
+        margin: 32px  auto;
+    }
+    .input-wraper{
+        width: 70%;
+    }
+
+  }
+
+  .progress-container {
+    margin: 20px 0;
+    display: none;
+}
+.progress-bar {
+    width: 100%;
+    height: 20px;
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.progress-bar-fill {
+    height: 100%;
+    background-color: var(--accent-color);
+    width: 0;
+}
+
+body:not(.light) thead,body:not(.light) tbody,body:not(.light) tfoot,body:not(.light) tr,body:not(.light) td,body:not(.light) th 
+    ,body:not(.light) .users-table > tr , body:not(.light)  .users-table > th ,body:not(.light)  .users-table td {
+    background: var(--background-color);
+
+    color: var(--primary-color);
+}

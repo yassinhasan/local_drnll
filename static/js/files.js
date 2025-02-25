@@ -1,15 +1,14 @@
 import { auth, ref,onAuthStateChanged,storage,uploadBytesResumable,getDownloadURL, createLogs ,storageRef, uploadString, uploadBytes, listAll, getMetadata , deleteObject} from './firebase.js';
-const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Octr", "Nov", "Dec"];
 const fileTypes = {
 
-    file: "<img src='/images/file.png' alt='file'>",
-    image: "<img src='/images/image.png' alt='image'>",
-    zip: "<img src='/images/zip.png' alt='zip'>",
-    doc: "<img src='/images/doc.png' alt='doc'>",
-    excel: "<img src='/images/excel.png' alt='excel'>",
-    pdf: "<img src='/images/pdf.png' alt='pdf'>",
-    ppt: "<img src='/images/ppt.png' alt='ppt'>",
-    video: "<img src='/images/mp4.png' alt='video'>",
+    file: "<img src='/static/images/file.png' alt='file'>",
+    image: "<img src='/static/images/image.png' alt='image'>",
+    zip: "<img src='/static/images/zip.png' alt='zip'>",
+    doc: "<img src='/static/images/doc.png' alt='doc'>",
+    excel: "<img src='/static/images/excel.png' alt='excel'>",
+    pdf: "<img src='/static/images/pdf.png' alt='pdf'>",
+    ppt: "<img src='/static/images/ppt.png' alt='ppt'>",
+    video: "<img src='/static/images/mp4.png' alt='video'>",
 }
 
 

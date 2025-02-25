@@ -491,7 +491,7 @@ body.light{
 /* HTML: <div class="loader"></div> */
 
 .loader-wraper{
-  position: fixed;
+  position: absolute;
   left: 0;
   height: 0;
   width: 100%;

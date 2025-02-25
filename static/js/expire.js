@@ -73,3 +73,26 @@ document.getElementById('expiryForm').addEventListener('submit', async function 
         alert(`Error: ${error.message}`);
     }
 });
+
+async function loginAndGetData() {
+    const userId = document.getElementById('userId').value;
+    const password = document.getElementById('password').value;
+
+    try {
+        const response = await fetch('/drslogin', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                userId: userId,
+                password: password,
+            }),
+        });
+
+        const data = await response.json();
+        console.log(data);
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}

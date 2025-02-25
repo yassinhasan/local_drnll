@@ -5,44 +5,41 @@
     </h1>
   </div>
   <div class="right-links">
-    <!-- links -->
+    <!-- Links -->
     <div class="right-links">
       <div class="links outer-links">
-      {% block nav %}
-      {% endblock %}
-      {% if isLogged == True: %}
-      <a href="{{ url_for('ydownload.downloadpage') }}" class="heading-nav  {%  if url_for(request.endpoint)  == '/download': %} {{ 'active' }}{%  endif %}">YDownload</a>
-        <a href="{{ url_for('upload.upload_page') }}" class="heading-nav  {%  if url_for(request.endpoint) == '/upload' : %} {{ 'active' }} {%  endif %}"> Files</a>
-        <a href="{{ url_for('search.searchpage') }}" class="heading-nav  {%  if url_for(request.endpoint) == '/search' : %} {{ 'active' }} {%  endif %}">Magic Search</a>
-        <a href="{{ url_for('notes.notespage') }}" class="heading-nav  {%  if url_for(request.endpoint) == '/notes' : %} {{ 'active' }} {%  endif %}">Notes</a>
-        <a href="{{ url_for('cvmaker.cvmakerpage') }}" class="heading-nav  {%  if url_for(request.endpoint) == '/cvmaker' : %} {{ 'active' }} {%  endif %}">Cv Maker</a>
-        <a href="#" class="heading-nav calc" aria-label="calc" data-bs-toggle="modal"data-bs-target="#calcModal">Calc</a>
-        <a href="#" class="heading-nav target" aria-label="target" data-bs-toggle="modal"data-bs-target="#targetModal">Target</a>
-        <a href="#" class="heading-nav record recording-toggle" title="record screen">Record</a>
-        <a href="{{ url_for('dashboard.dashboardpage') }}" class="heading-nav dashboard {%  if url_for(request.endpoint)  == '/dashboard': %} {{ 'active' }}{%  endif %}">Dashboard</a>
-        <a href="#" class="heading-nav logout">logout</a>
-        <a href="{{ url_for('dashboard.dashboardpage') }}" class="heading-nav dashboard {%  if url_for(request.endpoint)  == '/dashboard': %} {{ 'active' }}{%  endif %}">Dashboard</a>
-        {%  else %}
-        <a href="{{ url_for('ydownload.downloadpage') }}" class="heading-nav  {%  if url_for(request.endpoint)  == '/download': %} {{ 'active' }}{%  endif %}">YDownload</a>
-        <a href="{{ url_for('search.searchpage') }}" class="heading-nav  {%  if url_for(request.endpoint) == '/search' : %} {{ 'active' }} {%  endif %}">Magic Search</a>
-        <a href="{{ url_for('cvmaker.cvmakerpage') }}" class="heading-nav  {%  if url_for(request.endpoint) == '/cvmaker' : %} {{ 'active' }} {%  endif %}">Cv Maker</a>
-        <a href="#" class="heading-nav calc" aria-label="calc" data-bs-toggle="modal" data-bs-target="#calcModal">Calc</a>
-        <a href="#" class="heading-nav record recording-toggle" title="record screen">Record</a>
-        <a href="#" class="heading-nav sign-in" aria-label="login" data-bs-toggle="modal"
-          data-bs-target="#loginModal">Login</a>
-        <a href="#" class="heading-nav register" aria-label="register" data-bs-toggle="modal"
-          data-bs-target="#registerModal">Register</a>
-          <a href="{{ url_for('dashboard.dashboardpage') }}" class="heading-nav dashboard {%  if url_for(request.endpoint)  == '/dashboard': %} {{ 'active' }}{%  endif %}">Dashboard</a>
-        {% endif %} 
-
+        {% block nav %}
+        {% endblock %}
+        {% if isLogged == True %}
+        <a href="{{ url_for('data.data_page') }}" class="heading-nav {% if url_for(request.endpoint) == '/data' %}active{% endif %}">Data</a>
+          <a href="{{ url_for('ydownload.downloadpage') }}" class="heading-nav {% if url_for(request.endpoint) == '/download' %}active{% endif %}">YDownload</a>
+          <a href="{{ url_for('upload.upload_page') }}" class="heading-nav {% if url_for(request.endpoint) == '/upload' %}active{% endif %}">Upload Files</a>
+          <a href="{{ url_for('search.searchpage') }}" class="heading-nav {% if url_for(request.endpoint) == '/search' %}active{% endif %}">Magic Search</a>
+          <a href="{{ url_for('notes.notespage') }}" class="heading-nav {% if url_for(request.endpoint) == '/notes' %}active{% endif %}">Notes</a>
+          <a href="{{ url_for('cvmaker.cvmakerpage') }}" class="heading-nav {% if url_for(request.endpoint) == '/cvmaker' %}active{% endif %}">Cv Maker</a>
+          <a href="#" class="heading-nav calc" aria-label="calc" data-bs-toggle="modal" data-bs-target="#calcModal">Calc</a>
+          <a href="#" class="heading-nav target" aria-label="target" data-bs-toggle="modal" data-bs-target="#targetModal">Target</a>
+          <a href="#" class="heading-nav record recording-toggle" title="record screen">Record</a>
+          <a href="{{ url_for('dashboard.dashboardpage') }}" class="heading-nav dashboard {% if url_for(request.endpoint) == '/dashboard' %}active{% endif %}">Dashboard</a>
+          <a href="#" class="heading-nav logout">Logout</a>
+        {% else %}
+          <a href="{{ url_for('ydownload.downloadpage') }}" class="heading-nav {% if url_for(request.endpoint) == '/download' %}active{% endif %}">YDownload</a>
+          <a href="{{ url_for('search.searchpage') }}" class="heading-nav {% if url_for(request.endpoint) == '/search' %}active{% endif %}">Magic Search</a>
+          <a href="{{ url_for('cvmaker.cvmakerpage') }}" class="heading-nav {% if url_for(request.endpoint) == '/cvmaker' %}active{% endif %}">Cv Maker</a>
+          <a href="#" class="heading-nav calc" aria-label="calc" data-bs-toggle="modal" data-bs-target="#calcModal">Calc</a>
+          <a href="#" class="heading-nav record recording-toggle" title="record screen">Record</a>
+          <a href="#" class="heading-nav sign-in" aria-label="login" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a>
+          <a href="#" class="heading-nav register" aria-label="register" data-bs-toggle="modal" data-bs-target="#registerModal">Register</a>
+          <a href="{{ url_for('dashboard.dashboardpage') }}" class="heading-nav dashboard {% if url_for(request.endpoint) == '/dashboard' %}active{% endif %}">Dashboard</a>
+        {% endif %}
+      </div>
     </div>
-      <!-- enable permssion icon -->
+
+    <!-- Enable permission icon -->
     <div class="dropdown" data-bs-auto-close="outside">
-      <i class="fa-solid fa-sliders notify-perm  dropdown-toggle" title="allow permssions" id="notificationDropdown" data-bs-toggle="dropdown" aria-expanded="false"></i>
+      <i class="fa-solid fa-sliders notify-perm dropdown-toggle" title="allow permissions" id="notificationDropdown" data-bs-toggle="dropdown" aria-expanded="false"></i>
       <ul class="dropdown-menu permssion-dropdown" aria-labelledby="notificationDropdown">
-        <!--  -->
         <li>
-          
           <label class="dropdown-item" for="notificationToggle">
             Enable Notification
             <input type="checkbox" class="form-check-input cutsom-check" id="notificationToggle">
@@ -56,39 +53,40 @@
         </li>
       </ul>
     </div>
+
+    <!-- Menu button -->
     <div class="menu-btn">
       <i class="fa-solid fa-bars burger"></i>
       <div class="links inner-links">
         {% block innerlinks %}
         {% endblock %}
-          {%  if isLogged == True: %}
-          <a href="{{ url_for('ydownload.downloadpage') }}" class="heading-nav  {%  if url_for(request.endpoint)  == '/download': %} {{ 'active' }}{%  endif %}">YDownload</a>
-          <a href="{{ url_for('search.searchpage') }}" class="heading-nav  {%  if url_for(request.endpoint) == '/search' : %} {{ 'active' }} {%  endif %}">Magic Search</a>
-          <a href="{{ url_for('upload.upload_page') }}" class="heading-nav  {%  if url_for(request.endpoint)  == '/upload': %} {{ 'active' }}{%  endif %}">Files</a>
-          <a href="{{ url_for('notes.notespage') }}" class="heading-nav  {%  if url_for(request.endpoint) == '/notes' : %} {{ 'active' }} {%  endif %}">Notes</a>
-          <a href="{{ url_for('cvmaker.cvmakerpage') }}" class="heading-nav  {%  if url_for(request.endpoint) == '/cvmaker' : %} {{ 'active' }} {%  endif %}">Cv Maker</a>
+        {% if isLogged == True %}
+        <a href="{{ url_for('data.data_page') }}" class="heading-nav {% if url_for(request.endpoint) == '/data' %}active{% endif %}">Data</a>
+          <a href="{{ url_for('ydownload.downloadpage') }}" class="heading-nav {% if url_for(request.endpoint) == '/download' %}active{% endif %}">YDownload</a>
+          <a href="{{ url_for('search.searchpage') }}" class="heading-nav {% if url_for(request.endpoint) == '/search' %}active{% endif %}">Magic Search</a>
+          <a href="{{ url_for('upload.upload_page') }}" class="heading-nav {% if url_for(request.endpoint) == '/upload' %}active{% endif %}">Upload Files</a>
+          <a href="{{ url_for('notes.notespage') }}" class="heading-nav {% if url_for(request.endpoint) == '/notes' %}active{% endif %}">Notes</a>
+          <a href="{{ url_for('cvmaker.cvmakerpage') }}" class="heading-nav {% if url_for(request.endpoint) == '/cvmaker' %}active{% endif %}">Cv Maker</a>
           <a href="#" class="heading-nav calc" aria-label="calc" data-bs-toggle="modal" data-bs-target="#calcModal">Calc</a>
-          <a href="#" class="heading-nav target" aria-label="target" data-bs-toggle="modal"data-bs-target="#targetModal">Target</a>         
+          <a href="#" class="heading-nav target" aria-label="target" data-bs-toggle="modal" data-bs-target="#targetModal">Target</a>
           <a href="#" class="heading-nav record recording-toggle" title="record screen">Record</a>
-          <a href="#" class="heading-nav logout">logout</a> 
-          <a href="{{ url_for('dashboard.dashboardpage') }}" class="heading-nav dashboard {%  if url_for(request.endpoint)  == '/dashboard': %} {{ 'active' }}{%  endif %}">Dashboard</a>
-   {%  else %}
-          <a href="{{ url_for('ydownload.downloadpage') }}" class="heading-nav  {%  if url_for(request.endpoint)  == '/download': %} {{ 'active' }}{%  endif %}">YDownload</a>
-          <a href="{{ url_for('search.searchpage') }}" class="heading-nav  {%  if url_for(request.endpoint) == '/search' : %} {{ 'active' }} {%  endif %}">Magic Search</a>
-          <a href="{{ url_for('cvmaker.cvmakerpage') }}" class="heading-nav  {%  if url_for(request.endpoint) == '/cvmaker' : %} {{ 'active' }} {%  endif %}">Cv Maker</a>
+          <a href="#" class="heading-nav logout">Logout</a>
+          <a href="{{ url_for('dashboard.dashboardpage') }}" class="heading-nav dashboard {% if url_for(request.endpoint) == '/dashboard' %}active{% endif %}">Dashboard</a>
+        {% else %}
+          <a href="{{ url_for('ydownload.downloadpage') }}" class="heading-nav {% if url_for(request.endpoint) == '/download' %}active{% endif %}">YDownload</a>
+          <a href="{{ url_for('search.searchpage') }}" class="heading-nav {% if url_for(request.endpoint) == '/search' %}active{% endif %}">Magic Search</a>
+          <a href="{{ url_for('cvmaker.cvmakerpage') }}" class="heading-nav {% if url_for(request.endpoint) == '/cvmaker' %}active{% endif %}">Cv Maker</a>
           <a href="#" class="heading-nav calc" aria-label="calc" data-bs-toggle="modal" data-bs-target="#calcModal">Calc</a>
           <a href="#" class="heading-nav record recording-toggle" title="record screen">Record</a>
-          <a href="#" class="heading-nav sign-in" aria-label="login" data-bs-toggle="modal"
-            data-bs-target="#loginModal">Login</a>
-          <a href="#" class="heading-nav register" aria-label="register" data-bs-toggle="modal"
-            data-bs-target="#registerModal">Register</a>
-            <a href="{{ url_for('dashboard.dashboardpage') }}" class="heading-nav dashboard {%  if url_for(request.endpoint)  == '/dashboard': %} {{ 'active' }}{%  endif %}">Dashboard</a>
-          {% endif %} 
+          <a href="#" class="heading-nav sign-in" aria-label="login" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a>
+          <a href="#" class="heading-nav register" aria-label="register" data-bs-toggle="modal" data-bs-target="#registerModal">Register</a>
+          <a href="{{ url_for('dashboard.dashboardpage') }}" class="heading-nav dashboard {% if url_for(request.endpoint) == '/dashboard' %}active{% endif %}">Dashboard</a>
+        {% endif %}
       </div>
     </div>
+
     <i class="fa-solid fa-moon" style="margin-left: 16px;"></i>
   </div>
-
 </nav>
 
-<!-- notificaion trigger button -->
+<!-- Notification trigger button -->

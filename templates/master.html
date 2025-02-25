@@ -24,6 +24,11 @@
   {% block books %}
   {% endblock %}
     <!-- model -->
+    {% if not isLogged %}
+    {% include  'modals/registermodal.html' %}
+    {% include  'modals/loginmodal.html' %}
+    {% endif %}
+
     {% block modal %}
     {% endblock %}
     {% include  'modals/calcmodal.html' %}
@@ -32,6 +37,8 @@
     {% include "layouts/spinner.html" %}
     {% include "layouts/chatbot.html" %}  
     {% include "layouts/footer.html" %}
+
+
 
     <!-- js scripts -->
     {% block scripts %}

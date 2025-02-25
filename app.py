@@ -1,8 +1,10 @@
 import datetime
 import os
 from flask import Flask, redirect, url_for
-from flask_wtf import CSRFProtect
+from flask_wtf import CSRFProtect 
+from flask_wtf.csrf import generate_csrf
 from config import config
+from helpers.responses import json_response
 from services.firebase import initialize_firebase
 from routes.index import index_bp
 from routes.auth import logout_bp
@@ -17,6 +19,7 @@ from routes.notes import notes_bp
 from routes.notfound import notfound_bp
 from routes.offline import offline_bp
 from routes.expire import expire_bp
+from routes.data import data_bp
 # Initialize Flask app
 app = Flask(__name__)
 app.secret_key = 'hasanmeady0546035917'
@@ -45,8 +48,9 @@ app.register_blueprint(search_bp)
 app.register_blueprint(cvmaker_bp)
 app.register_blueprint(notes_bp)
 app.register_blueprint(dashboard_bp)
-# app.register_blueprint(offline_bp)
+app.register_blueprint(offline_bp)
 app.register_blueprint(expire_bp)
+app.register_blueprint(data_bp)
 
 # Custom 404 error handler
 @app.errorhandler(404)
@@ -54,6 +58,14 @@ def page_not_found(error):
     # Redirect to the custom "Not Found" page
     return redirect(url_for('notfound.not_found'))
 
+
+
+# for postman
+@app.route('/get_csrf', methods=['GET'])
+def get_csrf():
+    csrf_token = generate_csrf()
+    return json_response({'csrf_token': csrf_token})
+# 
 if __name__ == "__main__":
     app.run(debug=True, port=int(os.environ.get('PORT', 8080)))
 

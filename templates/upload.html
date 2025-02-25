@@ -1,20 +1,17 @@
 {% extends 'master.html' %}
 {% block css %}
-<link href="../static/css/lib/footer.css" rel="stylesheet" type="text/css" />
 <link href="../../static/css/upload.css" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block content %}
 
 <!-- alert -->
-<!-- alert -->
-<!-- <div class="alert alert-info alert-dismissible fade show" role="alert">
-  <strong> Required Daily Target Calculator Added In THis Path</strong>   Menu => Target or <a href="#" class="heading-nav target" aria-label="target" data-bs-toggle="modal"data-bs-target="#targetModal">Click Here</a>         
+ <div class="alert alert-info alert-dismissible fade show" role="alert">
+  <strong> Say goodbye to uploading files one by one! drnull allows you to upload many files simultaneously, saving you time and effort.</strong>     
     <br>
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div> -->
+</div>
 <!-- end alert -->
-<!-- alert -->
 <!-- after login -->
 <div class="home-wraper">
   <div class="profile-wraper">
@@ -34,7 +31,7 @@
       <p class="drop-text">Click or Drag & Drop to Upload File</p>
     </form>
     <section class="progress-area"></section>
-    <section class="uploaded-area hide"></section>
+    <!-- <section class="uploaded-area hide"></section> -->
   </div>
 </div>
 </div>
@@ -45,8 +42,6 @@
 {% block modal %}
 {% include 'modals/filesmodal.html' %}
 {% endblock %}
-
-
 
 {% block scripts %}
 <script src="../static/js/upload.js" type="module"></script>

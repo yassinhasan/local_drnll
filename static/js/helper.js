@@ -1,4 +1,4 @@
-
+const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Octr", "Nov", "Dec"];
 let spinners = document.querySelector(".main.spinners");
 let overlay = document.querySelector(".main.overlay");
 

@@ -1,0 +1,203 @@
+{% extends 'master.html' %}
+{% block css %}
+
+
+<link href="../static/css/book.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../static/js/lib/jquery-ui-1.8.20.custom.min.js"></script>
+<script type="text/javascript" src="../static/js/lib/jquery.mousewheel.min.js"></script>
+<script type="text/javascript" src="../static/js/lib/modernizr.2.5.3.min.js"></script>
+<script type="text/javascript" src="../static/js/lib/hash.js"></script>
+{% endblock %}
+{% block content %}
+<!-- <h1>Hello Yassin</h1> -->
+
+<div class="books">
+	<div class="card yassin-book">
+		<div class="book">
+			<img src="../static/images/yassin.PNG" alt="image">
+		</div>
+		<div class="book-info">
+			<p class="heading-5">
+				Yassin Book
+			</p>
+			<div class="button-wraper">
+				<a><i class="fa-solid fa-arrow-up-right-from-square yassin-book-showBtn book-show-btn "
+						title="open"></i></a>
+				<a href="../static/files/Yassin NoteBook.pdf" target="_blank" download="" title="dwonload"><i
+						class="fa-solid fa-download book-download-btn"></i></a>
+			</div>
+		</div>
+	</div>
+	<div class="card expire-book">
+		<div class="book">
+			<img src="../static/images/notepad.jpg" alt="image">
+		</div>
+		<div class="book-info">
+			<p class="heading-5">
+				Expire 2025
+				<br>
+				Copy and paste in Powershell
+			</p>
+			<div class="button-wraper">
+				<a href="../static/files/expire25.txt" target="_blank" title="open it in new tab"><i
+						class="fa-solid fa-arrow-up-right-from-square book-show-btn"></i></a>
+				<a><i class="fa-solid fa-copy book-copy-btn" title="copy"></i></a>
+				<a href="../static/files/expire25.txt" download title="dwonload"><i
+						class="fa-solid fa-download expire-btn book-download-btn"></i></a>
+			</div>
+		</div>
+	</div>
+</div>
+<!--  -->
+<!-- <div class="accordion-waper">
+	<p class="lead heading-cgp"  style="color: var(--primary-color);">
+		 CGP files
+	</p>
+	<div class="accordion" id="accordionPanelsStayOpenExample">
+		<div class="accordion-item">
+			<h2 class="accordion-header">
+				<button class="accordion-button" type="button" data-bs-toggle="collapse"
+					data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+					aria-controls="panelsStayOpen-collapseOne">
+					Eastern2_Committee.pdf </button>
+			</h2>
+			<div id="panelsStayOpen-collapseOne" class="accordion-collapse  show">
+				<div class="accordion-body">
+					<div class="button-wraper">
+						<div  onclick="(async () => { await getFileUrl(this,'Eastern2_Committee.pdf'); })()"><i class="fa-solid fa-arrow-up-right-from-square yassin-book-showBtn book-show-btn "
+								title="open"></i></div>
+						<a href="#" target="_blank" download="" title="dwonload"><i
+								class="fa-solid fa-download book-download-btn"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="accordion-item">
+			<h2 class="accordion-header">
+				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+					data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
+					aria-controls="panelsStayOpen-collapseTwo">
+					Release1_Welcoming_Arabic_C.pdf </button>
+			</h2>
+			<div id="panelsStayOpen-collapseTwo" class="accordion-collapse ">
+				<div class="accordion-body">
+					<div class="button-wraper">
+						<a href="../static/files/cgp/Release1_Welcoming_Arabic_C.pdf" target="_blank" ><i class="fa-solid fa-arrow-up-right-from-square yassin-book-showBtn book-show-btn "
+								title="open"></i></a>
+								<a href="../static/files/cgp/Release1_Welcoming_Arabic_C.pdf" target="_blank" download="" title="dwonload"><i
+								class="fa-solid fa-download book-download-btn"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="accordion-item">
+			<h2 class="accordion-header">
+				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+					data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
+					aria-controls="panelsStayOpen-collapseThree">
+					Eastern2_Committee_R2_New Items.pdf </button>
+			</h2>
+			<div id="panelsStayOpen-collapseThree" class="accordion-collapse ">
+				<div class="accordion-body">
+					<div class="button-wraper">
+						<a href="../static/files/cgp/Eastern2_Committee_R2_New Items.pdf" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square yassin-book-showBtn book-show-btn "
+								title="open"></i><span class="text-icon"></span></a>
+								<a href="../static/files/cgp/Eastern2_Committee_R2_New Items.pdf" target="_blank"download="" title="dwonload"><i
+								class="fa-solid fa-download book-download-btn"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>		<div class="accordion-item">
+			<h2 class="accordion-header">
+				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+					data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
+					aria-controls="panelsStayOpen-collapseThree">
+					Eastern2_Committee_R3_Hypertension.pdf
+ </button>
+			</h2>
+			<div id="panelsStayOpen-collapseThree" class="accordion-collapse ">
+				<div class="accordion-body">
+					<div class="button-wraper">
+						<a href="../static/files/cgp/Eastern2_Committee_R2_New Items.pdf" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square yassin-book-showBtn book-show-btn "
+								title="open"></i><span class="text-icon"></span></a>
+								<a href="../static/files/cgp/Eastern2_Committee_R2_New Items.pdf" target="_blank"download="" title="dwonload"><i
+								class="fa-solid fa-download book-download-btn"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>		<div class="accordion-item">
+			<h2 class="accordion-header">
+				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+					data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
+					aria-controls="panelsStayOpen-collapseThree">
+					Eastern2_Committee_R4_Dyslipidemia - Blood Thinners - Thyroid Disorders.pdf
+ </button>
+			</h2>
+			<div id="panelsStayOpen-collapseThree" class="accordion-collapse ">
+				<div class="accordion-body">
+					<div class="button-wraper">
+						<a href="../static/files/cgp/Eastern2_Committee_R2_New Items.pdf" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square yassin-book-showBtn book-show-btn "
+								title="open"></i><span class="text-icon"></span></a>
+								<a href="../static/files/cgp/Eastern2_Committee_R2_New Items.pdf" target="_blank"download="" title="dwonload"><i
+								class="fa-solid fa-download book-download-btn"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>		<div class="accordion-item">
+			<h2 class="accordion-header">
+				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+					data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
+					aria-controls="panelsStayOpen-collapseThree">
+					Release_2_Customer_Service.pdf
+</button>
+			</h2>
+			<div id="panelsStayOpen-collapseThree" class="accordion-collapse ">
+				<div class="accordion-body">
+					<div class="button-wraper">
+						<a href="../static/files/cgp/Eastern2_Committee_R2_New Items.pdf" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square yassin-book-showBtn book-show-btn "
+								title="open"></i><span class="text-icon"></span></a>
+								<a href="../static/files/cgp/Eastern2_Committee_R2_New Items.pdf" target="_blank"download="" title="dwonload"><i
+								class="fa-solid fa-download book-download-btn"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div> -->
+<!--  -->
+
+<!-- after login -->
+{% endblock %}
+
+<!-- books block -->
+{% block books %}
+<div id="book-canvas" class="book-canvas">
+	<div class="zoom-icon zoom-icon-in"></div>
+	<div class="close-icon"><i class="fa-solid fa-xmark"></i></div>
+
+	<div class="magazine-viewport">
+		<div class="magazine-container">
+			<div class="magazine">
+				<!-- Next button -->
+				<div ignore="1" class="next-button"></div>
+				<!-- Previous button -->
+				<div ignore="1" class="previous-button"></div>
+			</div>
+		</div>
+		<div class="bottom">
+			<div id="slider-bar" class="turnjs-slider">
+				<div id="slider"></div>
+			</div>
+		</div>
+	</div>
+
+	{% endblock %}
+	<!-- books block -->
+
+	
+
+
+	{% block scripts %}
+	<script src="../static/js/lib/turn.js"></script>
+	<script src="../static/js/book.js" type="module"></script>
+	{% endblock %}
