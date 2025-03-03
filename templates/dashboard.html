@@ -9,20 +9,66 @@
 {% block content %}
 <h1 class="heading-2 heading-dashboard">Dashboard</h1>
 
-<div class="action-wraper">
-    <div class="icon">
-        <a href="#" class="send-email" aria-label="email" title="send email to users" data-bs-toggle="modal"
-            data-bs-target="#emailModal">
-           Send Email <i class="fa-solid fa-paper-plane"></i>
-        </a>
+<!-- upload -->
+<div class="upload-section">
+    <h3 class="heading-4 head-title">
+        Upload Website Files 
+    </h3>
+    <form class="file-form" enctype="multipart/form-data"> 
+        <div class="form-wraper">
+            <div class="input-wraper">
+                <input id="fileInput" class="form-control form-control-lg file-input " type="file"
+                    placeholder="Upload Your Data File" aria-label=".form-control-lg example" name="file">
+                <i class="fa-solid fa-xmark clear"></i>
+            </div>
+            <!-- <div class="copy-div">
+                <i class="fa-solid fa-copy copy"></i>
+               </div> -->
+        </div>
+        <button type="submit" class="btn  btn-lg upload-btn heading-6">Upload <i
+                class="fa-solid fa-download"></i></button>
+    </form>
+    <!-- <i class="fa-solid fa-arrows-rotate refresh-data"></i> -->
+    <!-- progress -->
+    <div class="progress-container">
+        <div class="progress-bar">
+            <div class="progress-bar-fill" id="progressBar"></div>
+        </div>
+        <p id="progressText"></p>
+    </div>
+    <!-- table -->
+    <div class="table-section">
+        <div class="table-loader-wraper show">
+            <div class="loader show"></div>
+        </div>
+        <table id="dataFilesTable" class="table table-responsive table-hover">
+            <thead>
+                <tr>
+                    <th>Filename</th>
+                    <th>Timestamp</th>
+                    <th>File Size</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="tablebody">
+                <!-- Data will be inserted here -->
+            </tbody>
+        </table>
     </div>
 </div>
-
-<div class="loader-wraper">
-    <div class="loader"></div>
-</div>
-
+<!-- end upload -->
 <div class="dashboard-wraper">
+    <div class="loader-wraper show">
+        <div class="loader show"></div>
+    </div>
+    <div class="action-wraper">
+        <div class="icon">
+            <a href="#" class="send-email" aria-label="email" title="send email to users" data-bs-toggle="modal"
+                data-bs-target="#emailModal">
+                Send Email <i class="fa-solid fa-paper-plane"></i>
+            </a>
+        </div>
+    </div>
     <div class="main-dashboard">
         <div class="users">
             <div class="icon">
@@ -75,20 +121,20 @@
         </table>
     </div>
 
-<div class="logs-wraper">
-    <h2 class="heading-2">Logs</h2>
-    <table id="myTableLogs" class="display table-striped table-hover table-responsive">
-        <thead>
-            <tr>
-                <th>Info</th>
-                <th>Message</th>
-                <th>Time</th>
-            </tr>
-        </thead>
-        <tbody class="table-body">
-        </tbody>
-    </table>
-</div>
+    <div class="logs-wraper">
+        <h2 class="heading-2">Logs</h2>
+        <table id="myTableLogs" class="display table-striped table-hover table-responsive">
+            <thead>
+                <tr>
+                    <th>Info</th>
+                    <th>Message</th>
+                    <th>Time</th>
+                </tr>
+            </thead>
+            <tbody class="table-body">
+            </tbody>
+        </table>
+    </div>
 </div>
 {% endblock %}
 

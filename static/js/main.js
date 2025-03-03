@@ -9,3 +9,34 @@ if ('serviceWorker' in navigator) {
         });
     });
 }
+
+function updateLastActive(){
+    const options = {
+        headers: {
+        "X-CSRFToken": csrfToken,
+        "ContentType": 'application/json;charset=UTF-8',
+        },
+        credentials: 'include',
+        method: 'POST',
+    };
+    
+    fetch('/updateactivity', options)
+        .then(response => response.json())
+        .then(results => {
+        if (results.status == 'success') {
+            console.log("Last active updated successfully");
+        }
+        })
+        .catch(error => {
+        console.error("Error updating last active:", error);
+        });
+}
+
+// Update last active time every 5 minutes
+setInterval(updateLastActive, 300000);
+// Update last active time on page load
+updateLastActive();
+// Update last active time on page unload
+window.addEventListener('beforeunload', updateLastActive);
+
+

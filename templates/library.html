@@ -1,0 +1,39 @@
+{% extends 'master.html' %}
+{% block css %}
+<link href="../static/css/library.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block content %}
+
+      <div class="home-wraper">
+        <h3 class="heading-2 head-title">
+            Files Library
+        </h3>
+<!-- table -->
+<div class="table-section">
+    <div class="table-loader-wraper show">
+        <div class="loader show"></div>
+    </div>
+<table id="dataFilesTable" class="table table-responsive table-hover">
+  <thead>
+      <tr>
+          <th>Filename</th>
+          <th>Timestamp</th>
+          <th>File Size</th>
+          <th>Action</th>
+      </tr>
+  </thead>
+  <tbody id="tablebody">
+  </tbody>
+</table> 
+</div>
+<!-- table -->
+    </div>
+{% endblock %}
+
+
+
+{% block scripts %}
+    <script src="../static/js/library.js" type="module"></script>
+{%  endblock %}
+

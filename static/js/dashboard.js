@@ -1,8 +1,11 @@
-import { auth, logToday,ref, createLogs,db,get,child ,update , set} from './firebase.js';
+import { auth, logToday,ref, createLogs,get,child ,update , set , db, getMetadata, deleteObject, listAll, storageRef, uploadBytesResumable, storage, uploadBytes, getDownloadURL, getFirestore, collection, addDoc, serverTimestamp } from "./firebase.js";
 
 // DOM Elements
 const loaderWraper = document.querySelector(".loader-wraper");
 const loader = document.querySelector(".loader");
+const tableLoaderWraper = document.querySelector(".table-loader-wraper");
+const tableLoader = document.querySelector(".table-loader-wraper .loader");
+
 const dashboardWrapper = document.querySelector(".dashboard-wraper");
 const usersNumSpan = document.querySelector(".users .info .num");
 const activeUsersNum = document.querySelector(".active-users .num");
@@ -13,6 +16,8 @@ let sendemailBtn = document.querySelector(".sendemail-btn-modal")
 let emailform = document.querySelector(".emailform")
 const editModalElement = document.getElementById("editusersModal");
 const editModal = new bootstrap.Modal(editModalElement);
+let tBody = document.getElementById("tablebody");
+
 // Initialize Google Charts
 // Callback that creates and populates a data table,
 // instantiates the pie chart, passes in the data and
@@ -67,7 +72,7 @@ function drawChartTimeLine(loggingData) {
 // Fetch and display users data
 function fetchUsersData() {
   showLoader();
-  fireAlert("info", "Loading users data...");
+  // fireAlert("info", "Loading users data...");
   const options = {
     headers: {
       "X-CSRFToken": csrfToken,
@@ -90,7 +95,7 @@ function fetchUsersData() {
     })
     .finally(() => {
       hideLoader();
-      dashboardWrapper.style.display = "block";
+      // dashboardWrapper.style.display = "block";
       document.querySelector(".send-email").style.display="block"
     });
 }
@@ -108,14 +113,11 @@ function renderUsersData(users) {
   users.forEach(user => {
   selectEmail.innerHTML += `
               <option value="${user.email}">${user.email}</option>`
-    const lastLogin = new Date(user.lastLogin);
-    const lastLoginFormatted = formatDate(lastLogin);
+    const lastLogin = user.lastActive
 
     // Determine if the user is active or inactive
-    const currentDateInDays = new Date().getTime();
-    const lastLoginInDays = lastLogin.getTime();
-    const diffInLogin = Math.abs(Math.ceil((currentDateInDays - lastLoginInDays) / (24 * 3600 * 1000)));
-    const active = diffInLogin <= 7 ? 'active' : 'inactive';
+
+    const active = user.is_active ? 'active' : 'inactive';
     if (active === 'active') activeUsersCount++; else inactiveUsersCount++;
 
     // Email verification status
@@ -127,7 +129,7 @@ function renderUsersData(users) {
         <td>${user.email}</td>
         <td>${user.role}</td>
         <td>${user.status}</td>
-        <td>${lastLoginFormatted}</td>
+        <td>${lastLogin}</td>
         <td>${active}</td>
         <td>${emailVerified}</td>
         <td>
@@ -194,7 +196,7 @@ function fetchLogs() {
       const logs = snapshot.val();
       renderLogs(logs);
     } else {
-      fireAlert("info", "No logs today");
+      // fireAlert("info", "No logs today");
       document.querySelector(".logs-wraper").innerHTML = "No Logs Today";
     }
   }).catch(error => {
@@ -324,6 +326,11 @@ function hideLoader() {
   loaderWraper.classList.remove("show");
 }
 
+function tableHideLoader() {
+  tableLoader.classList.remove("show");
+  tableLoaderWraper.classList.remove("show");
+}
+
 // Initialize
 document.addEventListener("DOMContentLoaded", function () {
   fetchUsersData();
@@ -425,3 +432,207 @@ function deleteUsersFetch(uid,email) {
     });
 
 }
+
+
+// upload files
+
+// no need to upload file to firebase
+// change icon name to analyzie
+// handle file in backend
+// show loader show pending
+// show stats accoring to loyality number only
+
+
+document.querySelector(".upload-btn").addEventListener("click", (e) => {
+    e.preventDefault()
+    uploadFile()
+})
+
+const progresscContainer = document.querySelector(".progress-container")
+const progressBar = document.getElementById('progressBar');
+const progressText = document.getElementById('progressText');
+function uploadFile() {
+    const fileInput = document.getElementById('fileInput');
+    const file = fileInput.files[0];
+    if (!file) {
+        fireAlert("error", 'Please select a file.')
+        return;
+    }
+
+    // Validate file type
+    // const allowedTypes = ['text/plain', 'application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'text/csv'];
+    // if (!allowedTypes.includes(file.type)) {
+    //     fireAlert("error", 'Invalid file type. Please upload a TXT, CSV, or Excel file.');
+    //     return;
+    // }
+
+    // Read the file
+    const reader = new FileReader();
+    reader.onload = function (e) {
+        const fileContent = e.target.result;
+
+        // Upload to Firestore
+        // Reset progress and message
+        progresscContainer.style.display = "block"
+        progressBar.style.width = '0%';
+        progressText.textContent = '0%';
+        storeFireData(file)
+
+    };
+
+    reader.readAsText(file); // Read as text for simplicity
+}
+
+async function storeFireData(file) {
+
+    // Upload to Firebase Storage
+    const FIleRef = `uploads/info/${file.name}`
+    const fileStorageRef = storageRef(storage, `uploads/info/${file.name}`); // Use a descriptive path
+    const uploadTask = uploadBytesResumable(fileStorageRef, file);
+    // Track upload progress
+    uploadTask.on('state_changed',
+        (snapshot) => {
+            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            progressBar.style.width = `${progress}%`;
+            progressText.textContent = `${Math.round(progress)}%`;
+        },
+        (error) => {
+            console.log('Error uploading file: ' + error.message)
+        },
+         () => { // Make this callback async
+            try {
+                    fireAlert("success" , "FIle Uploaded Successfully")
+                    progresscContainer.style.display = "none"
+                    progressBar.textContent=``
+                    listAllFiles()
+            } catch (error) {
+                console.error("Error getting download URL:", error);
+                // Handle the error
+            }
+        }
+    );
+}
+
+listAllFiles()
+
+function listAllFiles() {
+  const listRef = storageRef(storage, `uploads/info`);
+  listAll(listRef)
+      .then((res) => {
+          prepareListFilesHtml(res.items);
+      })
+      .catch((error) => {
+          console.log(error);
+      });
+
+  function prepareListFilesHtml(files) {
+    
+    if (files.length == 0) {
+        tBody.innerHTML = ""; // Clear the existing table content
+          tBody.innerHTML = `<div class="empty-files">You don't have any files yet</div>`;
+          return;
+      }
+
+      const dataPromises = files.map(file => {
+          return getMetadata(storageRef(storage, `uploads/info/${file.name}`))
+              .then((metadata) => {
+                  return getDownloadURL(storageRef(storage, `uploads/info/${metadata.name}`))
+                      .then((url) => {
+                          let fileName = metadata.name;
+                          let fileSize = (metadata.size < 1024) ? metadata.size + " KB" : (metadata.size / (1024 * 1024)).toFixed(2) + " MB";
+                          let fileDate = new Date(metadata.timeCreated);
+                          fileDate = fileDate.getDate() + "-" + (months[fileDate.getMonth()]) + "-" + fileDate.getFullYear()
+                              + " " +
+                              fileDate.getHours() + ":" + fileDate.getMinutes();
+
+                          return {
+                              filename: fileName,
+                              date: fileDate,
+                              size: fileSize,
+                              action: `
+                                  <a href="${url}" target="_blank" download class="card-link download"><i class="fa-solid fa-download"></i></a>
+                                  <a href="#" class="file-delete-btn" data-filename="${fileName}"><i class="fa-solid fa-trash"></i></a>
+
+                              `
+                          };
+                      });
+              });
+      });
+
+      Promise.all(dataPromises)
+          .then(data => {
+                // Destroy existing DataTable instance if it exists
+                if ($.fn.DataTable.isDataTable('#dataFilesTable')) {
+                  $('#dataFilesTable').DataTable().destroy();
+              }
+              // Clear the table content
+              tBody.innerHTML = "";
+              // Reinitialize the DataTable with the new data
+              initializeDataTable(data);
+              tableHideLoader();
+          })
+          .catch(error => {
+              console.log(error);
+          });
+  }
+}
+
+function initializeDataTable(data) {
+    const table = $('#dataFilesTable').DataTable({
+        data: data,
+        columns: [
+          { data: 'filename', title: 'File Name' },
+          { data: 'date', title: 'Date' },
+          { data: 'size', title: 'File Size' },
+          { data: 'action', title: 'Action' }
+        ],
+        columnDefs: [
+          {
+            targets: 0, // First column (File Name column)
+            width: '20%' // Set the width to 30% of the table
+          },
+          {
+            targets: -1, // Last column (Action column)
+            orderable: false, // Disable sorting for the action column
+            searchable: false // Disable searching for the action column
+          }
+        ],
+        scrollX: true,
+      });
+
+    // Add event listeners for delete buttons
+    $('#dataFilesTable').on('click', '.file-delete-btn', function (e) {
+        e.preventDefault();
+        let fileToDeleted = $(this).data('filename');
+        Swal.fire({
+            customClass: 'swal-height',
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const desertRef = storageRef(storage, `uploads/info/${fileToDeleted}`);
+                deleteObject(desertRef).then(() => {
+                    Swal.fire({
+                        customClass: 'swal-height',
+                        title: "Deleted!",
+                        text: "Your file has been deleted.",
+                        icon: "success"
+                    });
+                    table.row($(this).parents('tr')).remove().draw(); // Remove the row from the table
+                }).catch((error) => {
+                    console.log(error);
+                });
+            }
+        });
+    });
+}
+
+
+// document.querySelector(".refresh-data").addEventListener("click",()=>{
+//   listAllFiles()
+// })

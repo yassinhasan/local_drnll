@@ -1,8 +1,10 @@
 from threading import Thread
+from datetime import datetime, timezone
 import time
 from flask import Blueprint, current_app, jsonify, make_response, request, redirect, url_for, render_template
-from helpers.auth import admin_required, get_firebase_services, is_user_logged
-from helpers.responses import error_response, get_response, handle_api_errors, internal_error, json_response
+from helpers.auth import get_firebase_services, is_user_logged
+from helpers.responses import error_response, get_response, internal_error, json_response
+from helpers.time import check_user_activity
 from services.sendmail import send_event_email
 
 dashboard_bp = Blueprint('dashboard', __name__)
@@ -141,6 +143,8 @@ def dashboardpage():
             return get_response(template)
 
 
+
+
 @dashboard_bp.route("/usersdata", methods=['POST'])
 def usersdata():
     try:
@@ -158,22 +162,24 @@ def usersdata():
                 # Fetch additional user details from Firebase Realtime Database
                 user_db_data = admin_db.reference("users").child(user.uid).get()
 
-                # Determine if the user is active or inactive based on last login
-                last_login = user_data.user_metadata.last_sign_in_timestamp
-                current_time = int(time.time() * 1000)  # Current time in milliseconds
-                days_since_last_login = (current_time - last_login) / (1000 * 60 * 60 * 24)
-                is_active = days_since_last_login <= 7
+                # Get last login time from Firebase Authentication
+                # last_login = user_data.user_metadata.last_sign_in_timestamp
+                # last_login_str = datetime.fromtimestamp(last_login / 1000, tz=timezone.utc).strftime('%Y-%m-%d %H:%M:%S') if last_login else "Never logged in"
 
+                # Get last active time from Firebase Realtime Database (access_time)
+                access_time = user_db_data.get('last_access')
+                is_active = check_user_activity(access_time)
+                last_active_str = datetime.strptime(access_time, "%Y-%m-%d %H:%M:%S.%f").strftime('%Y-%m-%d %H:%M:%S') if access_time else "Never accessed"
                 # Append user data to the list
                 users.append({
                     "userId": user_data.uid,
                     "email": user_data.email,
-                    "creationTime": user_data.user_metadata.creation_timestamp,
-                    "lastLogin": last_login,
+                    "creationTime": datetime.fromtimestamp(user_data.user_metadata.creation_timestamp / 1000, tz=timezone.utc).strftime('%Y-%m-%d %H:%M:%S'),
+                    "lastActive": last_active_str,  # From Firebase Realtime Database (access_time)
                     "email_verified": user_data.email_verified,
                     "role": user_db_data.get('role', 'user'),  # Default to 'user' if role is not set
                     "status": user_db_data.get('status', 'pending'),  # Default to 'pending' if status is not set
-                    "is_active": is_active
+                    "is_active": is_active  # Based on last active time (access_time)
                 })
             page = page.get_next_page()
 

@@ -1,0 +1,97 @@
+
+
+.head-title{
+       /* color: var(--style-color); */
+   color: var(--gray-color);
+    font-weight: bold;
+    text-align: center;
+}
+.table-section{
+    position: relative;
+    margin-top: 48px;
+    padding-bottom: 48px;
+
+}
+/* users table */
+
+body:not(.light) thead,body:not(.light) tbody,body:not(.light) tfoot,body:not(.light) tr,body:not(.light) td,body:not(.light) th 
+    ,body:not(.light) .users-table > tr , body:not(.light)  .users-table > th ,body:not(.light)  .users-table td {
+    background: var(--background-color);
+
+    color: var(--primary-color);
+}
+body:not(.light) div.dt-container .dt-length,body:not(.light) div.dt-container .dt-search, body:not(.light) div.dt-container .dt-info,body:not(.light) div.dt-container .dt-processing,body:not(.light) div.dt-container .dt-paging ,body:not(.light) span.dt-column-title ,body:not(.light) button.dt-paging-button.disabled.previous,body:not(.light) div.dt-container .dt-paging .dt-paging-button.disabled,body:not(.light) div.dt-container .dt-paging .dt-paging-button.disabled:hover, body:not(.light)div.dt-container .dt-paging .dt-paging-button.disabled:active{
+    background-color: var(--background-color) !important;
+    color: var(--primary-color) !important;
+}
+
+.dt-paging nav, .dt-paging nav button ,div#dataFilesTable_info , .dt-search , .dt-search label , .dataFilesTable_length , .dataFilesTable_length label , .dt-length label , div.dt-container .dt-paging .dt-paging-button.disabled, div.dt-container .dt-paging .dt-paging-button.disabled:hover, div.dt-container .dt-paging .dt-paging-button.disabled:active{
+    color: var(--primary-color) !important;
+}
+@keyframes gelatine {
+    0%, 100% {
+        transform: scale(1, 1);
+    }
+    25% {
+        transform: scale(0.9, 1.1);
+    }
+    50% {
+        transform: scale(1.1, 0.9);
+    }
+    75% {
+        transform: scale(0.95, 1.05);
+    }
+    
+}
+
+@media only screen and (max-width: 600px) {
+    table.dataTable > tbody > tr > th, table.dataTable > tbody > tr > td {
+        /* padding: 8px 10px; */
+        padding: 4px !important;
+        font-size: 15px;
+    }
+    div#dataFilesTable_info , .dt-paging nav, .dt-paging nav button, div#dataFilesTable_info, .dt-search, .dt-search label, .dataFilesTable_length, .dataFilesTable_length label, .dt-length label, div.dt-container .dt-paging .dt-paging-button.disabled, div.dt-container .dt-paging .dt-paging-button.disabled:hover, div.dt-container .dt-paging .dt-paging-button.disabled:active{
+
+        font-size: 14px;
+    }
+}
+  
+  
+  /* Small devices (portrait tablets and large phones, 600px and up) */
+  @media only screen and (min-width: 600px) and (max-width: 767px){
+    table.dataTable > tbody > tr > th, table.dataTable > tbody > tr > td {
+        /* padding: 8px 10px; */
+        padding: 4px !important;
+        font-size: 15px;
+    }
+    div#dataFilesTable_info , .dt-paging nav, .dt-paging nav button, div#dataFilesTable_info, .dt-search, .dt-search label, .dataFilesTable_length, .dataFilesTable_length label, .dt-length label, div.dt-container .dt-paging .dt-paging-button.disabled, div.dt-container .dt-paging .dt-paging-button.disabled:hover, div.dt-container .dt-paging .dt-paging-button.disabled:active{
+
+        font-size: 14px;
+    }
+  }
+  
+  /* Medium devices (landscape tablets, 768px and up) */
+  @media only screen and (min-width: 768px)  and (max-width: 991px){
+    table.dataTable > tbody > tr > th, table.dataTable > tbody > tr > td {
+        /* padding: 8px 10px; */
+        padding: 4px !important;
+        font-size: 15px;
+    }
+    div#dataFilesTable_info , .dt-paging nav, .dt-paging nav button, div#dataFilesTable_info, .dt-search, .dt-search label, .dataFilesTable_length, .dataFilesTable_length label, .dt-length label, div.dt-container .dt-paging .dt-paging-button.disabled, div.dt-container .dt-paging .dt-paging-button.disabled:hover, div.dt-container .dt-paging .dt-paging-button.disabled:active{
+
+        font-size: 14px;
+    }
+  }
+  
+  /* Large devices (laptops/desktops, 992px and up) */
+  @media only screen and (min-width: 992px)  and (max-width: 1199px){
+
+  }
+  
+  /* Extra large devices (large laptops and desktops, 1200px and up) */
+  @media only screen and (min-width: 1200px) {
+
+  }
+
+
+  /* upload files */

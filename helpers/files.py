@@ -1,6 +1,8 @@
+import time
 from flask import current_app
 import pandas as pd
 from io import StringIO, BytesIO
+from openpyxl import load_workbook
 
 def read_file_from_firebase(file_path):
     """
@@ -51,3 +53,86 @@ def read_file_from_firebase(file_path):
         raise ValueError("Unsupported file type. Please upload a CSV, Excel, or TXT file.")
 
     return df
+
+def read_file_from_request(file):
+    # filename = file.filename
+    # if filename.endswith('txt'):
+    #    df = pd.read_csv(file , delimiter="'\t") 
+    # elif filename.endswith('csv'):
+    #     df = pd.read_csv(file)
+    # elif filename.endswith("xlsx"):
+    #     df = pd.read_excel(file)
+
+    # return df    
+    # from openpyxl import load_workbook
+
+
+    dtypes =  {
+    "Customer ID": "float64",
+    "Customer Name": "object",
+    "DeliveryNo": "float64",
+    "Discount Value": "float64",
+    "Document Type": "object",
+    "Indirect Customer": "object",
+    "Insurance Approval": "object",
+    "Insurance Type": "float64",
+    "Item Lines Count": "int64",
+    "Items": "int64",
+    "Location": "object",
+    "Loyalty Customer ID": "float64",
+    "Loyalty Name": "object",
+    "Loyalty Phone": "float64",
+    "Membership ID": "object",
+    "Net Value": "float64",
+    "Order No": "object",
+    "Payment Lines Count": "int64",
+    "Receipt Number": "int64",
+    "Staff ID": "int64",
+    "Staff Name": "object",
+    "Staff Phone": "float64",
+    "Sub Document Type": "object",
+    "Trx Date": "object",
+    "Trx Month": "object",
+    "Trx Status": "object",
+    "Trx Time": "datetime64[ns]",
+    "Trx Type": "object",
+  }
+    usecols =  [
+    "Customer ID",
+    "Customer Name",
+    "DeliveryNo",
+    "Discount Value",
+    "Document Type",
+    "Indirect Customer",
+    "Insurance Approval",
+    "Insurance Type",
+    "Item Lines Count",
+    "Items",
+    "Location",
+    "Loyalty Customer ID",
+    "Loyalty Name",
+    "Loyalty Phone",
+    "Membership ID",
+    "Net Value",
+    "Order No",
+    "Payment Lines Count",
+    "Receipt Number",
+    "Staff ID",
+    "Staff Name",
+    "Staff Phone",
+    "Sub Document Type",
+    "Trx Date",
+    "Trx Month",
+    "Trx Status",
+    "Trx Time",
+    "Trx Type"
+
+  ]
+    df = pd.read_excel(file ,
+    sheet_name='Headers',  # Specify the sheet name
+    dtype=dtypes,         # Specify data types
+    usecols=usecols,      # Load only necessary columns
+    engine='openpyxl'    # Use the openpyxl engine
+    )
+    return df      
+

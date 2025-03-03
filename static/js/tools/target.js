@@ -85,8 +85,6 @@ function atStartUp() {
    today = new Date();
    daysInMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
    remainingDays = (daysInMonth - today.getDate()) + 1;
-
-
 }
 
 

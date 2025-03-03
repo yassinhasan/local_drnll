@@ -11,7 +11,7 @@
         {% block nav %}
         {% endblock %}
         {% if isLogged == True %}
-        <a href="{{ url_for('data.data_page') }}" class="heading-nav {% if url_for(request.endpoint) == '/data' %}active{% endif %}">Data</a>
+        <a href="{{ url_for('library.library_page') }}" class="heading-nav {% if url_for(request.endpoint) == '/library' %}active{% endif %}">Files Library</a>
           <a href="{{ url_for('ydownload.downloadpage') }}" class="heading-nav {% if url_for(request.endpoint) == '/download' %}active{% endif %}">YDownload</a>
           <a href="{{ url_for('upload.upload_page') }}" class="heading-nav {% if url_for(request.endpoint) == '/upload' %}active{% endif %}">Upload Files</a>
           <a href="{{ url_for('search.searchpage') }}" class="heading-nav {% if url_for(request.endpoint) == '/search' %}active{% endif %}">Magic Search</a>
@@ -61,7 +61,7 @@
         {% block innerlinks %}
         {% endblock %}
         {% if isLogged == True %}
-        <a href="{{ url_for('data.data_page') }}" class="heading-nav {% if url_for(request.endpoint) == '/data' %}active{% endif %}">Data</a>
+        <a href="{{ url_for('library.library_page') }}" class="heading-nav {% if url_for(request.endpoint) == '/library' %}active{% endif %}">Files Library</a>
           <a href="{{ url_for('ydownload.downloadpage') }}" class="heading-nav {% if url_for(request.endpoint) == '/download' %}active{% endif %}">YDownload</a>
           <a href="{{ url_for('search.searchpage') }}" class="heading-nav {% if url_for(request.endpoint) == '/search' %}active{% endif %}">Magic Search</a>
           <a href="{{ url_for('upload.upload_page') }}" class="heading-nav {% if url_for(request.endpoint) == '/upload' %}active{% endif %}">Upload Files</a>

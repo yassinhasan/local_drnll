@@ -13,9 +13,9 @@ document.querySelector(".upload-btn").addEventListener("click", (e) => {
     uploadFile()
 })
 
-const progresscContainer = document.querySelector(".progress-container")
-const progressBar = document.getElementById('progressBar');
-const progressText = document.getElementById('progressText');
+// const progresscContainer = document.querySelector(".progress-container")
+// const progressBar = document.getElementById('progressBar');
+// const progressText = document.getElementById('progressText');
 function uploadFile() {
     const fileInput = document.getElementById('fileInput');
     const file = fileInput.files[0];
@@ -30,73 +30,73 @@ function uploadFile() {
         fireAlert("error", 'Invalid file type. Please upload a TXT, CSV, or Excel file.');
         return;
     }
-
+    sendFIleToAnalyize(file)
     // Read the file
-    const reader = new FileReader();
-    reader.onload = function (e) {
-        const fileContent = e.target.result;
+    // const reader = new FileReader();
+    // eader.onload = function (e) {
+    //     const fileContent = e.target.result;
 
-        // Upload to Firestore
-        // Reset progress and message
-        progresscContainer.style.display = "block"
-        progressBar.style.width = '0%';
-        progressText.textContent = '0%';
-        storeFireData(file)
+    //     // Upload to Firestore
+    //     // Reset progress and message
+    //     progresscContainer.style.display = "block"
+    //     progressBar.style.width = '0%';
+    //     progressText.textContent = '0%';
+    //     storeFireData(file)
 
-    };
+    // };
 
-    reader.readAsText(file); // Read as text for simplicity
+    // reader.readAsText(file); // Read as text for simplicity
 }
 
-async function storeFireData(file) {
+// async function storeFireData(file) {
 
-    // Upload to Firebase Storage
-    const FIleRef = `uploads/data/${uid}/${file.name}`
-    const fileStorageRef = storageRef(storage, `uploads/data/${uid}/${file.name}`); // Use a descriptive path
-    const uploadTask = uploadBytesResumable(fileStorageRef, file);
-    // Track upload progress
-    uploadTask.on('state_changed',
-        (snapshot) => {
-            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            progressBar.style.width = `${progress}%`;
-            progressText.textContent = `${Math.round(progress)}%`;
-        },
-        (error) => {
-            console.log('Error uploading file: ' + error.message)
-        },
-         () => { // Make this callback async
-            try {
-                    fireAlert("success" , "FIle Uploaded Successfully")
-                    progresscContainer.style.display = "none"
-                    progressBar.textContent=``
-                    // listAllFiles()
-                    // send fetch to backend to analyze data 
-                    sendFIleToAnalyize(FIleRef)
+//     // Upload to Firebase Storage
+//     const FIleRef = `uploads/data/${uid}/${file.name}`
+//     const fileStorageRef = storageRef(storage, `uploads/data/${uid}/${file.name}`); // Use a descriptive path
+//     const uploadTask = uploadBytesResumable(fileStorageRef, file);
+//     // Track upload progress
+//     uploadTask.on('state_changed',
+//         (snapshot) => {
+//             const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+//             progressBar.style.width = `${progress}%`;
+//             progressText.textContent = `${Math.round(progress)}%`;
+//         },
+//         (error) => {
+//             console.log('Error uploading file: ' + error.message)
+//         },
+//          () => { // Make this callback async
+//             try {
+//                     fireAlert("success" , "FIle Uploaded Successfully")
+//                     progresscContainer.style.display = "none"
+//                     progressBar.textContent=``
+//                     // listAllFiles()
+//                     // send fetch to backend to analyze data 
+//                     sendFIleToAnalyize(FIleRef)
 
-            } catch (error) {
-                console.error("Error getting download URL:", error);
-                // Handle the error
-            }
-        }
-    );
-}
+//             } catch (error) {
+//                 console.error("Error getting download URL:", error);
+//                 // Handle the error
+//             }
+//         }
+//     );
+// }
 
 
 
-function sendFIleToAnalyize(path)
+function sendFIleToAnalyize(file)
 {
-    const data   = {
-        "path" : path
-    }
+    console.log(file);
+    
+    const formData = new FormData();
+    formData.append('file', file);
     const options = {
         headers: {
           "X-CSRFToken": csrfToken,
-          "Content-Type": "application/json",  // Set the Content-Type header
 
         },
         credentials: 'include',
         method: 'POST',
-        body: JSON.stringify(data),
+        body: formData,
       };
     
       fetch('/analyze', options)

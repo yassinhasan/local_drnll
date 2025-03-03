@@ -32,15 +32,19 @@ def json_response(data, status_code=200):
     response.status_code = status_code
     return response
 
+from flask import jsonify
+
 def error_response(message, status_code=400, details=None):
     """
-    Create a standardized error response
+    Create a standardized error response.
+
     Args:
-        message (str): Human-readable error message
-        status_code (int): HTTP status code (default: 400)
-        details (dict): Additional error details (optional)
+        message (str): Human-readable error message.
+        status_code (int): HTTP status code (default: 400).
+        details (dict): Additional error details (optional).
+
     Returns:
-        Response: JSON-formatted error response
+        Response: JSON-formatted error response.
     """
     response_data = {
         'status': 'error',
@@ -48,7 +52,7 @@ def error_response(message, status_code=400, details=None):
         'message': message
     }
     if details:
-        response_data['details'] = details
+        response_data['details'] = details  # Add details as a nested object
     response = jsonify(response_data)
     response.status_code = status_code
     return response
