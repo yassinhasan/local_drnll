@@ -39,7 +39,6 @@ function listAllFiles() {
 
                             return {
                                 filename: fileName,
-                                date: fileDate,
                                 size: fileSize,
                                 action: `
                                     <a href="${url}" target="_blank" download class="card-link download"><i class="fa-solid fa-download"></i></a>
@@ -72,7 +71,6 @@ function initializeDataTable(data) {
         data: data,
         columns: [
           { data: 'filename', title: 'File Name' },
-          { data: 'date', title: 'Date' },
           { data: 'size', title: 'File Size' },
           { data: 'action', title: 'Action' }
         ],

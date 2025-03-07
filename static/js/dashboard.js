@@ -582,7 +582,6 @@ function initializeDataTable(data) {
         data: data,
         columns: [
           { data: 'filename', title: 'File Name' },
-          { data: 'date', title: 'Date' },
           { data: 'size', title: 'File Size' },
           { data: 'action', title: 'Action' }
         ],
@@ -598,6 +597,7 @@ function initializeDataTable(data) {
           }
         ],
         scrollX: true,
+        
       });
 
     // Add event listeners for delete buttons

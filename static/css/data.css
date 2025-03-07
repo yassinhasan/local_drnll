@@ -1,11 +1,10 @@
 
-  
-.results .spinners , .results .overlay{
-    position: absolute !important;
-    display: none;
+img{
+    max-width: 100% !important;
 }
-
-
+.swal2-popup.swal2-toast .swal2-title{
+    font-family: 'Gluten' !important;
+}
 
 .home-wraper{
     text-align: center;
@@ -247,4 +246,47 @@ body:not(.light) thead,body:not(.light) tbody,body:not(.light) tfoot,body:not(.l
     background: var(--background-color);
 
     color: var(--primary-color);
+}
+.results-container{
+    position: relative;
+    padding: 8px;
+}
+.results-container.show{
+    box-shadow: var(--box-shadow);
+}
+.results-container img {
+    max-width: 100%
+}
+.result-heading h2{
+    color: var(--accent-color);
+    text-align: start;
+    padding: 16px;
+}
+.img-heading
+{
+    background: orange;
+    padding: 4px;
+    margin-top: 24px;
+    color: var(--primary-color);
+
+}
+/* Hide all elements by default when printing */
+@media print {
+    body * {
+        visibility: hidden;
+    }
+
+    /* Show only the results-container and its children */
+    #results-container,
+    #results-container * {
+        visibility: visible;
+    }
+
+    /* Position the results-container at the top of the page */
+    #results-container {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
 }

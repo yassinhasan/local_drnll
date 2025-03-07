@@ -132,7 +132,8 @@ def read_file_from_request(file):
     sheet_name='Headers',  # Specify the sheet name
     dtype=dtypes,         # Specify data types
     usecols=usecols,      # Load only necessary columns
-    engine='openpyxl'    # Use the openpyxl engine
+    engine='openpyxl' ,
+    skiprows=[1]   # Use the openpyxl engine
     )
     return df      
 
