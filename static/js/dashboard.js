@@ -73,12 +73,18 @@ function drawChartTimeLine(loggingData) {
 function fetchUsersData() {
   showLoader();
   // fireAlert("info", "Loading users data...");
-  const options = {
+  fetch('/get_csrf', {
+    method: 'GET',
+    credentials: 'include',  // Include cookies in the request
+}).then(response => response.json())
+.then(data => {
+    const csrfToken = data.data.csrf_token;
+    
+ const options = {
     headers: {
-      "X-CSRFToken": csrfToken,
-      "ContentType": 'application/json;charset=UTF-8',
+        "Content-Type": "application/json",
+        "X-CSRFToken": csrfToken,
     },
-    credentials: 'include',
     method: 'POST',
   };
 
@@ -98,6 +104,7 @@ function fetchUsersData() {
       // dashboardWrapper.style.display = "block";
       document.querySelector(".send-email").style.display="block"
     });
+  })
 }
 
 // Render users data in the table
@@ -279,9 +286,16 @@ function updateUser(userId, role, status) {
   formData.append("role", role);
   formData.append("status", status);
 
-  const options = {
+  fetch('/get_csrf', {
+    method: 'GET',
+    credentials: 'include',  // Include cookies in the request
+}).then(response => response.json())
+.then(data => {
+    const csrfToken = data.data.csrf_token;
+ const options = {
     headers: {
-      "X-CSRFToken": csrfToken,
+        "Content-Type": "application/json",
+        "X-CSRFToken": csrfToken,
     },
     credentials: 'include',
     method: 'POST',
@@ -306,7 +320,7 @@ function updateUser(userId, role, status) {
       editModal.hide();
       fetchUsersData()
     });
-    
+  })
   
 }
 
@@ -355,9 +369,16 @@ sendemailBtn.addEventListener("click", e => {
    CKupdate()
   let formdata = new FormData(emailform)
   
-  const options = {
+  fetch('/get_csrf', {
+    method: 'GET',
+    credentials: 'include',  // Include cookies in the request
+}).then(response => response.json())
+.then(data => {
+    const csrfToken = data.data.csrf_token;
+ const options = {
     headers: {
-      "X-CSRFToken": csrfToken,
+        "Content-Type": "application/json",
+        "X-CSRFToken": csrfToken,
     },
     credentials: 'include',
     method: 'POST',
@@ -390,16 +411,23 @@ sendemailBtn.addEventListener("click", e => {
       fireAlert("error",error)
 
     })
+  })
 
 })
 
 function deleteUsersFetch(uid,email) {
   let formdata = new FormData()
   formdata.append("uid",uid)
-  const options = {
+  fetch('/get_csrf', {
+    method: 'GET',
+    credentials: 'include',  // Include cookies in the request
+}).then(response => response.json())
+.then(data => {
+    const csrfToken = data.data.csrf_token;
+ const options = {
     headers: {
-      "X-CSRFToken": csrfToken,
-      "ContentType": 'application/json;charset=UTF-8',
+        "Content-Type": "application/json",
+        "X-CSRFToken": csrfToken,
     },
     credentials: 'include',
     method: 'POST',
@@ -430,7 +458,7 @@ function deleteUsersFetch(uid,email) {
       hideLoader();
       fetchUsersData()
     });
-
+  })
 }
 
 
@@ -582,6 +610,7 @@ function initializeDataTable(data) {
         data: data,
         columns: [
           { data: 'filename', title: 'File Name' },
+          { data: 'date', title: 'Date' },
           { data: 'size', title: 'File Size' },
           { data: 'action', title: 'Action' }
         ],
@@ -597,7 +626,6 @@ function initializeDataTable(data) {
           }
         ],
         scrollX: true,
-        
       });
 
     // Add event listeners for delete buttons

@@ -161,6 +161,16 @@ nav{
     transition-timing-function: cubic-bezier(0.6, 4, 0.3, 0.8);
     animation: gelatine 0.5s 1;
   }
+  /* on hover disallowed  */
+  .notify-perm{
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+  .notify-perm:hover{
+    cursor: not-allowed !important;
+    pointer-events: none;
+
+  }
   .right-links .fa-moon.day::before{
     content: "\f185";
   }

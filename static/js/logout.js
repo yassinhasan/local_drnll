@@ -13,10 +13,16 @@ function logoutUser() {
     signOut(auth)
     .then(() => {
         let formdata = new FormData()
-        const options = {
+        fetch('/get_csrf', {
+          method: 'GET',
+          credentials: 'include',  // Include cookies in the request
+      }).then(response => response.json())
+      .then(data => {
+          const csrfToken = data.data.csrf_token;
+       const options = {
           headers: {
-        "X-CSRFToken" : csrfToken,
-        "ContentType": 'application/json;charset=UTF-8',
+              "Content-Type": "application/json",
+              "X-CSRFToken": csrfToken,
           },
           credentials: 'include' ,
           method: 'POST',
@@ -44,4 +50,5 @@ function logoutUser() {
   }).catch((error) => {
     console.log(error);
   });
+})
 }

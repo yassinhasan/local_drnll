@@ -17,17 +17,6 @@ def library_page():
             "library.html",
             "(library)✌Dr.Null"
         )
-
-    # If the user is not logged in, check for a token
-    token = request.args.get('token')
-    if token is None:
+    else:
         return handle_unauthenticated_user()
 
-    # If the user has a token, verify it
-    return handle_token_authentication(
-        token,
-        database,
-        admin_auth,
-        "library.html",
-        "(library)✌Dr.Null"
-    )

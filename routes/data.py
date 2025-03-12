@@ -1,19 +1,27 @@
-from flask import Blueprint, current_app, render_template, request, jsonify
-import requests
-from helpers.auth import handle_logged_in_user, is_user_logged
-from helpers.files import read_file_from_firebase, read_file_from_request
-from helpers.responses import error_response, get_response, json_response
+from multiprocessing import Pool
+import multiprocessing
+from flask import Blueprint, current_app, render_template, request
+from helpers.auth import handle_logged_in_user, handle_unauthenticated_user, is_user_logged
+from helpers.dataprocessing import process_chunk
+from helpers.responses import  get_response, json_response
 import pandas as pd
+from flask_wtf.csrf import generate_csrf
 import matplotlib.pyplot as plt
 import io
-import datetime
 import base64
 import seaborn as sns
 
+from visualization.net_value_per_day import net_value_per_day
+from visualization.histograms import net_value_histogram
+from helpers.dataprocessing import preapreDF
+
 data_bp = Blueprint('data', __name__)
+
 
 @data_bp.route("/data", methods=['GET'])
 def data_page():
+    # Generate the CSRF token
+
     """Handle the data page route."""
     firebase_services = current_app.firebase_services
     database = firebase_services['database']  # Pyrebase DB
@@ -22,108 +30,40 @@ def data_page():
         return handle_logged_in_user(
             database,
             "data.html",
-            "(data)✌Dr.Null"
+            "(data)✌Dr.Null" ,
+            csrf_token=generate_csrf()
         )
     else:
-        isLogged = False
-        messages = {
-            "type" : "warning" , 
-            "msg" : "you shoud login first!",
-             "mustLogin" : True
-        }
-        template = render_template("index.html",pagetitle="(H.meady)✌Dr.Null",isLogged=isLogged,messages=messages)
-        return get_response(template)     
+        return handle_unauthenticated_user(csrf_token=generate_csrf())
 
-@data_bp.route("/analyze", methods=['POST'])
+
+
+# Analyze endpoint
+@data_bp.route('/analyze', methods=['POST'])
 def analyze():
+    data = request.json
+    df = preapreDF(data)
     
-    # Get the file path from the request (uploaded by the user)
-    if 'file' not in request.files:
-            return error_response("No file uploaded")
-    # READ THE FILE
-    file = request.files['file']
-    df = read_file_from_request(file)
-    dtypes_dict = df.dtypes.astype(str).to_dict()
+    # Split DataFrame into chunks for parallel processing
+    chunk_size = 2000  # Adjust chunk size based on your data
+    chunks = [df[i:i + chunk_size] for i in range(0, df.shape[0], chunk_size)]
+    
+    # Process chunks in parallel using multiprocessing Pool
+    process_count = min(4, multiprocessing.cpu_count()) # Ensure it doesn't exceed 4
 
-    # Perform analysis
+    with Pool(processes=process_count) as pool:  # Use 4 processes (adjust based on CPU cores)
+        results = pool.map(process_chunk, chunks)
+    
+    # Combine processed chunks back into a single DataFrame
+    processed_df = pd.concat(results)
+    
+    # Perform analysis on the processed DataFrame
     analysis_results = {}
-    analysis_results['net_value_histogram_img'] = net_value_histogram(df)
-    analysis_results['net_value_per_day_img'] = net_value_per_day(df)['plot_url']
-    analysis_results['net_value_per_day_period'] = net_value_per_day(df)['period']
-    # Return the analysis results to the frontend
+    analysis_results['net_value_histogram_img'] = net_value_histogram(processed_df)['plot_url']
+    analysis_results['net_value_per_day_img'] = net_value_per_day(processed_df)['plot_url']
+    
+    # Return analysis results as JSON
     return json_response({"analysis": analysis_results})
-
-def net_value_histogram(df):
-    fig,ax = plt.subplots(2,figsize=(14,10))
-    df['Net Value'].hist(ax=ax[0],bins=12)
-    ax[0].set_title("Net Value Distribution")
-    ax[0].set_xlabel("Net Value")
-    ax[0].set_ylabel("Frequency")
-
-    df['Net Value'].plot.box(ax=ax[1],vert=False)
-    ax[1].set_title("Net Value Boxplot")
-    ax[1].set_xlabel("Net Value")
-    ax[1].set_ylabel("Frequency")
-    fig.tight_layout()
-    imge = io.BytesIO()
-    fig.savefig(imge)
-    imge.seek(0)
-    plot_url = base64.b64encode(imge.getvalue()).decode("utf8")
-    fig.figure.clear()
-    return plot_url
-
-# get net value for every day 
-def net_value_per_day(df):
-    # Add columns with year, month, and weekday name
-    if  'Trx Date' in df.columns  :
-        df = df.set_index('Trx Date')
-
-    df['Year'] = df.index.year
-    df['Month'] = df.index.month
-    df['Day'] = df.index.day
-    df['Weekday Name'] = df.index.day_name()
-
-    net = df.groupby(df.index)['Net Value'].sum()
-    sales_merged = pd.merge(net ,  df[['Weekday Name' , 'Month' , 'Day']] , on='Trx Date' ).drop_duplicates()
-    # show only 30 days
-
-    sales_merged = sales_merged.head(30)
-    x_labels = [f"{row['Day']}-{row['Month']} {row['Weekday Name'][:3]}" for _, row in sales_merged.iterrows()]
-    plt.figure(figsize=(14,10))
-    plt.plot( range(len( sales_merged['Weekday Name'])) , sales_merged['Net Value'] , marker='o')
-    plt.xticks( range(len( sales_merged['Weekday Name'])) ,  x_labels , rotation=90)
-    plt.grid(True)
-    # show valy on each point
-    for i in range(len(sales_merged['Weekday Name'])):
-        plt.text(i, sales_merged['Net Value'][i] + 100, f"{sales_merged['Net Value'][i]:,.0f}", ha = 'center')
-    start_Day = sales_merged.index[0].strftime('%Y-%m-%d')
-    end_day   = sales_merged.index[-1].strftime('%Y-%m-%d')
-    plt.title(f"Net Value from {start_Day} to {end_day}")
-    plt.xlabel("Weekday")
-    plt.ylabel("Net Value")
-    img = io.BytesIO()
-    plt.savefig(img, format="png")
-    img.seek(0)
-    plot_url = base64.b64encode(img.getvalue()).decode("utf8")
-    plt.close()
-    return {"plot_url":plot_url , "period" : f"{start_Day} to {end_day}"}
-
-
-
-  
- 
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

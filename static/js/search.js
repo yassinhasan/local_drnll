@@ -698,37 +698,6 @@ inputUrl.addEventListener("input",e=>
 })
 
 
-function testSession(){
-  
-  const formdata = new FormData();
-  formdata.append("test", "test");
-  formdata.append("cookie", "PHPSESSID=47e4b4bfc62fddc7ef096ac141d6299c");
-  
-  const requestOptions = {
-    method: "POST",
-    body: formdata,
-    redirect: "follow" ,
-    headers: {
-      "X-CSRFToken" : csrfToken
-    }
-  };
-  
-  fetch("/testSession", requestOptions)
-  .then((response) => response.json())
-  .then((data) =>{
-   
-    if(data.success && data.result == "200"){
-      
-      sessionExp = false
-    }else{
-      sessionExp = true
-    }
-   
-  })
-  .catch((error) => {
-    sessionExp = true
-   
-  });
-}
+
 
 // testSession()

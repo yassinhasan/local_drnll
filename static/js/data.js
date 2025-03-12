@@ -14,23 +14,48 @@ function hideTableLoader() {
     tableLoaderWraper.classList.remove("show");
 }
 
+let file;
 
-const uid = localStorage.getItem("uid")
-document.querySelector(".upload-btn").addEventListener("click", (e) => {
+document.getElementById('upload-btn').addEventListener('click', function(e) {
     e.preventDefault()
-    uploadFile()
+    uploadFile(file)
+});
+
+document.getElementById('fileInput').addEventListener('change', (event)=> {
+   event.preventDefault()
+    file = event.target.files[0]; 
+
 })
 
-// const progresscContainer = document.querySelector(".progress-container")
-// const progressBar = document.getElementById('progressBar');
-// const progressText = document.getElementById('progressText');
-function uploadFile() {
-    showTableLoader()
-    const fileInput = document.getElementById('fileInput');
-    const file = fileInput.files[0];
+// data.js
+function handleFIleUsingLib(file) {
+        // Create a new Web Worker
+        showTableLoader();
+        const worker = new Worker('/static/js/fileProcessor.js');
+
+        // Send the file to the worker
+        worker.postMessage(file);
+
+        // Handle the response from the worker
+        worker.onmessage = function (event) {
+            const jsonData = event.data;
+            sendDataToBackend(jsonData)
+            worker.terminate(); // Clean up the worker
+        };
+
+        // Handle errors
+        worker.onerror = function (error) {
+            console.log(error);
+            
+         worker.terminate(); // Clean up the worker
+        };
+}
+
+async function uploadFile(file) {
+    showTableLoader();
     if (!file) {
-        fireAlert("error", 'Please select a file.')
-        hideTableLoader()
+        fireAlert("error", 'Please select a file.');
+        hideTableLoader();
         return;
     }
 
@@ -38,56 +63,44 @@ function uploadFile() {
     const allowedTypes = ['text/plain', 'application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'text/csv'];
     if (!allowedTypes.includes(file.type)) {
         fireAlert("error", 'Invalid file type. Please upload a TXT, CSV, or Excel file.');
-        hideTableLoader()
+        hideTableLoader();
         return;
     }
-    sendFIleToAnalyize(file)
+
+    try {
+        // Process the file using the Web Worker
+        // Send the processed data to the backend
+        handleFIleUsingLib(file);
+    } catch (error) {
+        console.error("Error processing file:", error);
+        fireAlert("error", 'An error occurred while processing the file.');
+    } 
 }
-
-
-
-
-function sendFIleToAnalyize(file) {
-    // alert this will take time until the data is analyzed in arabic
-    fireAlert("info", "جاري تحليل البيانات، قد يستغرق هذا بعض الوقت", 4000, 'swal-login', "top-end");
-    resultsContainer.innerHTML = ""
-    const formData = new FormData();
-    formData.append('file', file);
-    const options = {
+// send data to backend /analyze with post method
+function sendDataToBackend(json_data)
+{
+    fetch('/get_csrf', {
+        method: 'GET',
+        credentials: 'include',  // Include cookies in the request
+    }).then(response => response.json())
+    .then(data => {
+        const csrfToken = data.data.csrf_token;
+     const options = {
         headers: {
+            "Content-Type": "application/json",
             "X-CSRFToken": csrfToken,
-
         },
         credentials: 'include',
         method: 'POST',
-        body: formData,
+        body: JSON.stringify(json_data),
     };
 
     fetch('/analyze', options)
         .then(response => response.json())
         .then(data => {
+            console.log(data);
             if (data.status === "success") {
-                let results = data.data.analysis;
-                resultsContainer.classList.add("show");
-                hideTableLoader()
-                console.log(data.data);
-                let net_value_histogram_img = `data:image/png;base64,${results.net_value_histogram_img}`
-                let net_value_per_day_img = `data:image/png;base64,${results.net_value_per_day_img}`
-                resultsContainer.innerHTML =
-                    `
-                <div class="result-heading">
-                    <h2 class="heading-3">Results</h2>
-                </div>
-               <!-- net_value_perday  -->
-               <div class="result-image">
-                    <img class="results-img" src="${net_value_per_day_img}" alt="${net_value_per_day_img}">
-                </div>
-               <!--end net_value_perday  -->
-                <!-- net_value_histogram net valueresults -->
-                <div class="result-image">
-                    <img class="results-img" src="${net_value_histogram_img}" alt="${net_value_histogram_img}">
-                </div> 
-                <!-- net_value_histogram net valueresults -->              `
+                repareResultInHtml(data)
             } else {
                 fireAlert("error", "Failed to fetch data");
             }
@@ -97,5 +110,35 @@ function sendFIleToAnalyize(file) {
             console.error("Error fetching data:", error);
             fireAlert("error", "An error occurred while fetching data");
         });
+    })
+    .catch(error => {
+        console.error("Error fetching CSRF token:", error);
+    });
+}
+
+function repareResultInHtml(data)
+{
+    console.log(data.data);
+    let results = data.data.analysis;
+    resultsContainer.classList.add("show");
+    let net_value_histogram_img = `data:image/png;base64,${results.net_value_histogram_img}`
+    let net_value_per_day_img = `data:image/png;base64,${results.net_value_per_day_img}`
+    resultsContainer.innerHTML =
+        `
+    <div class="result-heading">
+        <h2 class="heading-3">Results</h2>
+    </div>
+   <!-- net_value_perday  -->
+   <div class="result-image">
+        <img class="results-img" src="${net_value_per_day_img}" alt="${net_value_per_day_img}">
+    </div>
+   <!--end net_value_perday  -->
+    <!-- net_value_histogram net valueresults -->
+    <div class="result-image">
+        <img class="results-img" src="${net_value_histogram_img}" alt="${net_value_histogram_img}">
+    </div> 
+    <!-- net_value_histogram net valueresults -->   
+    `
+    hideTableLoader()
 
 }

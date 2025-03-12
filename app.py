@@ -1,6 +1,6 @@
 import datetime
 import os
-from flask import Flask, jsonify, make_response, redirect, url_for
+from flask import Flask, redirect, url_for
 from flask_wtf import CSRFProtect 
 from flask_wtf.csrf import generate_csrf
 from config import config
@@ -22,11 +22,13 @@ from routes.expire import expire_bp
 from routes.data import data_bp
 from routes.library import library_bp
 from routes.lastactive import lastactive_bp
+import dotenv
+dotenv.load_dotenv()
 # Initialize Flask app
 app = Flask(__name__)
-app.secret_key = 'hasanmeady0546035917'
+app.secret_key = os.environ.get('SECRET_KEY','hasanmeady0546035917')
 app.config["SESSION_PERMANENT"] = True
-app.config['WTF_CSRF_ENABLED'] = True
+
 scrf = CSRFProtect(app)
 
 # Initialize Firebase
@@ -68,14 +70,11 @@ def page_not_found(error):
 @app.route('/get_csrf', methods=['GET'])
 def get_csrf():
     csrf_token = generate_csrf()
-    
-    # Create a response and set the CSRF token as a cookie
-    response = make_response(jsonify({"csrf_token": csrf_token}))
-    response.set_cookie('csrf_token', csrf_token)
-    return response
+    return json_response({'csrf_token': csrf_token})
+# 
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=int(os.environ.get('PORT', 8080)))
+    app.run(debug=os.environ.get('DEBUG'), port=int(os.environ.get('PORT', 8080)))
 
 

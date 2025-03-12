@@ -1,5 +1,7 @@
 from flask import make_response, jsonify
 from functools import wraps
+from flask_wtf.csrf import generate_csrf
+
 
 def get_response(template, status_code=200):
     """
@@ -10,7 +12,16 @@ def get_response(template, status_code=200):
     Returns:
         Response: Flask response object with security headers
     """
-    response = make_response(template, status_code)
+    csrf_token = generate_csrf()
+
+    response = make_response(template, status_code )
+    response.set_cookie(
+        'csrf_token',
+        csrf_token ,
+        httponly=True,  # Prevent JavaScript from accessing the cookie
+        secure=True,     # Only send over HTTPS
+        samesite='Lax'   # Prevent CSRF attacks
+    )
     response.headers['Cache-Control'] = 'private, max-age=300, s-maxage=600'
 #     response.headers['X-Content-Type-Options'] = 'nosniff'
 #     response.headers['X-Frame-Options'] = 'SAMEORIGIN'

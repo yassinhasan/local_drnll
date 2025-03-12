@@ -1,15 +1,16 @@
 from flask import Blueprint, current_app ,jsonify, make_response, request, redirect, url_for, render_template
 import requests
 from helpers.responses import get_response
-from helpers.auth import is_user_logged
+from helpers.auth import handle_noneed_logged_user, is_user_logged
+from flask_wtf.csrf import generate_csrf
+
 search_bp = Blueprint("search",__name__)
 
 @search_bp.route("/search")
 def searchpage():
     if is_user_logged() == True:
         current_app.isLogged= True
-    template =   render_template("search.html",pagetitle="(Search))✌Dr.Null",isLogged=current_app.isLogged) 
-    return get_response(template)
+    return handle_noneed_logged_user("search.html", pagetitle="(search)✌Dr.Null" ,isLogged=current_app.isLogged , csrf_token=generate_csrf())
 
 
 @search_bp.route("/searchItem", methods=['POST']) 

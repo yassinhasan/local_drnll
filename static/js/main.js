@@ -1,3 +1,6 @@
+// get csrf token from meta head tag
+const csrfToken = document.head.querySelector("[name~=csrf-token][content]").content; // this line will now be working as expected
+
 // const worker = new Worker("woker.js")
 // console.log(worker);
 if ('serviceWorker' in navigator) {
@@ -11,10 +14,16 @@ if ('serviceWorker' in navigator) {
 }
 
 function updateLastActive(){
-    const options = {
+    fetch('/get_csrf', {
+        method: 'GET',
+        credentials: 'include',  // Include cookies in the request
+    }).then(response => response.json())
+    .then(data => {
+        const csrfToken = data.data.csrf_token;
+     const options = {
         headers: {
-        "X-CSRFToken": csrfToken,
-        "ContentType": 'application/json;charset=UTF-8',
+            "Content-Type": "application/json",
+            "X-CSRFToken": csrfToken,
         },
         credentials: 'include',
         method: 'POST',
@@ -30,6 +39,7 @@ function updateLastActive(){
         .catch(error => {
         console.error("Error updating last active:", error);
         });
+    })
 }
 
 // Update last active time every 5 minutes

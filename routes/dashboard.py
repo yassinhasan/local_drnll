@@ -5,6 +5,7 @@ from flask import Blueprint, current_app, jsonify, make_response, request, redir
 from helpers.auth import get_firebase_services, is_user_logged
 from helpers.responses import error_response, get_response, internal_error, json_response
 from helpers.time import check_user_activity
+from flask_wtf.csrf import generate_csrf
 from services.sendmail import send_event_email
 
 dashboard_bp = Blueprint('dashboard', __name__)
@@ -31,7 +32,8 @@ def dashboardpage():
                     pagetitle="(Dashboard)✌Dr.Null",
                     username=signedUser['username'],
                     isLogged=isLogged,
-                    admin=True
+                    admin=True,
+                    csrf_token=generate_csrf()
                 )
                 return get_response(template)
 
@@ -56,6 +58,7 @@ def dashboardpage():
                     pagetitle="(H.meady)✌Dr.Null",
                     isLogged=isLogged,
                     messages=messages
+                    ,csrf_token=generate_csrf()
                 )
                 return get_response(template)
 
@@ -78,6 +81,7 @@ def dashboardpage():
             pagetitle="(H.meady)✌Dr.Null",
             isLogged=isLogged,
             messages=messages
+            ,csrf_token=generate_csrf()
         )
         return get_response(template)
 
@@ -98,7 +102,8 @@ def dashboardpage():
                         pagetitle="(Dashboard)✌Dr.Null",
                         username=signedUser['username'],
                         isLogged=isLogged,
-                        admin=True
+                        admin=True,
+                        csrf_token=generate_csrf()
                     )
                     response = make_response(template)
                     response.set_cookie('__session', value=uid, max_age=None, expires=current_app.expires)
@@ -116,6 +121,7 @@ def dashboardpage():
                         pagetitle="(H.meady)✌Dr.Null",
                         isLogged=isLogged,
                         messages=messages
+                        ,csrf_token=generate_csrf()
                     )
                     response = make_response(template)
                     return response
@@ -138,7 +144,8 @@ def dashboardpage():
                 "index.html",
                 pagetitle="(H.meady)✌Dr.Null",
                 isLogged=isLogged,
-                messages=messages
+                messages=messages,
+                csrf_token=generate_csrf()
             )
             return get_response(template)
 
